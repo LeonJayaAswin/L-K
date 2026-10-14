@@ -8,13 +8,16 @@ public class PlayerMovement2D : MonoBehaviour
 {
     [Header("Movement")]
     [Tooltip("Top horizontal speed in units/second.")]
-    [SerializeField, Min(0f)] private float moveSpeed = 5f;
+    [SerializeField, Min(0f)] private float moveSpeed = 2.6f;
 
-    [Tooltip("How fast we reach moveSpeed while a direction is held.")]
-    [SerializeField, Min(0f)] private float acceleration = 60f;
+    [Tooltip("How fast we reach moveSpeed while a direction is held. Kept low on purpose so the speed ramp is long enough for the run animation to visibly track it.")]
+    [SerializeField, Min(0f)] private float acceleration = 25f;
 
     [Tooltip("How fast we come to a stop after input is released.")]
-    [SerializeField, Min(0f)] private float deceleration = 80f;
+    [SerializeField, Min(0f)] private float deceleration = 30f;
+
+    [Tooltip("How fast Leon changes direction. Deliberately high so he pivots instantly like a platformer character instead of sliding backwards.")]
+    [SerializeField, Min(0f)] private float turnSpeed = 90f;
 
     [Tooltip("Input below this magnitude counts as no input (kills controller drift).")]
     [SerializeField, Range(0f, 0.5f)] private float inputDeadzone = 0.15f;
@@ -27,6 +30,18 @@ public class PlayerMovement2D : MonoBehaviour
 
     [Tooltip("Normalized speed above which the Run animation is used.")]
     [SerializeField, Range(0f, 1f)] private float runThreshold = 0.1f;
+
+    [Tooltip("The ground speed the run clip was authored for. The run cycle is played back faster or slower than 1.0 in proportion to how much faster or slower Leon is actually moving than this, which keeps the stride length (and therefore the foot contact) constant at any moveSpeed.")]
+    [SerializeField, Min(0.1f)] private float animationReferenceSpeed = 2.6f;
+
+    [Tooltip("0 disables speed scaling and plays the run clip at a fixed rate; 1 scales fully.")]
+    [SerializeField, Range(0f, 1f)] private float syncRunToSpeed = 1f;
+
+    [Tooltip("Floor for run playback speed, so a barely-moving character does not crawl through the run cycle.")]
+    [SerializeField, Range(0.1f, 1f)] private float minRunPlaybackSpeed = 0.5f;
+
+    [Tooltip("Ceiling for run playback speed, so a collision overshoot cannot make the legs blur into noise.")]
+    [SerializeField, Range(1f, 4f)] private float maxRunPlaybackSpeed = 3f;
 
     [Header("Facing")]
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -78,6 +93,18 @@ public class PlayerMovement2D : MonoBehaviour
                 : 0f;
 
             animator.SetFloat(speedParamHash, normalizedSpeed);
+
+            // Play the run cycle at the rate Leon is actually travelling.
+            // The reference speed is what the clip was authored for, so the
+            // stride length stays constant no matter how fast he moves -
+            // which is what stops the feet sliding at high speed.
+            // Values above 1 mean "legs move faster", which is exactly what a
+            // fast platformer run should look like.
+            float targetPlayback = Mathf.Abs(velocityX) / animationReferenceSpeed;
+            float runPlayback = Mathf.Lerp(1f, targetPlayback, syncRunToSpeed);
+            animator.speed = normalizedSpeed > runThreshold
+                ? Mathf.Clamp(runPlayback, minRunPlaybackSpeed, maxRunPlaybackSpeed)
+                : 1f;
         }
     }
 
@@ -86,7 +113,23 @@ public class PlayerMovement2D : MonoBehaviour
         Vector2 velocity = body.linearVelocity;
 
         float targetSpeed = moveInput * moveSpeed;
-        float rate = Mathf.Approximately(moveInput, 0f) ? deceleration : acceleration;
+
+        // Turning around uses a much higher rate than accelerating from rest.
+        // Without this, reversing direction leaves Leon briefly sliding
+        // backwards at full speed, which reads as a moonwalk.
+        bool reversing = !Mathf.Approximately(moveInput, 0f)
+            && Mathf.Abs(velocity.x) > 0.01f
+            && Mathf.Sign(targetSpeed) != Mathf.Sign(velocity.x);
+
+        float rate;
+        if (reversing)
+        {
+            rate = turnSpeed;
+        }
+        else
+        {
+            rate = Mathf.Approximately(moveInput, 0f) ? deceleration : acceleration;
+        }
 
         velocity.x = Mathf.MoveTowards(velocity.x, targetSpeed, rate * Time.fixedDeltaTime);
 

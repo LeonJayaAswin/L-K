@@ -489,13 +489,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c53cc0ce2d9386747aeebfeb4c807dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement2D
-  moveSpeed: 5
-  acceleration: 60
-  deceleration: 80
+  moveSpeed: 7
+  acceleration: 55
+  deceleration: 40
+  turnSpeed: 90
   inputDeadzone: 0.15
   animator: {fileID: 1200955315}
   speedParameter: Speed
   runThreshold: 0.1
+  animationReferenceSpeed: 3.8780627
+  syncRunToSpeed: 1
+  minRunPlaybackSpeed: 0.5
+  maxRunPlaybackSpeed: 3
   spriteRenderer: {fileID: 1200955316}
   startsFacingRight: 1
 --- !u!50 &1200955319
