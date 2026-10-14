@@ -1,0 +1,797 @@
+fileFormatVersion: 2
+guid: df5a0c89df2540d4eac1a95f12527bcb
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7919875608620219713
+    second: Leon-idle-v1_0
+  - first:
+      213: 9136378724016712634
+    second: Leon-idle-v1_1
+  - first:
+      213: 4103920149909611484
+    second: Leon-idle-v1_2
+  - first:
+      213: 2027547857407246666
+    second: Leon-idle-v1_3
+  - first:
+      213: 7088426724629928807
+    second: Leon-idle-v1_4
+  - first:
+      213: 3355978085512413773
+    second: Leon-idle-v1_5
+  - first:
+      213: -4381376370806336173
+    second: Leon-idle-v1_6
+  - first:
+      213: 2821603338503852902
+    second: Leon-idle-v1_7
+  - first:
+      213: 5777158832906328585
+    second: Leon-idle-v1_8
+  - first:
+      213: -624609139728963248
+    second: Leon-idle-v1_9
+  - first:
+      213: 4132869188378091966
+    second: Leon-idle-v1_10
+  - first:
+      213: 8607354595648965751
+    second: Leon-idle-v1_11
+  - first:
+      213: -188268718160874902
+    second: Leon-idle-v1_12
+  - first:
+      213: -8506547983389484094
+    second: Leon-idle-v1_13
+  - first:
+      213: 7460644682578762499
+    second: Leon-idle-v1_14
+  - first:
+      213: 8297517960260604854
+    second: Leon-idle-v1_15
+  - first:
+      213: 1945409317915903780
+    second: Leon-idle-v1_16
+  - first:
+      213: -5007747012851171741
+    second: Leon-idle-v1_17
+  - first:
+      213: -7695824315963975778
+    second: Leon-idle-v1_18
+  - first:
+      213: -1100092440194609442
+    second: Leon-idle-v1_19
+  - first:
+      213: -5953029422782420696
+    second: Leon-idle-v1_20
+  - first:
+      213: -1319937584007847493
+    second: Leon-idle-v1_21
+  - first:
+      213: -2778500630680846482
+    second: Leon-idle-v1_22
+  - first:
+      213: 6473976791939355992
+    second: Leon-idle-v1_23
+  - first:
+      213: -3685001683042793813
+    second: Leon-idle-v1_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Leon-idle-v1_0
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 1053
+        width: 55
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14db61d97ec09ed60800000000000000
+      internalID: 7919875608620219713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_1
+      rect:
+        serializedVersion: 2
+        x: 354
+        y: 1053
+        width: 55
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: abbe37afa00face70800000000000000
+      internalID: 9136378724016712634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_2
+      rect:
+        serializedVersion: 2
+        x: 610
+        y: 1053
+        width: 55
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd32ee102ad04f830800000000000000
+      internalID: 4103920149909611484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_3
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 1053
+        width: 55
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a410ddda80c432c10800000000000000
+      internalID: 2027547857407246666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_4
+      rect:
+        serializedVersion: 2
+        x: 1121
+        y: 1053
+        width: 56
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76bd3f9cc862f5260800000000000000
+      internalID: 7088426724629928807
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_5
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 797
+        width: 56
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4286fcb944d29e20800000000000000
+      internalID: 3355978085512413773
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_6
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 797
+        width: 56
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3555cce77693233c0800000000000000
+      internalID: -4381376370806336173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_7
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 797
+        width: 56
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66314907949582720800000000000000
+      internalID: 2821603338503852902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_8
+      rect:
+        serializedVersion: 2
+        x: 865
+        y: 797
+        width: 56
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90a546e89579c2050800000000000000
+      internalID: 5777158832906328585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_9
+      rect:
+        serializedVersion: 2
+        x: 1121
+        y: 797
+        width: 56
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0592ef6fb41f457f0800000000000000
+      internalID: -624609139728963248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_10
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 541
+        width: 57
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb1ee6441a6ea5930800000000000000
+      internalID: 4132869188378091966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_11
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 541
+        width: 58
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 77c8b79a667737770800000000000000
+      internalID: 8607354595648965751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_12
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 541
+        width: 60
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a62f3bb2992236df0800000000000000
+      internalID: -188268718160874902
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_13
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 541
+        width: 60
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cb1141cdaba2f980800000000000000
+      internalID: -8506547983389484094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_14
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 541
+        width: 60
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30b93848fc8898760800000000000000
+      internalID: 7460644682578762499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_15
+      rect:
+        serializedVersion: 2
+        x: 95
+        y: 285
+        width: 60
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b3d1ca6f94b62370800000000000000
+      internalID: 8297517960260604854
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_16
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 285
+        width: 60
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 427cc19a77b7ffa10800000000000000
+      internalID: 1945409317915903780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_17
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 285
+        width: 60
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36e7bfdbf98e08ab0800000000000000
+      internalID: -5007747012851171741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_18
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 285
+        width: 60
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9757211f80f23590800000000000000
+      internalID: -7695824315963975778
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_19
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 285
+        width: 58
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ede8b1211cfabb0f0800000000000000
+      internalID: -1100092440194609442
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_20
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 29
+        width: 57
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 829ea9dc747926da0800000000000000
+      internalID: -5953029422782420696
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_21
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 29
+        width: 56
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb1668bb2c3aeade0800000000000000
+      internalID: -1319937584007847493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_22
+      rect:
+        serializedVersion: 2
+        x: 609
+        y: 29
+        width: 56
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e6fb114c568c079d0800000000000000
+      internalID: -2778500630680846482
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_23
+      rect:
+        serializedVersion: 2
+        x: 866
+        y: 29
+        width: 55
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8551ba7779f28d950800000000000000
+      internalID: 6473976791939355992
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-idle-v1_24
+      rect:
+        serializedVersion: 2
+        x: 1122
+        y: 29
+        width: 55
+        height: 181
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba684854e7e3cdcc0800000000000000
+      internalID: -3685001683042793813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: c8c753c5fbc44474a998a26d984dd9ba
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      Leon-idle-v1_0: 7919875608620219713
+      Leon-idle-v1_1: 9136378724016712634
+      Leon-idle-v1_10: 4132869188378091966
+      Leon-idle-v1_11: 8607354595648965751
+      Leon-idle-v1_12: -188268718160874902
+      Leon-idle-v1_13: -8506547983389484094
+      Leon-idle-v1_14: 7460644682578762499
+      Leon-idle-v1_15: 8297517960260604854
+      Leon-idle-v1_16: 1945409317915903780
+      Leon-idle-v1_17: -5007747012851171741
+      Leon-idle-v1_18: -7695824315963975778
+      Leon-idle-v1_19: -1100092440194609442
+      Leon-idle-v1_2: 4103920149909611484
+      Leon-idle-v1_20: -5953029422782420696
+      Leon-idle-v1_21: -1319937584007847493
+      Leon-idle-v1_22: -2778500630680846482
+      Leon-idle-v1_23: 6473976791939355992
+      Leon-idle-v1_24: -3685001683042793813
+      Leon-idle-v1_3: 2027547857407246666
+      Leon-idle-v1_4: 7088426724629928807
+      Leon-idle-v1_5: 3355978085512413773
+      Leon-idle-v1_6: -4381376370806336173
+      Leon-idle-v1_7: 2821603338503852902
+      Leon-idle-v1_8: 5777158832906328585
+      Leon-idle-v1_9: -624609139728963248
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
