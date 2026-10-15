@@ -19,6 +19,9 @@ public class PlayerMovement2D : MonoBehaviour
     [Tooltip("How fast Leon changes direction. Deliberately high so he pivots instantly like a platformer character instead of sliding backwards.")]
     [SerializeField, Min(0f)] private float turnSpeed = 90f;
 
+    [Tooltip("How hard a swing stops Leon. High on purpose: the swing should read as a committed, locked move.")]
+    [SerializeField, Min(0f)] private float attackLockDeceleration = 250f;
+
     [Tooltip("Input below this magnitude counts as no input (kills controller drift).")]
     [SerializeField, Range(0f, 0.5f)] private float inputDeadzone = 0.15f;
 
@@ -54,6 +57,13 @@ public class PlayerMovement2D : MonoBehaviour
     private float moveInput;
     private bool facingRight;
 
+    /// <summary>
+    /// Set by PlayerAttack2D while a swing is playing. While true this script
+    /// keeps driving movement but stops flipping the sprite and stops scaling
+    /// Animator playback, so an attack and a run never fight over them.
+    /// </summary>
+    public bool IsAttacking { get; set; }
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
@@ -79,12 +89,18 @@ public class PlayerMovement2D : MonoBehaviour
 
         float velocityX = body.linearVelocity.x;
 
-        if (Mathf.Abs(velocityX) > 0.01f)
+        // While a swing is playing we still report Speed (so Leon can walk out
+        // of the attack into Run), but we must not flip him mid-strike and we
+        // must not rescale the swing with ground speed.
+        if (!IsAttacking)
         {
-            facingRight = velocityX > 0f;
-        }
+            if (Mathf.Abs(velocityX) > 0.01f)
+            {
+                facingRight = velocityX > 0f;
+            }
 
-        spriteRenderer.flipX = !facingRight;
+            spriteRenderer.flipX = !facingRight;
+        }
 
         if (animator != null)
         {
@@ -93,6 +109,12 @@ public class PlayerMovement2D : MonoBehaviour
                 : 0f;
 
             animator.SetFloat(speedParamHash, normalizedSpeed);
+
+            if (IsAttacking)
+            {
+                animator.speed = 1f;
+                return;
+            }
 
             // Play the run cycle at the rate Leon is actually travelling.
             // The reference speed is what the clip was authored for, so the
@@ -111,6 +133,16 @@ public class PlayerMovement2D : MonoBehaviour
     private void FixedUpdate()
     {
         Vector2 velocity = body.linearVelocity;
+
+        // A swing is committed: Leon plants his feet and does not steer. The
+        // high rate means he stops within a frame or two of the swing starting,
+        // so it reads as a hard lock rather than a slow drift.
+        if (IsAttacking)
+        {
+            velocity.x = Mathf.MoveTowards(velocity.x, 0f, attackLockDeceleration * Time.fixedDeltaTime);
+            body.linearVelocity = velocity;
+            return;
+        }
 
         float targetSpeed = moveInput * moveSpeed;
 

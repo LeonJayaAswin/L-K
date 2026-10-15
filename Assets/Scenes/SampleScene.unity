@@ -373,6 +373,7 @@ GameObject:
   - component: {fileID: 1200955315}
   - component: {fileID: 1200955319}
   - component: {fileID: 1200955318}
+  - component: {fileID: 1200955320}
   m_Layer: 0
   m_Name: Leon
   m_TagString: Untagged
@@ -489,10 +490,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c53cc0ce2d9386747aeebfeb4c807dca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMovement2D
-  moveSpeed: 7
+  moveSpeed: 3
   acceleration: 55
   deceleration: 40
   turnSpeed: 90
+  attackLockDeceleration: 250
   inputDeadzone: 0.15
   animator: {fileID: 1200955315}
   speedParameter: Speed
@@ -530,6 +532,28 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
+--- !u!114 &1200955320
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200955314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6b4a2f70dab36443b603b71af2e06f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAttack2D
+  allowMouse: 1
+  allowKeyboard: 1
+  keyboardKey: 20
+  allowGamepad: 1
+  comboResetTime: 0.6
+  minimumSwingTime: 1.25
+  releaseLeadTime: 0.08
+  attackParameter: Attack
+  animator: {fileID: 1200955315}
+  movement: {fileID: 1200955318}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
