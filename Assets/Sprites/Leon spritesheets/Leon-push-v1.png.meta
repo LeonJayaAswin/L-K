@@ -1,0 +1,795 @@
+fileFormatVersion: 2
+guid: a79ad6a23ae20fb44b93791dfa7f4f70
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 6890723383186608193
+    second: Leon-push-v1_0
+  - first:
+      213: -7173544787064006986
+    second: Leon-push-v1_1
+  - first:
+      213: -1241298608323121047
+    second: Leon-push-v1_2
+  - first:
+      213: -6959108822147269929
+    second: Leon-push-v1_3
+  - first:
+      213: 1736644629695107407
+    second: Leon-push-v1_4
+  - first:
+      213: -815776390344687195
+    second: Leon-push-v1_5
+  - first:
+      213: -3000195886559543620
+    second: Leon-push-v1_6
+  - first:
+      213: 7017808081237491135
+    second: Leon-push-v1_7
+  - first:
+      213: 2603563829240773115
+    second: Leon-push-v1_8
+  - first:
+      213: -2574725111417040213
+    second: Leon-push-v1_9
+  - first:
+      213: 6261092356952270617
+    second: Leon-push-v1_10
+  - first:
+      213: 5946384188168012214
+    second: Leon-push-v1_11
+  - first:
+      213: -2360199424808881581
+    second: Leon-push-v1_12
+  - first:
+      213: 8105065422193053336
+    second: Leon-push-v1_13
+  - first:
+      213: -1490293858381638787
+    second: Leon-push-v1_14
+  - first:
+      213: -6003459292148003830
+    second: Leon-push-v1_15
+  - first:
+      213: -3593141253273997750
+    second: Leon-push-v1_16
+  - first:
+      213: 2349128901304444899
+    second: Leon-push-v1_17
+  - first:
+      213: -4378513072310817515
+    second: Leon-push-v1_18
+  - first:
+      213: -5258151350918448586
+    second: Leon-push-v1_19
+  - first:
+      213: -6837304229464014494
+    second: Leon-push-v1_20
+  - first:
+      213: 8357713497685804950
+    second: Leon-push-v1_21
+  - first:
+      213: 9037526186949175944
+    second: Leon-push-v1_22
+  - first:
+      213: -4607728404519937345
+    second: Leon-push-v1_23
+  - first:
+      213: 1243057594684850025
+    second: Leon-push-v1_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Leon-push-v1_0
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 1054
+        width: 157
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 140d05c8864c0af50800000000000000
+      internalID: 6890723383186608193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_1
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 1054
+        width: 157
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b6d1b2f503727c90800000000000000
+      internalID: -7173544787064006986
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_2
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 1054
+        width: 157
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 960b6be0e7506cee0800000000000000
+      internalID: -1241298608323121047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_3
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 1054
+        width: 158
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7daff9ea5674c6f90800000000000000
+      internalID: -6959108822147269929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_4
+      rect:
+        serializedVersion: 2
+        x: 1068
+        y: 1054
+        width: 162
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f41111ee61dc91810800000000000000
+      internalID: 1736644629695107407
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_5
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 798
+        width: 162
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a1ca55f1b7cda4f0800000000000000
+      internalID: -815776390344687195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_6
+      rect:
+        serializedVersion: 2
+        x: 307
+        y: 799
+        width: 155
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbeb705acb92d56d0800000000000000
+      internalID: -3000195886559543620
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_7
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 799
+        width: 145
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbdb6089443446160800000000000000
+      internalID: 7017808081237491135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_8
+      rect:
+        serializedVersion: 2
+        x: 843
+        y: 799
+        width: 131
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf9b3f72287b12420800000000000000
+      internalID: 2603563829240773115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_9
+      rect:
+        serializedVersion: 2
+        x: 1097
+        y: 799
+        width: 133
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba295b3172db44cd0800000000000000
+      internalID: -2574725111417040213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_10
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 543
+        width: 139
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 917ad02735ed3e650800000000000000
+      internalID: 6261092356952270617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_11
+      rect:
+        serializedVersion: 2
+        x: 319
+        y: 543
+        width: 143
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b101c1f9ecc58250800000000000000
+      internalID: 5946384188168012214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_12
+      rect:
+        serializedVersion: 2
+        x: 568
+        y: 542
+        width: 149
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3527f25c023ee3fd0800000000000000
+      internalID: -2360199424808881581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_13
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 541
+        width: 155
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89e4e1b1f0afa7070800000000000000
+      internalID: 8105065422193053336
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_14
+      rect:
+        serializedVersion: 2
+        x: 1072
+        y: 542
+        width: 158
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d735738b1a9615be0800000000000000
+      internalID: -1490293858381638787
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_15
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 286
+        width: 161
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0c000cd49d6faca0800000000000000
+      internalID: -6003459292148003830
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_16
+      rect:
+        serializedVersion: 2
+        x: 306
+        y: 286
+        width: 156
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4e2dc24119922ec0800000000000000
+      internalID: -3593141253273997750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_17
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 286
+        width: 145
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e7eadd1a48c99020800000000000000
+      internalID: 2349128901304444899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_18
+      rect:
+        serializedVersion: 2
+        x: 837
+        y: 286
+        width: 137
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51d62802f856c33c0800000000000000
+      internalID: -4378513072310817515
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_19
+      rect:
+        serializedVersion: 2
+        x: 1096
+        y: 286
+        width: 134
+        height: 178
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63af349843b4707b0800000000000000
+      internalID: -5258151350918448586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_20
+      rect:
+        serializedVersion: 2
+        x: 67
+        y: 30
+        width: 139
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 261858567040d11a0800000000000000
+      internalID: -6837304229464014494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_21
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 30
+        width: 144
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 697cc0425209cf370800000000000000
+      internalID: 8357713497685804950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_22
+      rect:
+        serializedVersion: 2
+        x: 569
+        y: 30
+        width: 149
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88a65652f2ebb6d70800000000000000
+      internalID: 9037526186949175944
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_23
+      rect:
+        serializedVersion: 2
+        x: 819
+        y: 30
+        width: 155
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fba9c1bcd6f0e00c0800000000000000
+      internalID: -4607728404519937345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-push-v1_24
+      rect:
+        serializedVersion: 2
+        x: 1070
+        y: 30
+        width: 160
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96fba8edb4a304110800000000000000
+      internalID: 1243057594684850025
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Leon-push-v1_0: 6890723383186608193
+      Leon-push-v1_1: -7173544787064006986
+      Leon-push-v1_10: 6261092356952270617
+      Leon-push-v1_11: 5946384188168012214
+      Leon-push-v1_12: -2360199424808881581
+      Leon-push-v1_13: 8105065422193053336
+      Leon-push-v1_14: -1490293858381638787
+      Leon-push-v1_15: -6003459292148003830
+      Leon-push-v1_16: -3593141253273997750
+      Leon-push-v1_17: 2349128901304444899
+      Leon-push-v1_18: -4378513072310817515
+      Leon-push-v1_19: -5258151350918448586
+      Leon-push-v1_2: -1241298608323121047
+      Leon-push-v1_20: -6837304229464014494
+      Leon-push-v1_21: 8357713497685804950
+      Leon-push-v1_22: 9037526186949175944
+      Leon-push-v1_23: -4607728404519937345
+      Leon-push-v1_24: 1243057594684850025
+      Leon-push-v1_3: -6959108822147269929
+      Leon-push-v1_4: 1736644629695107407
+      Leon-push-v1_5: -815776390344687195
+      Leon-push-v1_6: -3000195886559543620
+      Leon-push-v1_7: 7017808081237491135
+      Leon-push-v1_8: 2603563829240773115
+      Leon-push-v1_9: -2574725111417040213
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -1,0 +1,795 @@
+fileFormatVersion: 2
+guid: 4594826c85171d34bb64d6e11f163432
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7268673864947404252
+    second: Leon-Death_0
+  - first:
+      213: -92366175572031512
+    second: Leon-Death_1
+  - first:
+      213: -1451446041970649549
+    second: Leon-Death_2
+  - first:
+      213: -8492008437295875062
+    second: Leon-Death_3
+  - first:
+      213: 6149178871592334592
+    second: Leon-Death_4
+  - first:
+      213: -8924102414751674581
+    second: Leon-Death_5
+  - first:
+      213: -7560075851024513617
+    second: Leon-Death_6
+  - first:
+      213: -3984731849298963979
+    second: Leon-Death_7
+  - first:
+      213: -8857707816343370800
+    second: Leon-Death_8
+  - first:
+      213: 1940311071176540920
+    second: Leon-Death_9
+  - first:
+      213: 8013324590003617812
+    second: Leon-Death_10
+  - first:
+      213: -1106408968499959950
+    second: Leon-Death_11
+  - first:
+      213: -5369955139334667504
+    second: Leon-Death_12
+  - first:
+      213: -1933543671595283888
+    second: Leon-Death_13
+  - first:
+      213: -7334773914022508786
+    second: Leon-Death_14
+  - first:
+      213: -9057921294739880536
+    second: Leon-Death_15
+  - first:
+      213: -5361107083821867077
+    second: Leon-Death_16
+  - first:
+      213: -2996744312421644742
+    second: Leon-Death_17
+  - first:
+      213: 1794402477931243100
+    second: Leon-Death_18
+  - first:
+      213: 2279026240681122441
+    second: Leon-Death_19
+  - first:
+      213: 8127725164117267547
+    second: Leon-Death_20
+  - first:
+      213: -8365527551391078406
+    second: Leon-Death_21
+  - first:
+      213: 5774125580024580441
+    second: Leon-Death_22
+  - first:
+      213: 1478055951724518710
+    second: Leon-Death_23
+  - first:
+      213: 6760495725989502055
+    second: Leon-Death_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Leon-Death_0
+      rect:
+        serializedVersion: 2
+        x: 103
+        y: 1054
+        width: 40
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cdd0b5c7e548fd460800000000000000
+      internalID: 7268673864947404252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_1
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 1054
+        width: 40
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e784c3e379d7bef0800000000000000
+      internalID: -92366175572031512
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_2
+      rect:
+        serializedVersion: 2
+        x: 613
+        y: 1053
+        width: 53
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33651b1d38d6bdbe0800000000000000
+      internalID: -1451446041970649549
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_3
+      rect:
+        serializedVersion: 2
+        x: 865
+        y: 1054
+        width: 47
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0cfb51a153562a80800000000000000
+      internalID: -8492008437295875062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_4
+      rect:
+        serializedVersion: 2
+        x: 1120
+        y: 1054
+        width: 52
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 005399d9a95465550800000000000000
+      internalID: 6149178871592334592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_5
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 798
+        width: 57
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b2f458db228372480800000000000000
+      internalID: -8924102414751674581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_6
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 799
+        width: 68
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fa5cca88117351790800000000000000
+      internalID: -7560075851024513617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_7
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 798
+        width: 100
+        height: 132
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f1995dbe7363b8c0800000000000000
+      internalID: -3984731849298963979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_8
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 799
+        width: 115
+        height: 103
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d307a2dba9131580800000000000000
+      internalID: -8857707816343370800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_9
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 798
+        width: 116
+        height: 111
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f24c3793ae5dea10800000000000000
+      internalID: 1940311071176540920
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_10
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 543
+        width: 114
+        height: 118
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4108119124c053f60800000000000000
+      internalID: 8013324590003617812
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_11
+      rect:
+        serializedVersion: 2
+        x: 332
+        y: 542
+        width: 113
+        height: 122
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 277e048b7ee35a0f0800000000000000
+      internalID: -1106408968499959950
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_12
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 543
+        width: 113
+        height: 120
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0138c2480461a75b0800000000000000
+      internalID: -5369955139334667504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_13
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 543
+        width: 115
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 05acbd8664caa25e0800000000000000
+      internalID: -1933543671595283888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_14
+      rect:
+        serializedVersion: 2
+        x: 1100
+        y: 542
+        width: 118
+        height: 117
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0703ea8cf5a53a90800000000000000
+      internalID: -7334773914022508786
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_15
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 286
+        width: 122
+        height: 114
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a54597c29ccb4280800000000000000
+      internalID: -9057921294739880536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_16
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 286
+        width: 131
+        height: 107
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bbf97f9f2858995b0800000000000000
+      internalID: -5361107083821867077
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_17
+      rect:
+        serializedVersion: 2
+        x: 578
+        y: 287
+        width: 149
+        height: 96
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a368f6fdcec6966d0800000000000000
+      internalID: -2996744312421644742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_18
+      rect:
+        serializedVersion: 2
+        x: 805
+        y: 282
+        width: 217
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c562c29eb8ff6e810800000000000000
+      internalID: 1794402477931243100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_19
+      rect:
+        serializedVersion: 2
+        x: 1057
+        y: 282
+        width: 223
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98a97958a4ab0af10800000000000000
+      internalID: 2279026240681122441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_20
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 26
+        width: 225
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b54963769fa7bc070800000000000000
+      internalID: 8127725164117267547
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_21
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 26
+        width: 224
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: af76794b30da7eb80800000000000000
+      internalID: -8365527551391078406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_22
+      rect:
+        serializedVersion: 2
+        x: 545
+        y: 26
+        width: 224
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9598cd55f90d12050800000000000000
+      internalID: 5774125580024580441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_23
+      rect:
+        serializedVersion: 2
+        x: 800
+        y: 26
+        width: 225
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63d11b89e0c138410800000000000000
+      internalID: 1478055951724518710
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Death_24
+      rect:
+        serializedVersion: 2
+        x: 1056
+        y: 26
+        width: 224
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76c962d4b0b12dd50800000000000000
+      internalID: 6760495725989502055
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Leon-Death_0: 7268673864947404252
+      Leon-Death_1: -92366175572031512
+      Leon-Death_10: 8013324590003617812
+      Leon-Death_11: -1106408968499959950
+      Leon-Death_12: -5369955139334667504
+      Leon-Death_13: -1933543671595283888
+      Leon-Death_14: -7334773914022508786
+      Leon-Death_15: -9057921294739880536
+      Leon-Death_16: -5361107083821867077
+      Leon-Death_17: -2996744312421644742
+      Leon-Death_18: 1794402477931243100
+      Leon-Death_19: 2279026240681122441
+      Leon-Death_2: -1451446041970649549
+      Leon-Death_20: 8127725164117267547
+      Leon-Death_21: -8365527551391078406
+      Leon-Death_22: 5774125580024580441
+      Leon-Death_23: 1478055951724518710
+      Leon-Death_24: 6760495725989502055
+      Leon-Death_3: -8492008437295875062
+      Leon-Death_4: 6149178871592334592
+      Leon-Death_5: -8924102414751674581
+      Leon-Death_6: -7560075851024513617
+      Leon-Death_7: -3984731849298963979
+      Leon-Death_8: -8857707816343370800
+      Leon-Death_9: 1940311071176540920
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

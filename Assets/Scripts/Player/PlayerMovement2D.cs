@@ -1,6 +1,21 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+/// <summary>
+/// Horizontal platformer movement for Leon.
+///
+/// Grounding:
+///  - Leon only ever moves while he is standing on a collider tagged with
+///    "Ground". The probe is a small box that straddles the bottom of Leon's
+///    own collider, so it keeps working no matter how the sprite is scaled or
+///    which frame of the animation is on screen.
+///
+/// Movement:
+///  - A/D (or the left stick) accelerate Leon up to moveSpeed.
+///  - While an attack is playing Leon is locked in place.
+///  - While a push is playing Leon walks the object forward, never back.
+/// </summary>
+[DefaultExecutionOrder(-100)]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(SpriteRenderer))]
 [AddComponentMenu("L&K/Player/Player Movement 2D")]
@@ -8,13 +23,13 @@ public class PlayerMovement2D : MonoBehaviour
 {
     [Header("Movement")]
     [Tooltip("Top horizontal speed in units/second.")]
-    [SerializeField, Min(0f)] private float moveSpeed = 2.6f;
+    [SerializeField, Min(0f)] private float moveSpeed = 3f;
 
-    [Tooltip("How fast we reach moveSpeed while a direction is held. Kept low on purpose so the speed ramp is long enough for the run animation to visibly track it.")]
-    [SerializeField, Min(0f)] private float acceleration = 25f;
+    [Tooltip("How fast we reach moveSpeed while a direction is held.")]
+    [SerializeField, Min(0f)] private float acceleration = 55f;
 
     [Tooltip("How fast we come to a stop after input is released.")]
-    [SerializeField, Min(0f)] private float deceleration = 30f;
+    [SerializeField, Min(0f)] private float deceleration = 40f;
 
     [Tooltip("How fast Leon changes direction. Deliberately high so he pivots instantly like a platformer character instead of sliding backwards.")]
     [SerializeField, Min(0f)] private float turnSpeed = 90f;
@@ -24,6 +39,25 @@ public class PlayerMovement2D : MonoBehaviour
 
     [Tooltip("Input below this magnitude counts as no input (kills controller drift).")]
     [SerializeField, Range(0f, 0.5f)] private float inputDeadzone = 0.15f;
+
+    [Header("Grounding")]
+    [Tooltip("Tag of the objects Leon may walk on. Movement and the run animation only happen while standing on one.")]
+    [SerializeField] private string groundTag = "Ground";
+
+    [Tooltip("How far below Leon's feet the ground probe reaches.")]
+    [SerializeField, Min(0.02f)] private float groundProbeDepth = 0.25f;
+
+    [Tooltip("How far above Leon's feet the ground probe reaches. This is the tolerance that keeps Leon grounded while he rests on the floor.")]
+    [SerializeField, Min(0f)] private float groundProbeLift = 0.06f;
+
+    [Tooltip("Width of the ground probe. Zero derives it from Leon's own collider.")]
+    [SerializeField, Min(0f)] private float groundProbeWidth = 0f;
+
+    [Tooltip("Only used when Leon has no 2D collider: offset below the transform that is treated as his feet.")]
+    [SerializeField] private float groundCheckOffset = -0.89f;
+
+    [Tooltip("Only used when Leon has no 2D collider: radius of the fallback ground probe.")]
+    [SerializeField, Min(0.05f)] private float groundCheckRadius = 0.15f;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -35,7 +69,7 @@ public class PlayerMovement2D : MonoBehaviour
     [SerializeField, Range(0f, 1f)] private float runThreshold = 0.1f;
 
     [Tooltip("The ground speed the run clip was authored for. The run cycle is played back faster or slower than 1.0 in proportion to how much faster or slower Leon is actually moving than this, which keeps the stride length (and therefore the foot contact) constant at any moveSpeed.")]
-    [SerializeField, Min(0.1f)] private float animationReferenceSpeed = 2.6f;
+    [SerializeField, Min(0.1f)] private float animationReferenceSpeed = 3.878f;
 
     [Tooltip("0 disables speed scaling and plays the run clip at a fixed rate; 1 scales fully.")]
     [SerializeField, Range(0f, 1f)] private float syncRunToSpeed = 1f;
@@ -53,6 +87,7 @@ public class PlayerMovement2D : MonoBehaviour
     [SerializeField] private bool startsFacingRight = true;
 
     private Rigidbody2D body;
+    private Collider2D bodyCollider;
     private int speedParamHash;
     private float moveInput;
     private bool facingRight;
@@ -64,9 +99,35 @@ public class PlayerMovement2D : MonoBehaviour
     /// </summary>
     public bool IsAttacking { get; set; }
 
+    /// <summary>
+    /// Set by PlayerAttack2D while Leon is pushing an object. A push is a
+    /// committed action: Leon holds the object and only ever pushes forward.
+    /// </summary>
+    public bool IsPushing { get; set; }
+
+    /// <summary>
+    /// Signed direction (+1 right, -1 left) Leon is committed to while pushing.
+    /// Zero means "not pushing". The direction is locked when the push starts
+    /// so a push can never turn into a backwards shove.
+    /// </summary>
+    public float PushDirection { get; set; }
+
+    /// <summary>
+    /// How fast Leon travels while he is pushing, in units per second.
+    /// </summary>
+    public float PushSpeed { get; set; } = 2f;
+
+    private bool movementLocked => IsAttacking || IsPushing;
+
     private void Awake()
     {
         body = GetComponent<Rigidbody2D>();
+        bodyCollider = GetComponent<Collider2D>();
+
+        // Leon must never fall asleep. A sleeping Rigidbody2D ignores a
+        // linearVelocity assignment, so the character would stand still
+        // forever after the first moment of standing still.
+        body.sleepMode = RigidbodySleepMode2D.NeverSleep;
 
         if (animator == null)
         {
@@ -87,14 +148,26 @@ public class PlayerMovement2D : MonoBehaviour
     {
         moveInput = ReadHorizontalInput();
 
+        // Refresh the ground state here as well as in FixedUpdate: the
+        // animator needs an up to date value even on frames where the
+        // physics step did not run.
+        IsGrounded = CheckGrounded();
+
         float velocityX = body.linearVelocity.x;
 
-        // While a swing is playing we still report Speed (so Leon can walk out
-        // of the attack into Run), but we must not flip him mid-strike and we
-        // must not rescale the swing with ground speed.
-        if (!IsAttacking)
+        // While a swing or a push is playing we still report Speed (so Leon can
+        // walk out of the action into Run), but we must not flip him mid-action
+        // and we must not rescale the action with ground speed.
+        if (!movementLocked)
         {
-            if (Mathf.Abs(velocityX) > 0.01f)
+            // Input wins over velocity: the sprite turns the instant the
+            // player presses a direction, which is what makes the push
+            // direction predictable.
+            if (!Mathf.Approximately(moveInput, 0f))
+            {
+                facingRight = moveInput > 0f;
+            }
+            else if (Mathf.Abs(velocityX) > 0.01f)
             {
                 facingRight = velocityX > 0f;
             }
@@ -102,44 +175,68 @@ public class PlayerMovement2D : MonoBehaviour
             spriteRenderer.flipX = !facingRight;
         }
 
-        if (animator != null)
+        if (animator == null)
         {
-            float normalizedSpeed = moveSpeed > 0f
-                ? Mathf.Clamp01(Mathf.Abs(velocityX) / moveSpeed)
-                : 0f;
-
-            animator.SetFloat(speedParamHash, normalizedSpeed);
-
-            if (IsAttacking)
-            {
-                animator.speed = 1f;
-                return;
-            }
-
-            // Play the run cycle at the rate Leon is actually travelling.
-            // The reference speed is what the clip was authored for, so the
-            // stride length stays constant no matter how fast he moves -
-            // which is what stops the feet sliding at high speed.
-            // Values above 1 mean "legs move faster", which is exactly what a
-            // fast platformer run should look like.
-            float targetPlayback = Mathf.Abs(velocityX) / animationReferenceSpeed;
-            float runPlayback = Mathf.Lerp(1f, targetPlayback, syncRunToSpeed);
-            animator.speed = normalizedSpeed > runThreshold
-                ? Mathf.Clamp(runPlayback, minRunPlaybackSpeed, maxRunPlaybackSpeed)
-                : 1f;
+            return;
         }
+
+        float normalizedSpeed = moveSpeed > 0f
+            ? Mathf.Clamp01(Mathf.Abs(velocityX) / moveSpeed)
+            : 0f;
+
+        // Only walk when standing on something that can be walked on.
+        animator.SetFloat(speedParamHash, IsGrounded ? normalizedSpeed : 0f);
+
+        if (movementLocked)
+        {
+            animator.speed = 1f;
+            return;
+        }
+
+        // Play the run cycle at the rate Leon is actually travelling.
+        // The reference speed is what the clip was authored for, so the
+        // stride length stays constant no matter how fast he moves -
+        // which is what stops the feet sliding at high speed.
+        // Values above 1 mean "legs move faster", which is exactly what a
+        // fast platformer run should look like.
+        float targetPlayback = Mathf.Abs(velocityX) / animationReferenceSpeed;
+        float runPlayback = Mathf.Lerp(1f, targetPlayback, syncRunToSpeed);
+        animator.speed = normalizedSpeed > runThreshold
+            ? Mathf.Clamp(runPlayback, minRunPlaybackSpeed, maxRunPlaybackSpeed)
+            : 1f;
     }
 
     private void FixedUpdate()
     {
+        // The physics step is authoritative for grounding: movement is
+        // decided here, so the check has to be re-run here.
+        IsGrounded = CheckGrounded();
+
         Vector2 velocity = body.linearVelocity;
 
+        // A push is committed: Leon walks the object forward and never back.
+        if (IsPushing && !Mathf.Approximately(PushDirection, 0f))
+        {
+            velocity.x = PushDirection * PushSpeed;
+            body.linearVelocity = velocity;
+            body.WakeUp();
+            return;
+        }
+
         // A swing is committed: Leon plants his feet and does not steer. The
-        // high rate means he stops within a frame or two of the swing starting,
-        // so it reads as a hard lock rather than a slow drift.
+        // high rate means he stops within a frame or two of the swing
+        // starting, so it reads as a hard lock rather than a drift.
         if (IsAttacking)
         {
             velocity.x = Mathf.MoveTowards(velocity.x, 0f, attackLockDeceleration * Time.fixedDeltaTime);
+            body.linearVelocity = velocity;
+            return;
+        }
+
+        // Never walk on air.
+        if (!IsGrounded)
+        {
+            velocity.x = 0f;
             body.linearVelocity = velocity;
             return;
         }
@@ -166,13 +263,98 @@ public class PlayerMovement2D : MonoBehaviour
         velocity.x = Mathf.MoveTowards(velocity.x, targetSpeed, rate * Time.fixedDeltaTime);
 
         body.linearVelocity = velocity;
+
+        // A sleeping body would ignore the velocity above.
+        if (!Mathf.Approximately(moveInput, 0f)) body.WakeUp();
+    }
+
+    /// <summary>
+    /// True while Leon is standing on something tagged as walkable ground.
+    /// </summary>
+    public bool IsGrounded { get; private set; }
+
+    /// <summary>True while a swing or a push is holding Leon in place.</summary>
+    public bool IsLocked => movementLocked;
+
+    /// <summary>True while Leon faces right. Drives the push direction (forward = right).</summary>
+    public bool FacingRight => facingRight;
+
+    /// <summary>World space position of Leon's feet (the bottom of his collider).</summary>
+    public Vector2 FeetPosition
+    {
+        get
+        {
+            if (bodyCollider != null && bodyCollider.enabled)
+            {
+                return bodyCollider.bounds.min;
+            }
+
+            return (Vector2)transform.position + Vector2.up * groundCheckOffset;
+        }
+    }
+
+    /// <summary>
+    /// Checks whether Leon is standing on something tagged as ground.
+    /// The probe is a box that straddles his feet, so it still finds the
+    /// floor while he is resting on it or while he is settling onto it.
+    /// </summary>
+    private bool CheckGrounded()
+    {
+        if (bodyCollider == null || !bodyCollider.enabled)
+        {
+            return CheckGroundedFallback();
+        }
+
+        Vector2 feet = bodyCollider.bounds.min;
+
+        float width = groundProbeWidth > 0.01f
+            ? groundProbeWidth
+            : Mathf.Max(0.1f, bodyCollider.bounds.size.x * 0.75f);
+
+        float depth = Mathf.Max(0.02f, groundProbeDepth);
+        float lift = Mathf.Clamp(groundProbeLift, 0f, depth);
+
+        Vector2 size = new Vector2(width, depth);
+        Vector2 center = new Vector2(feet.x, feet.y + lift - depth * 0.5f);
+
+        Collider2D[] hits = Physics2D.OverlapBoxAll(center, size, 0f);
+
+        foreach (var c in hits)
+        {
+            if (c == null) continue;
+
+            // Never let Leon's own collider count as ground.
+            if (c.transform == transform || c.transform.IsChildOf(transform)) continue;
+
+            if (c.gameObject.CompareTag(groundTag)) return true;
+        }
+
+        return false;
+    }
+
+    /// <summary>
+    /// Used only when Leon has no 2D collider at all.
+    /// </summary>
+    private bool CheckGroundedFallback()
+    {
+        Vector2 origin = (Vector2)transform.position + Vector2.up * groundCheckOffset;
+        Collider2D[] hits = Physics2D.OverlapCircleAll(origin, groundCheckRadius);
+
+        foreach (var c in hits)
+        {
+            if (c == null) continue;
+            if (c.transform == transform || c.transform.IsChildOf(transform)) continue;
+            if (c.gameObject.CompareTag(groundTag)) return true;
+        }
+
+        return false;
     }
 
     /// <summary>
     /// Reads left/right from the keyboard first, then lets the gamepad stick
     /// override it, so the two never fight when both are being touched.
     /// </summary>
-    private float ReadHorizontalInput()
+    public float ReadHorizontalInput()
     {
         float value = 0f;
 

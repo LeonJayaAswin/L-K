@@ -1,0 +1,795 @@
+fileFormatVersion: 2
+guid: eb36d08b694d55049a2ea8dcdf7ef329
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -213914393857946647
+    second: Leon-Hurt_0
+  - first:
+      213: 4561409851960518785
+    second: Leon-Hurt_1
+  - first:
+      213: 6803006756733749806
+    second: Leon-Hurt_2
+  - first:
+      213: 4162199478759071160
+    second: Leon-Hurt_3
+  - first:
+      213: -4241380087863337687
+    second: Leon-Hurt_4
+  - first:
+      213: 5785746940290842114
+    second: Leon-Hurt_5
+  - first:
+      213: 6740488978521784073
+    second: Leon-Hurt_6
+  - first:
+      213: 1776771466263765839
+    second: Leon-Hurt_7
+  - first:
+      213: -228411667939612026
+    second: Leon-Hurt_8
+  - first:
+      213: 1497080433577791108
+    second: Leon-Hurt_9
+  - first:
+      213: 7831234997736802491
+    second: Leon-Hurt_10
+  - first:
+      213: 2857196383372561966
+    second: Leon-Hurt_11
+  - first:
+      213: 5291609847578108491
+    second: Leon-Hurt_12
+  - first:
+      213: 4194159839734660226
+    second: Leon-Hurt_13
+  - first:
+      213: 3461832527836549755
+    second: Leon-Hurt_14
+  - first:
+      213: 6415699112635311458
+    second: Leon-Hurt_15
+  - first:
+      213: 4849270052856669061
+    second: Leon-Hurt_16
+  - first:
+      213: -3667058331549479606
+    second: Leon-Hurt_17
+  - first:
+      213: -7588386519844348863
+    second: Leon-Hurt_18
+  - first:
+      213: -6607875228466448047
+    second: Leon-Hurt_19
+  - first:
+      213: -717300574032565071
+    second: Leon-Hurt_20
+  - first:
+      213: -2871528739215848522
+    second: Leon-Hurt_21
+  - first:
+      213: -5252375969611548784
+    second: Leon-Hurt_22
+  - first:
+      213: -8693999390444991543
+    second: Leon-Hurt_23
+  - first:
+      213: 4569262414587489144
+    second: Leon-Hurt_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Leon-Hurt_0
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 1055
+        width: 36
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9eb01cdfdf5080df0800000000000000
+      internalID: -213914393857946647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_1
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 1055
+        width: 36
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 188e21dc7126d4f30800000000000000
+      internalID: 4561409851960518785
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_2
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 1055
+        width: 36
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2a82b3f992296e50800000000000000
+      internalID: 6803006756733749806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_3
+      rect:
+        serializedVersion: 2
+        x: 877
+        y: 1055
+        width: 36
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bd10c7af5a13c930800000000000000
+      internalID: 4162199478759071160
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_4
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 1055
+        width: 36
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92d9d7928479325c0800000000000000
+      internalID: -4241380087863337687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_5
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 799
+        width: 36
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20eb650203a1b4050800000000000000
+      internalID: 5785746940290842114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_6
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 799
+        width: 36
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90ff93963070b8d50800000000000000
+      internalID: 6740488978521784073
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_7
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 799
+        width: 50
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f43a3bd1c3c58a810800000000000000
+      internalID: 1776771466263765839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_8
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 799
+        width: 50
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 68aa7e55cc484dcf0800000000000000
+      internalID: -228411667939612026
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_9
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 799
+        width: 49
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 48e8793f8b2b6c410800000000000000
+      internalID: 1497080433577791108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_10
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 543
+        width: 50
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bb885b02db22eac60800000000000000
+      internalID: 7831234997736802491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_11
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 543
+        width: 50
+        height: 176
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2ec37cf8fcc6a720800000000000000
+      internalID: 2857196383372561966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_12
+      rect:
+        serializedVersion: 2
+        x: 613
+        y: 543
+        width: 50
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b422ad6ce139f6940800000000000000
+      internalID: 5291609847578108491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_13
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 543
+        width: 50
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28cf7921726a43a30800000000000000
+      internalID: 4194159839734660226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_14
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 543
+        width: 50
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b72179da756ea0030800000000000000
+      internalID: 3461832527836549755
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_15
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 287
+        width: 49
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 265aa62e954290950800000000000000
+      internalID: 6415699112635311458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_16
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 287
+        width: 49
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5832678ab611c4340800000000000000
+      internalID: 4849270052856669061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_17
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 287
+        width: 48
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4d4b5950edfb1dc0800000000000000
+      internalID: -3667058331549479606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_18
+      rect:
+        serializedVersion: 2
+        x: 872
+        y: 287
+        width: 46
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 14c905a4aa2a0b690800000000000000
+      internalID: -7588386519844348863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_19
+      rect:
+        serializedVersion: 2
+        x: 1131
+        y: 287
+        width: 40
+        height: 181
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 159772f5d7c1c44a0800000000000000
+      internalID: -6607875228466448047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_20
+      rect:
+        serializedVersion: 2
+        x: 108
+        y: 31
+        width: 37
+        height: 182
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1bcea97ade2ab06f0800000000000000
+      internalID: -717300574032565071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_21
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 31
+        width: 36
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bbc6b063d74628d0800000000000000
+      internalID: -2871528739215848522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_22
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 31
+        width: 36
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 097718842efcb17b0800000000000000
+      internalID: -5252375969611548784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_23
+      rect:
+        serializedVersion: 2
+        x: 877
+        y: 31
+        width: 36
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cb401ffd95b85780800000000000000
+      internalID: -8693999390444991543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-Hurt_24
+      rect:
+        serializedVersion: 2
+        x: 1133
+        y: 31
+        width: 36
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87be70305f7496f30800000000000000
+      internalID: 4569262414587489144
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Leon-Hurt_0: -213914393857946647
+      Leon-Hurt_1: 4561409851960518785
+      Leon-Hurt_10: 7831234997736802491
+      Leon-Hurt_11: 2857196383372561966
+      Leon-Hurt_12: 5291609847578108491
+      Leon-Hurt_13: 4194159839734660226
+      Leon-Hurt_14: 3461832527836549755
+      Leon-Hurt_15: 6415699112635311458
+      Leon-Hurt_16: 4849270052856669061
+      Leon-Hurt_17: -3667058331549479606
+      Leon-Hurt_18: -7588386519844348863
+      Leon-Hurt_19: -6607875228466448047
+      Leon-Hurt_2: 6803006756733749806
+      Leon-Hurt_20: -717300574032565071
+      Leon-Hurt_21: -2871528739215848522
+      Leon-Hurt_22: -5252375969611548784
+      Leon-Hurt_23: -8693999390444991543
+      Leon-Hurt_24: 4569262414587489144
+      Leon-Hurt_3: 4162199478759071160
+      Leon-Hurt_4: -4241380087863337687
+      Leon-Hurt_5: 5785746940290842114
+      Leon-Hurt_6: 6740488978521784073
+      Leon-Hurt_7: 1776771466263765839
+      Leon-Hurt_8: -228411667939612026
+      Leon-Hurt_9: 1497080433577791108
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
