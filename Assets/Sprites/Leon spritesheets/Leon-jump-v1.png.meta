@@ -1,0 +1,795 @@
+fileFormatVersion: 2
+guid: 797960165ed30304cbe058572e95bd1c
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2214058628325756852
+    second: Leon-jump-v1_0
+  - first:
+      213: -7687468968881198491
+    second: Leon-jump-v1_1
+  - first:
+      213: 89931759389869668
+    second: Leon-jump-v1_2
+  - first:
+      213: 8987410078465121319
+    second: Leon-jump-v1_3
+  - first:
+      213: -294512805383471019
+    second: Leon-jump-v1_4
+  - first:
+      213: -826538617415097148
+    second: Leon-jump-v1_5
+  - first:
+      213: -5746967426968883405
+    second: Leon-jump-v1_6
+  - first:
+      213: 8014298501221745092
+    second: Leon-jump-v1_7
+  - first:
+      213: -5731506583392948351
+    second: Leon-jump-v1_8
+  - first:
+      213: -2297279461871417381
+    second: Leon-jump-v1_9
+  - first:
+      213: 835680079690354309
+    second: Leon-jump-v1_10
+  - first:
+      213: -2399564592591408285
+    second: Leon-jump-v1_11
+  - first:
+      213: 6670080062743283987
+    second: Leon-jump-v1_12
+  - first:
+      213: -7106658494900168265
+    second: Leon-jump-v1_13
+  - first:
+      213: 6693795122809950069
+    second: Leon-jump-v1_14
+  - first:
+      213: 8982726143945876495
+    second: Leon-jump-v1_15
+  - first:
+      213: 1251860549461737020
+    second: Leon-jump-v1_16
+  - first:
+      213: -4838878082005935892
+    second: Leon-jump-v1_17
+  - first:
+      213: -1349541694972144309
+    second: Leon-jump-v1_18
+  - first:
+      213: 6045779515750151106
+    second: Leon-jump-v1_19
+  - first:
+      213: 4441269583049752193
+    second: Leon-jump-v1_20
+  - first:
+      213: -8200438226059535031
+    second: Leon-jump-v1_21
+  - first:
+      213: 1788259825676817345
+    second: Leon-jump-v1_22
+  - first:
+      213: -6579898359689599261
+    second: Leon-jump-v1_23
+  - first:
+      213: 2307932973008976426
+    second: Leon-jump-v1_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Leon-jump-v1_0
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 1055
+        width: 87
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4bfce35879ae9be10800000000000000
+      internalID: 2214058628325756852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_1
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 1055
+        width: 84
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56a6ff7e3bf905590800000000000000
+      internalID: -7687468968881198491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_2
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 1054
+        width: 61
+        height: 157
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 466857c65708f3100800000000000000
+      internalID: 89931759389869668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_3
+      rect:
+        serializedVersion: 2
+        x: 874
+        y: 1055
+        width: 77
+        height: 177
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 72cdda959d1b9bc70800000000000000
+      internalID: 8987410078465121319
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_4
+      rect:
+        serializedVersion: 2
+        x: 1134
+        y: 1069
+        width: 67
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5508055f92ea9ebf0800000000000000
+      internalID: -294512805383471019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_5
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 843
+        width: 69
+        height: 179
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c4a4d3b18b8784f0800000000000000
+      internalID: -826538617415097148
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_6
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 879
+        width: 70
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 33f67cbe29bae30b0800000000000000
+      internalID: -5746967426968883405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_7
+      rect:
+        serializedVersion: 2
+        x: 615
+        y: 887
+        width: 70
+        height: 138
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c184497602883f60800000000000000
+      internalID: 8014298501221745092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_8
+      rect:
+        serializedVersion: 2
+        x: 871
+        y: 889
+        width: 70
+        height: 136
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18fec0511299570b0800000000000000
+      internalID: -5731506583392948351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_9
+      rect:
+        serializedVersion: 2
+        x: 1126
+        y: 883
+        width: 69
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd78a5d308c6e10e0800000000000000
+      internalID: -2297279461871417381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_10
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 613
+        width: 68
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58e40d7da9ee89b00800000000000000
+      internalID: 835680079690354309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_11
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 592
+        width: 67
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 363fbfa67b803bed0800000000000000
+      internalID: -2399564592591408285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_12
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 543
+        width: 62
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3198a3b3a72e09c50800000000000000
+      internalID: 6670080062743283987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_13
+      rect:
+        serializedVersion: 2
+        x: 869
+        y: 543
+        width: 63
+        height: 153
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b9967760c3106d90800000000000000
+      internalID: -7106658494900168265
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_14
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 543
+        width: 66
+        height: 146
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57f445ee23325ec50800000000000000
+      internalID: 6693795122809950069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_15
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 287
+        width: 68
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f04228cd5dd09ac70800000000000000
+      internalID: 8982726143945876495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_16
+      rect:
+        serializedVersion: 2
+        x: 357
+        y: 286
+        width: 65
+        height: 149
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3efdfe79808f5110800000000000000
+      internalID: 1251860549461737020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_17
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 287
+        width: 61
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce8dc9a950ad8dcb0800000000000000
+      internalID: -4838878082005935892
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_18
+      rect:
+        serializedVersion: 2
+        x: 872
+        y: 287
+        width: 54
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b455b958af6754de0800000000000000
+      internalID: -1349541694972144309
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_19
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 287
+        width: 41
+        height: 183
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c3fe9a007ce6e350800000000000000
+      internalID: 6045779515750151106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_20
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 31
+        width: 38
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18e7d69a72f82ad30800000000000000
+      internalID: 4441269583049752193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_21
+      rect:
+        serializedVersion: 2
+        x: 365
+        y: 31
+        width: 36
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94ddf2591e0323e80800000000000000
+      internalID: -8200438226059535031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_22
+      rect:
+        serializedVersion: 2
+        x: 621
+        y: 31
+        width: 36
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c3919b36dc21d810800000000000000
+      internalID: 1788259825676817345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_23
+      rect:
+        serializedVersion: 2
+        x: 876
+        y: 30
+        width: 37
+        height: 185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e6a68cbd418fa4a0800000000000000
+      internalID: -6579898359689599261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Leon-jump-v1_24
+      rect:
+        serializedVersion: 2
+        x: 1132
+        y: 30
+        width: 37
+        height: 185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2a7c9d9fcc670020800000000000000
+      internalID: 2307932973008976426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Leon-jump-v1_0: 2214058628325756852
+      Leon-jump-v1_1: -7687468968881198491
+      Leon-jump-v1_10: 835680079690354309
+      Leon-jump-v1_11: -2399564592591408285
+      Leon-jump-v1_12: 6670080062743283987
+      Leon-jump-v1_13: -7106658494900168265
+      Leon-jump-v1_14: 6693795122809950069
+      Leon-jump-v1_15: 8982726143945876495
+      Leon-jump-v1_16: 1251860549461737020
+      Leon-jump-v1_17: -4838878082005935892
+      Leon-jump-v1_18: -1349541694972144309
+      Leon-jump-v1_19: 6045779515750151106
+      Leon-jump-v1_2: 89931759389869668
+      Leon-jump-v1_20: 4441269583049752193
+      Leon-jump-v1_21: -8200438226059535031
+      Leon-jump-v1_22: 1788259825676817345
+      Leon-jump-v1_23: -6579898359689599261
+      Leon-jump-v1_24: 2307932973008976426
+      Leon-jump-v1_3: 8987410078465121319
+      Leon-jump-v1_4: -294512805383471019
+      Leon-jump-v1_5: -826538617415097148
+      Leon-jump-v1_6: -5746967426968883405
+      Leon-jump-v1_7: 8014298501221745092
+      Leon-jump-v1_8: -5731506583392948351
+      Leon-jump-v1_9: -2297279461871417381
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -80,6 +80,19 @@ public class PlayerMovement2D : MonoBehaviour
     [Tooltip("Ceiling for run playback speed, so a collision overshoot cannot make the legs blur into noise.")]
     [SerializeField, Range(1f, 4f)] private float maxRunPlaybackSpeed = 3f;
 
+    [Header("Jump")]
+    [Tooltip("Jump force applied when jumping. Higher = higher jump.")]
+    [SerializeField, Min(0f)] private float jumpForce = 12f;
+
+    [Tooltip("Gravity multiplier applied while falling. Higher = faster fall.")]
+    [SerializeField, Min(0.1f)] private float fallGravityScale = 1.5f;
+
+    [Tooltip("Bool parameter on the Animator for jump state.")]
+    [SerializeField] private string jumpParameter = "IsJumping";
+
+    [Tooltip("Coyote time: frames after leaving ground that jump is still allowed. Feels more forgiving.")]
+    [SerializeField, Range(0f, 0.2f)] private float coyoteTime = 0.1f;
+
     [Header("Facing")]
     [SerializeField] private SpriteRenderer spriteRenderer;
 
@@ -89,8 +102,13 @@ public class PlayerMovement2D : MonoBehaviour
     private Rigidbody2D body;
     private Collider2D bodyCollider;
     private int speedParamHash;
+    private int jumpParamHash;
     private float moveInput;
     private bool facingRight;
+
+    private float coyoteCounter;
+    private bool jumpInputQueued;
+    private float jumpInputCooldown;
 
     /// <summary>
     /// Set by PlayerAttack2D while a swing is playing. While true this script
@@ -140,6 +158,7 @@ public class PlayerMovement2D : MonoBehaviour
         }
 
         speedParamHash = Animator.StringToHash(speedParameter);
+        jumpParamHash = Animator.StringToHash(jumpParameter);
         facingRight = startsFacingRight;
         spriteRenderer.flipX = !facingRight;
     }
@@ -152,6 +171,19 @@ public class PlayerMovement2D : MonoBehaviour
         // animator needs an up to date value even on frames where the
         // physics step did not run.
         IsGrounded = CheckGrounded();
+
+        // Coyote time: allows jump shortly after leaving ground for forgiving feel
+        if (IsGrounded)
+        {
+            coyoteCounter = coyoteTime;
+        }
+        else
+        {
+            coyoteCounter -= Time.deltaTime;
+        }
+
+        // Read jump input (Space or Gamepad A)
+        HandleJumpInput();
 
         float velocityX = body.linearVelocity.x;
 
@@ -185,7 +217,11 @@ public class PlayerMovement2D : MonoBehaviour
             : 0f;
 
         // Only walk when standing on something that can be walked on.
+        // Do NOT show run animation mid-air.
         animator.SetFloat(speedParamHash, IsGrounded ? normalizedSpeed : 0f);
+
+        // Update jump animation state
+        animator.SetBool(jumpParamHash, !IsGrounded);
 
         if (movementLocked)
         {
@@ -212,7 +248,19 @@ public class PlayerMovement2D : MonoBehaviour
         // decided here, so the check has to be re-run here.
         IsGrounded = CheckGrounded();
 
+        // Execute queued jump if valid
+        if (jumpInputQueued)
+        {
+            ExecuteJump();
+        }
+
         Vector2 velocity = body.linearVelocity;
+
+        // Apply enhanced gravity while falling for snappier platformer feel
+        if (!IsGrounded && velocity.y < 0f)
+        {
+            velocity.y += Physics2D.gravity.y * (fallGravityScale - 1f) * Time.fixedDeltaTime;
+        }
 
         // A push is committed: Leon walks the object forward and never back.
         if (IsPushing && !Mathf.Approximately(PushDirection, 0f))
@@ -348,6 +396,56 @@ public class PlayerMovement2D : MonoBehaviour
         }
 
         return false;
+    }
+
+    /// <summary>
+    /// Reads jump input (Space or Gamepad A) and queues the jump if valid.
+    /// </summary>
+    private void HandleJumpInput()
+    {
+        bool jumpPressed = false;
+
+        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+        {
+            jumpPressed = true;
+        }
+
+        if (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame)
+        {
+            jumpPressed = true;
+        }
+
+        if (jumpPressed)
+        {
+            jumpInputCooldown = 0.1f; // Small cooldown to prevent double-taps
+            jumpInputQueued = true;
+        }
+
+        jumpInputCooldown -= Time.deltaTime;
+    }
+
+    /// <summary>
+    /// Attempts to execute a jump if conditions are met:
+    /// - Not attacking
+    /// - Not pushing
+    /// - Have coyote time or are grounded
+    /// </summary>
+    private void ExecuteJump()
+    {
+        // Cannot jump while attacking or pushing
+        if (IsAttacking || IsPushing) return;
+
+        // Must have coyote time remaining or be grounded
+        if (coyoteCounter <= 0f) return;
+
+        Vector2 velocity = body.linearVelocity;
+        velocity.y = jumpForce;
+        body.linearVelocity = velocity;
+        body.WakeUp();
+
+        // Consume jump input and coyote time
+        jumpInputQueued = false;
+        coyoteCounter = 0f;
     }
 
     /// <summary>

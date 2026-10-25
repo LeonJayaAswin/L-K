@@ -97,6 +97,7 @@ public class PlayerAttack2D : MonoBehaviour
     private float stateEnteredTime = -999f;
 
     private bool isPushing;
+    private bool pushIsActive;  // Animation event flag: controls if object moves NOW
     private float pushDirection;
     private Transform pushTarget;
 
@@ -183,6 +184,7 @@ public class PlayerAttack2D : MonoBehaviour
         if (!isPushing) return;
 
         isPushing = false;
+        pushIsActive = false;  // Stop movement when push ends
         pushTarget = null;
 
         if (animator != null) animator.SetInteger(pushParamHash, 0);
@@ -235,9 +237,13 @@ public class PlayerAttack2D : MonoBehaviour
     /// <summary>
     /// Moves the pushed object. The object only ever travels along the
     /// locked push direction, so it can never be shoved backwards.
+    /// Only executes when pushIsActive is true (set by animation events).
     /// </summary>
     private void ApplyPush()
     {
+        // Only move if animation event has enabled push movement
+        if (!pushIsActive) return;
+
         if (pushTarget == null)
         {
             EndPush();
@@ -441,5 +447,23 @@ public class PlayerAttack2D : MonoBehaviour
         lastSeenState = 0;
         stateEnteredTime = -999f;
         if (animator != null) animator.SetInteger(attackParamHash, 0);
+    }
+
+    /// <summary>
+    /// Called by animation event at frame 0 of push animation.
+    /// Enables object movement during active pushing frames.
+    /// </summary>
+    public void OnPushStart()
+    {
+        pushIsActive = true;
+    }
+
+    /// <summary>
+    /// Called by animation event at frame 23 (1.15s) of push animation.
+    /// Disables object movement during hold/freeze frames.
+    /// </summary>
+    public void OnPushEnd()
+    {
+        pushIsActive = false;
     }
 }
