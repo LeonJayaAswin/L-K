@@ -518,7 +518,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &885996148
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -895,31 +895,6 @@ MonoBehaviour:
   attackParameter: Attack
   animator: {fileID: 1200955315}
   movement: {fileID: 1200955318}
---- !u!114 &1200955322
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1200955314}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a9a3d78a6297074f8557730b6ff27c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthHurt
-  hurtKey: 22
-  hitsBeforeDeath: 10
-  animator: {fileID: 1200955315}
-  hurtTrigger: Hurt
-  deathTrigger: Death
-  hurtStateName: Hurt
-  pinDeathToGround: 1
-  groundTag: Ground
-  spriteRenderer: {fileID: 1200955316}
-  bodyCollider: {fileID: 1200955321}
-  body: {fileID: 1200955319}
-  movement: {fileID: 1200955318}
-  attack: {fileID: 1200955320}
 --- !u!61 &1200955321
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -966,6 +941,31 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.37, y: 1.78}
   m_EdgeRadius: 0
+--- !u!114 &1200955322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200955314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a9a3d78a6297074f8557730b6ff27c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthHurt
+  hurtKey: 22
+  hitsBeforeDeath: 10
+  animator: {fileID: 1200955315}
+  hurtTrigger: Hurt
+  deathTrigger: Death
+  hurtStateName: Hurt
+  pinDeathToGround: 1
+  groundTag: Ground
+  spriteRenderer: {fileID: 1200955316}
+  bodyCollider: {fileID: 1200955321}
+  body: {fileID: 1200955319}
+  movement: {fileID: 1200955318}
+  attack: {fileID: 1200955320}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
