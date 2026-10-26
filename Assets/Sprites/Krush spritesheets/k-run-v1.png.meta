@@ -1,0 +1,795 @@
+fileFormatVersion: 2
+guid: d229e53bfdcb03449b3dbe14fc36ece8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5478043599801121857
+    second: k-run-v1_0
+  - first:
+      213: 8187071741609953624
+    second: k-run-v1_1
+  - first:
+      213: 282270862390965222
+    second: k-run-v1_2
+  - first:
+      213: -5669614427872231619
+    second: k-run-v1_3
+  - first:
+      213: -676228884838533725
+    second: k-run-v1_4
+  - first:
+      213: 451315686115115413
+    second: k-run-v1_5
+  - first:
+      213: -1516162865729590651
+    second: k-run-v1_6
+  - first:
+      213: -3220803250984262096
+    second: k-run-v1_7
+  - first:
+      213: 4012589701192473828
+    second: k-run-v1_8
+  - first:
+      213: 5660796660389840125
+    second: k-run-v1_9
+  - first:
+      213: -3835116347401448049
+    second: k-run-v1_10
+  - first:
+      213: -6896556726351490010
+    second: k-run-v1_11
+  - first:
+      213: 3792820289339551566
+    second: k-run-v1_12
+  - first:
+      213: 1142669431884450928
+    second: k-run-v1_13
+  - first:
+      213: 4369395831867335057
+    second: k-run-v1_14
+  - first:
+      213: 7141626055095615380
+    second: k-run-v1_15
+  - first:
+      213: -8479714313857141089
+    second: k-run-v1_16
+  - first:
+      213: 5325852685321195867
+    second: k-run-v1_17
+  - first:
+      213: 7586939866090895973
+    second: k-run-v1_18
+  - first:
+      213: 2805492806677614487
+    second: k-run-v1_19
+  - first:
+      213: -5430908229269078806
+    second: k-run-v1_20
+  - first:
+      213: -7501611877145941568
+    second: k-run-v1_21
+  - first:
+      213: 5797892402815589224
+    second: k-run-v1_22
+  - first:
+      213: 4514299073347905136
+    second: k-run-v1_23
+  - first:
+      213: 7864353759857811193
+    second: k-run-v1_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: k-run-v1_0
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 1078
+        width: 148
+        height: 154
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fb380c1be541af3b0800000000000000
+      internalID: -5478043599801121857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_1
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 1069
+        width: 173
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 859cc4d3f525e9170800000000000000
+      internalID: 8187071741609953624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_2
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 1059
+        width: 109
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e3b1439ad3dae300800000000000000
+      internalID: 282270862390965222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_3
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 1059
+        width: 93
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3ffe3d77bb7151b0800000000000000
+      internalID: -5669614427872231619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_4
+      rect:
+        serializedVersion: 2
+        x: 1059
+        y: 1073
+        width: 142
+        height: 159
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a5375c796d8d96f0800000000000000
+      internalID: -676228884838533725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_5
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 809
+        width: 162
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5910470b935634600800000000000000
+      internalID: 451315686115115413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_6
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 803
+        width: 79
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58aac8618e185fae0800000000000000
+      internalID: -1516162865729590651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_7
+      rect:
+        serializedVersion: 2
+        x: 552
+        y: 809
+        width: 138
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 036e8adf1886d43d0800000000000000
+      internalID: -3220803250984262096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_8
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 813
+        width: 171
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ecd7f8d2159fa730800000000000000
+      internalID: 4012589701192473828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_9
+      rect:
+        serializedVersion: 2
+        x: 1094
+        y: 803
+        width: 88
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df4014802903f8e40800000000000000
+      internalID: 5660796660389840125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_10
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 549
+        width: 129
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f85d7d8500ee6cac0800000000000000
+      internalID: -3835116347401448049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_11
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 559
+        width: 166
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6241d7862328a40a0800000000000000
+      internalID: -6896556726351490010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_12
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 547
+        width: 105
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4f6afa35fdc2a430800000000000000
+      internalID: 3792820289339551566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_13
+      rect:
+        serializedVersion: 2
+        x: 825
+        y: 547
+        width: 116
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07c8b2f4bc39bdf00800000000000000
+      internalID: 1142669431884450928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_14
+      rect:
+        serializedVersion: 2
+        x: 1053
+        y: 565
+        width: 151
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1916689eb5633ac30800000000000000
+      internalID: 4369395831867335057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_15
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 294
+        width: 151
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 49ff5a42f072c1360800000000000000
+      internalID: 7141626055095615380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_16
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 291
+        width: 77
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f96ffbd42c0025a80800000000000000
+      internalID: -8479714313857141089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_17
+      rect:
+        serializedVersion: 2
+        x: 544
+        y: 309
+        width: 145
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5151aabcca39e940800000000000000
+      internalID: 5325852685321195867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_18
+      rect:
+        serializedVersion: 2
+        x: 793
+        y: 300
+        width: 169
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 56af8926c993a4960800000000000000
+      internalID: 7586939866090895973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_19
+      rect:
+        serializedVersion: 2
+        x: 1098
+        y: 291
+        width: 80
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79fcee1f7dc1fe620800000000000000
+      internalID: 2805492806677614487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_20
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 47
+        width: 142
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aecbbaa5db981a4b0800000000000000
+      internalID: -5430908229269078806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_21
+      rect:
+        serializedVersion: 2
+        x: 280
+        y: 45
+        width: 172
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c96dd33ebbe4e790800000000000000
+      internalID: -7501611877145941568
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_22
+      rect:
+        serializedVersion: 2
+        x: 566
+        y: 35
+        width: 115
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86b52cbfb60467050800000000000000
+      internalID: 5797892402815589224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_23
+      rect:
+        serializedVersion: 2
+        x: 826
+        y: 35
+        width: 113
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 076e6c4e61306ae30800000000000000
+      internalID: 4514299073347905136
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-run-v1_24
+      rect:
+        serializedVersion: 2
+        x: 1049
+        y: 47
+        width: 169
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9fe1554d31cc32d60800000000000000
+      internalID: 7864353759857811193
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      k-run-v1_0: -5478043599801121857
+      k-run-v1_1: 8187071741609953624
+      k-run-v1_10: -3835116347401448049
+      k-run-v1_11: -6896556726351490010
+      k-run-v1_12: 3792820289339551566
+      k-run-v1_13: 1142669431884450928
+      k-run-v1_14: 4369395831867335057
+      k-run-v1_15: 7141626055095615380
+      k-run-v1_16: -8479714313857141089
+      k-run-v1_17: 5325852685321195867
+      k-run-v1_18: 7586939866090895973
+      k-run-v1_19: 2805492806677614487
+      k-run-v1_2: 282270862390965222
+      k-run-v1_20: -5430908229269078806
+      k-run-v1_21: -7501611877145941568
+      k-run-v1_22: 5797892402815589224
+      k-run-v1_23: 4514299073347905136
+      k-run-v1_24: 7864353759857811193
+      k-run-v1_3: -5669614427872231619
+      k-run-v1_4: -676228884838533725
+      k-run-v1_5: 451315686115115413
+      k-run-v1_6: -1516162865729590651
+      k-run-v1_7: -3220803250984262096
+      k-run-v1_8: 4012589701192473828
+      k-run-v1_9: 5660796660389840125
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

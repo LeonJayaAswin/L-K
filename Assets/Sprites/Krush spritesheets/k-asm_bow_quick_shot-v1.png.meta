@@ -1,0 +1,743 @@
+fileFormatVersion: 2
+guid: 864e56234c9564545a3941f7474e4f5a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 8427007020193969907
+    second: k-asm_bow_quick_shot-v1_0
+  - first:
+      213: -8221891541825207943
+    second: k-asm_bow_quick_shot-v1_1
+  - first:
+      213: -78958493388917166
+    second: k-asm_bow_quick_shot-v1_2
+  - first:
+      213: 5400691441478934982
+    second: k-asm_bow_quick_shot-v1_3
+  - first:
+      213: -4575732163269868770
+    second: k-asm_bow_quick_shot-v1_4
+  - first:
+      213: 7283526604561116296
+    second: k-asm_bow_quick_shot-v1_5
+  - first:
+      213: 755509535676239257
+    second: k-asm_bow_quick_shot-v1_6
+  - first:
+      213: 7390716414992224998
+    second: k-asm_bow_quick_shot-v1_7
+  - first:
+      213: 489275794564821076
+    second: k-asm_bow_quick_shot-v1_8
+  - first:
+      213: -1000681059765780208
+    second: k-asm_bow_quick_shot-v1_9
+  - first:
+      213: 5860711234742804728
+    second: k-asm_bow_quick_shot-v1_10
+  - first:
+      213: -3445073418086900496
+    second: k-asm_bow_quick_shot-v1_11
+  - first:
+      213: -7719394126664753519
+    second: k-asm_bow_quick_shot-v1_12
+  - first:
+      213: -8553546374296625624
+    second: k-asm_bow_quick_shot-v1_13
+  - first:
+      213: -6008246603150787110
+    second: k-asm_bow_quick_shot-v1_14
+  - first:
+      213: 2292825009891153432
+    second: k-asm_bow_quick_shot-v1_15
+  - first:
+      213: 7272888043506081508
+    second: k-asm_bow_quick_shot-v1_16
+  - first:
+      213: -1751390102669565304
+    second: k-asm_bow_quick_shot-v1_17
+  - first:
+      213: -3480936846165605358
+    second: k-asm_bow_quick_shot-v1_18
+  - first:
+      213: 6473307031953426401
+    second: k-asm_bow_quick_shot-v1_19
+  - first:
+      213: -8336270272423739334
+    second: k-asm_bow_quick_shot-v1_20
+  - first:
+      213: 271180689509818047
+    second: k-asm_bow_quick_shot-v1_21
+  - first:
+      213: -924243243806349454
+    second: k-asm_bow_quick_shot-v1_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_0
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 2078
+        width: 114
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f672669c3eb2f470800000000000000
+      internalID: 8427007020193969907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_1
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 2078
+        width: 114
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 97148b34439f5ed80800000000000000
+      internalID: -8221891541825207943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_2
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 2078
+        width: 114
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 256bd892bab77eef0800000000000000
+      internalID: -78958493388917166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_3
+      rect:
+        serializedVersion: 2
+        x: 1743
+        y: 2078
+        width: 114
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c128de704c13fa40800000000000000
+      internalID: 5400691441478934982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_4
+      rect:
+        serializedVersion: 2
+        x: 2254
+        y: 2078
+        width: 113
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1348fc37dbbf70c0800000000000000
+      internalID: -4575732163269868770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_5
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 1566
+        width: 169
+        height: 200
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88ce8f86bd8441560800000000000000
+      internalID: 7283526604561116296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_6
+      rect:
+        serializedVersion: 2
+        x: 709
+        y: 1566
+        width: 111
+        height: 201
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99d076a7beb1c7a00800000000000000
+      internalID: 755509535676239257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_7
+      rect:
+        serializedVersion: 2
+        x: 888
+        y: 1707
+        width: 70
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6e29247fb69119660800000000000000
+      internalID: 7390716414992224998
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_8
+      rect:
+        serializedVersion: 2
+        x: 1221
+        y: 1566
+        width: 256
+        height: 209
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 450bb3c2eb14ac600800000000000000
+      internalID: 489275794564821076
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_9
+      rect:
+        serializedVersion: 2
+        x: 1720
+        y: 1566
+        width: 125
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0110333c0eddc12f0800000000000000
+      internalID: -1000681059765780208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_10
+      rect:
+        serializedVersion: 2
+        x: 2221
+        y: 1566
+        width: 139
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8f06cfd01dd655150800000000000000
+      internalID: 5860711234742804728
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_11
+      rect:
+        serializedVersion: 2
+        x: 177
+        y: 1054
+        width: 136
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0fc1ac1aaf3a030d0800000000000000
+      internalID: -3445073418086900496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_12
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 1054
+        width: 114
+        height: 185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19e19eed0f33fd490800000000000000
+      internalID: -7719394126664753519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_13
+      rect:
+        serializedVersion: 2
+        x: 1224
+        y: 1054
+        width: 113
+        height: 185
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82e183624e2bb4980800000000000000
+      internalID: -8553546374296625624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_14
+      rect:
+        serializedVersion: 2
+        x: 1737
+        y: 1054
+        width: 154
+        height: 187
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: addff382c8b6e9ca0800000000000000
+      internalID: -6008246603150787110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_15
+      rect:
+        serializedVersion: 2
+        x: 2253
+        y: 1054
+        width: 158
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81691b6d230c1df10800000000000000
+      internalID: 2292825009891153432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_16
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 542
+        width: 149
+        height: 194
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ee9d54642d7ee460800000000000000
+      internalID: 7272888043506081508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_17
+      rect:
+        serializedVersion: 2
+        x: 724
+        y: 542
+        width: 139
+        height: 197
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 882ee3b1bffc1b7e0800000000000000
+      internalID: -1751390102669565304
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_18
+      rect:
+        serializedVersion: 2
+        x: 1238
+        y: 542
+        width: 131
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2140bb6916a31bfc0800000000000000
+      internalID: -3480936846165605358
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_19
+      rect:
+        serializedVersion: 2
+        x: 1750
+        y: 542
+        width: 125
+        height: 199
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e74f91d27ec5d950800000000000000
+      internalID: 6473307031953426401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_20
+      rect:
+        serializedVersion: 2
+        x: 2262
+        y: 542
+        width: 117
+        height: 198
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a30c88cca5e9f4c80800000000000000
+      internalID: -8336270272423739334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_21
+      rect:
+        serializedVersion: 2
+        x: 213
+        y: 30
+        width: 113
+        height: 196
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fbe9d2c766d63c300800000000000000
+      internalID: 271180689509818047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_quick_shot-v1_22
+      rect:
+        serializedVersion: 2
+        x: 721
+        y: 30
+        width: 114
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2772ed6aaad6c23f0800000000000000
+      internalID: -924243243806349454
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      k-asm_bow_quick_shot-v1_0: 8427007020193969907
+      k-asm_bow_quick_shot-v1_1: -8221891541825207943
+      k-asm_bow_quick_shot-v1_10: 5860711234742804728
+      k-asm_bow_quick_shot-v1_11: -3445073418086900496
+      k-asm_bow_quick_shot-v1_12: -7719394126664753519
+      k-asm_bow_quick_shot-v1_13: -8553546374296625624
+      k-asm_bow_quick_shot-v1_14: -6008246603150787110
+      k-asm_bow_quick_shot-v1_15: 2292825009891153432
+      k-asm_bow_quick_shot-v1_16: 7272888043506081508
+      k-asm_bow_quick_shot-v1_17: -1751390102669565304
+      k-asm_bow_quick_shot-v1_18: -3480936846165605358
+      k-asm_bow_quick_shot-v1_19: 6473307031953426401
+      k-asm_bow_quick_shot-v1_2: -78958493388917166
+      k-asm_bow_quick_shot-v1_20: -8336270272423739334
+      k-asm_bow_quick_shot-v1_21: 271180689509818047
+      k-asm_bow_quick_shot-v1_22: -924243243806349454
+      k-asm_bow_quick_shot-v1_3: 5400691441478934982
+      k-asm_bow_quick_shot-v1_4: -4575732163269868770
+      k-asm_bow_quick_shot-v1_5: 7283526604561116296
+      k-asm_bow_quick_shot-v1_6: 755509535676239257
+      k-asm_bow_quick_shot-v1_7: 7390716414992224998
+      k-asm_bow_quick_shot-v1_8: 489275794564821076
+      k-asm_bow_quick_shot-v1_9: -1000681059765780208
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

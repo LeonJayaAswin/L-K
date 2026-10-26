@@ -1,0 +1,795 @@
+fileFormatVersion: 2
+guid: 532833b231a09b548a56b00ec905cbe8
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 2450754055506522345
+    second: k-hurt_0
+  - first:
+      213: -2469542723070316470
+    second: k-hurt_1
+  - first:
+      213: -7620759365851154453
+    second: k-hurt_2
+  - first:
+      213: -3551422290585159216
+    second: k-hurt_3
+  - first:
+      213: 6338918657607094201
+    second: k-hurt_4
+  - first:
+      213: 690139067780199095
+    second: k-hurt_5
+  - first:
+      213: -5611563729461461418
+    second: k-hurt_6
+  - first:
+      213: 3029979388740624427
+    second: k-hurt_7
+  - first:
+      213: -6956313758403434208
+    second: k-hurt_8
+  - first:
+      213: 4494812129372223089
+    second: k-hurt_9
+  - first:
+      213: 4564976779320132424
+    second: k-hurt_10
+  - first:
+      213: -5735940843566965975
+    second: k-hurt_11
+  - first:
+      213: -7578825179424238433
+    second: k-hurt_12
+  - first:
+      213: -6444472847427820689
+    second: k-hurt_13
+  - first:
+      213: -9099052650814493619
+    second: k-hurt_14
+  - first:
+      213: 3379777737943964328
+    second: k-hurt_15
+  - first:
+      213: -7502310982219307194
+    second: k-hurt_16
+  - first:
+      213: 3688134659609357007
+    second: k-hurt_17
+  - first:
+      213: 218309257447394677
+    second: k-hurt_18
+  - first:
+      213: -1454933697899893441
+    second: k-hurt_19
+  - first:
+      213: 3330519204916369138
+    second: k-hurt_20
+  - first:
+      213: 9132846253798922270
+    second: k-hurt_21
+  - first:
+      213: -7171175518630086846
+    second: k-hurt_22
+  - first:
+      213: -3046622701795304658
+    second: k-hurt_23
+  - first:
+      213: 6327978660963321698
+    second: k-hurt_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: k-hurt_0
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 1058
+        width: 43
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e0705e24d3d20220800000000000000
+      internalID: 2450754055506522345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_1
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 1057
+        width: 43
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a403eb14afb6abdd0800000000000000
+      internalID: -2469542723070316470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_2
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 1058
+        width: 43
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be7f5b7bbbf9d3690800000000000000
+      internalID: -7620759365851154453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_3
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 1058
+        width: 63
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d974423e30d6bec0800000000000000
+      internalID: -3551422290585159216
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_4
+      rect:
+        serializedVersion: 2
+        x: 961
+        y: 1058
+        width: 208
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9bf44ce1fec58f750800000000000000
+      internalID: 6338918657607094201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_5
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 802
+        width: 52
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b278ac53ddd39900800000000000000
+      internalID: 690139067780199095
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_6
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 803
+        width: 80
+        height: 148
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 65ebbf6f488bf12b0800000000000000
+      internalID: -5611563729461461418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_7
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 802
+        width: 82
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b20e3a65336ac0a20800000000000000
+      internalID: 3029979388740624427
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_8
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 802
+        width: 80
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 029633c2e75367f90800000000000000
+      internalID: -6956313758403434208
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_9
+      rect:
+        serializedVersion: 2
+        x: 1117
+        y: 802
+        width: 79
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 176395f21d7c06e30800000000000000
+      internalID: 4494812129372223089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_10
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 547
+        width: 79
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 843884bc13e0a5f30800000000000000
+      internalID: 4564976779320132424
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_11
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 546
+        width: 79
+        height: 145
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92b598e6138d560b0800000000000000
+      internalID: -5735940843566965975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_12
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 546
+        width: 79
+        height: 144
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f94d1a557aa92d690800000000000000
+      internalID: -7578825179424238433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_13
+      rect:
+        serializedVersion: 2
+        x: 861
+        y: 546
+        width: 79
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f632a6ce612a096a0800000000000000
+      internalID: -6444472847427820689
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_14
+      rect:
+        serializedVersion: 2
+        x: 1117
+        y: 546
+        width: 80
+        height: 143
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4c20aba2dba9b180800000000000000
+      internalID: -9099052650814493619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_15
+      rect:
+        serializedVersion: 2
+        x: 93
+        y: 290
+        width: 80
+        height: 142
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8aa5ce122f167ee20800000000000000
+      internalID: 3379777737943964328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_16
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 290
+        width: 73
+        height: 156
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6476e4e19ef62e790800000000000000
+      internalID: -7502310982219307194
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_17
+      rect:
+        serializedVersion: 2
+        x: 605
+        y: 291
+        width: 62
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fca62ddaee2ee2330800000000000000
+      internalID: 3688134659609357007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_18
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 290
+        width: 51
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57dc45dec17970300800000000000000
+      internalID: 218309257447394677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_19
+      rect:
+        serializedVersion: 2
+        x: 1119
+        y: 289
+        width: 55
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f3d6ee4a2890fcbe0800000000000000
+      internalID: -1454933697899893441
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_20
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 34
+        width: 53
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f618ae2291683e20800000000000000
+      internalID: 3330519204916369138
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_21
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 34
+        width: 52
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1811f9a7436ebe70800000000000000
+      internalID: 9132846253798922270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_22
+      rect:
+        serializedVersion: 2
+        x: 607
+        y: 34
+        width: 50
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 247731e3cddda7c90800000000000000
+      internalID: -7171175518630086846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_23
+      rect:
+        serializedVersion: 2
+        x: 868
+        y: 35
+        width: 45
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2b99de5bc838b5d0800000000000000
+      internalID: -3046622701795304658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-hurt_24
+      rect:
+        serializedVersion: 2
+        x: 1125
+        y: 34
+        width: 44
+        height: 173
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 26788f8a01f71d750800000000000000
+      internalID: 6327978660963321698
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      k-hurt_0: 2450754055506522345
+      k-hurt_1: -2469542723070316470
+      k-hurt_10: 4564976779320132424
+      k-hurt_11: -5735940843566965975
+      k-hurt_12: -7578825179424238433
+      k-hurt_13: -6444472847427820689
+      k-hurt_14: -9099052650814493619
+      k-hurt_15: 3379777737943964328
+      k-hurt_16: -7502310982219307194
+      k-hurt_17: 3688134659609357007
+      k-hurt_18: 218309257447394677
+      k-hurt_19: -1454933697899893441
+      k-hurt_2: -7620759365851154453
+      k-hurt_20: 3330519204916369138
+      k-hurt_21: 9132846253798922270
+      k-hurt_22: -7171175518630086846
+      k-hurt_23: -3046622701795304658
+      k-hurt_24: 6327978660963321698
+      k-hurt_3: -3551422290585159216
+      k-hurt_4: 6338918657607094201
+      k-hurt_5: 690139067780199095
+      k-hurt_6: -5611563729461461418
+      k-hurt_7: 3029979388740624427
+      k-hurt_8: -6956313758403434208
+      k-hurt_9: 4494812129372223089
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

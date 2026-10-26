@@ -1,0 +1,795 @@
+fileFormatVersion: 2
+guid: d022f815690ffac4cb1583ad827d395f
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -4152137107906359457
+    second: mimo-push-v1_0
+  - first:
+      213: 4050910721917637545
+    second: mimo-push-v1_1
+  - first:
+      213: -3588054772670943642
+    second: mimo-push-v1_2
+  - first:
+      213: 6268627424686419789
+    second: mimo-push-v1_3
+  - first:
+      213: 2681953157817417341
+    second: mimo-push-v1_4
+  - first:
+      213: -5679579650139367047
+    second: mimo-push-v1_5
+  - first:
+      213: -6460707789205318089
+    second: mimo-push-v1_6
+  - first:
+      213: 1233346368078955683
+    second: mimo-push-v1_7
+  - first:
+      213: 1928523947956003225
+    second: mimo-push-v1_8
+  - first:
+      213: -5393137504398109503
+    second: mimo-push-v1_9
+  - first:
+      213: 5996434436527326791
+    second: mimo-push-v1_10
+  - first:
+      213: -5381869291097043275
+    second: mimo-push-v1_11
+  - first:
+      213: 4171773634353747296
+    second: mimo-push-v1_12
+  - first:
+      213: 5818951915154148364
+    second: mimo-push-v1_13
+  - first:
+      213: -7019174907018105668
+    second: mimo-push-v1_14
+  - first:
+      213: -3144370934454781896
+    second: mimo-push-v1_15
+  - first:
+      213: 4352161056006427306
+    second: mimo-push-v1_16
+  - first:
+      213: -4697116378159314083
+    second: mimo-push-v1_17
+  - first:
+      213: 593130000728861671
+    second: mimo-push-v1_18
+  - first:
+      213: 1832929480871591101
+    second: mimo-push-v1_19
+  - first:
+      213: 3345115582541518763
+    second: mimo-push-v1_20
+  - first:
+      213: -3197938279380464450
+    second: mimo-push-v1_21
+  - first:
+      213: -6297843309059988125
+    second: mimo-push-v1_22
+  - first:
+      213: 2090686941691264395
+    second: mimo-push-v1_23
+  - first:
+      213: -3933244371149676009
+    second: mimo-push-v1_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: mimo-push-v1_0
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 1057
+        width: 172
+        height: 161
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5f0680ac45a066c0800000000000000
+      internalID: -4152137107906359457
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_1
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 1056
+        width: 172
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a3d8b4c6d9b73830800000000000000
+      internalID: 4050910721917637545
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_2
+      rect:
+        serializedVersion: 2
+        x: 549
+        y: 1057
+        width: 173
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66ead40d13ba43ec0800000000000000
+      internalID: -3588054772670943642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_3
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 1057
+        width: 167
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4fa4bd1e63aef650800000000000000
+      internalID: 6268627424686419789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_4
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 1057
+        width: 159
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d7eb1fbff26383520800000000000000
+      internalID: 2681953157817417341
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_5
+      rect:
+        serializedVersion: 2
+        x: 62
+        y: 801
+        width: 148
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 979d7ef56641e21b0800000000000000
+      internalID: -5679579650139367047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_6
+      rect:
+        serializedVersion: 2
+        x: 321
+        y: 801
+        width: 145
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 73651dafe74f656a0800000000000000
+      internalID: -6460707789205318089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_7
+      rect:
+        serializedVersion: 2
+        x: 572
+        y: 801
+        width: 150
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a44d5abcf9bd1110800000000000000
+      internalID: 1233346368078955683
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_8
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 801
+        width: 154
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99160ca105e73ca10800000000000000
+      internalID: 1928523947956003225
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_9
+      rect:
+        serializedVersion: 2
+        x: 1075
+        y: 800
+        width: 159
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1c49389830ab725b0800000000000000
+      internalID: -5393137504398109503
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_10
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 544
+        width: 164
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 746812c795d973350800000000000000
+      internalID: 5996434436527326791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_11
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 544
+        width: 167
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bec394e462cf45b0800000000000000
+      internalID: -5381869291097043275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_12
+      rect:
+        serializedVersion: 2
+        x: 550
+        y: 544
+        width: 172
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 065def6740e15e930800000000000000
+      internalID: 4171773634353747296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_13
+      rect:
+        serializedVersion: 2
+        x: 804
+        y: 543
+        width: 174
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0c87dbcfe111c050800000000000000
+      internalID: 5818951915154148364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_14
+      rect:
+        serializedVersion: 2
+        x: 1061
+        y: 544
+        width: 173
+        height: 164
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cbca9da7c91e69e90800000000000000
+      internalID: -7019174907018105668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_15
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 287
+        width: 169
+        height: 166
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83872c17b43fc54d0800000000000000
+      internalID: -3144370934454781896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_16
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 288
+        width: 155
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa25d84fb6bf56c30800000000000000
+      internalID: 4352161056006427306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_17
+      rect:
+        serializedVersion: 2
+        x: 579
+        y: 288
+        width: 143
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d5b052b5a8d70deb0800000000000000
+      internalID: -4697116378159314083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_18
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 288
+        width: 144
+        height: 171
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7eb2217d7983b3800800000000000000
+      internalID: 593130000728861671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_19
+      rect:
+        serializedVersion: 2
+        x: 1082
+        y: 288
+        width: 152
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbc31bdc6afdf6910800000000000000
+      internalID: 1832929480871591101
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_20
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 32
+        width: 157
+        height: 167
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba7d20e26ec3c6e20800000000000000
+      internalID: 3345115582541518763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_21
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 32
+        width: 161
+        height: 165
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ebc47eb0414ae93d0800000000000000
+      internalID: -3197938279380464450
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_22
+      rect:
+        serializedVersion: 2
+        x: 557
+        y: 32
+        width: 165
+        height: 163
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 365a868b0e09998a0800000000000000
+      internalID: -6297843309059988125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_23
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 32
+        width: 170
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b8d3e0052bc930d10800000000000000
+      internalID: 2090686941691264395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: mimo-push-v1_24
+      rect:
+        serializedVersion: 2
+        x: 1062
+        y: 32
+        width: 172
+        height: 162
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 712a1da651f4a69c0800000000000000
+      internalID: -3933244371149676009
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      mimo-push-v1_0: -4152137107906359457
+      mimo-push-v1_1: 4050910721917637545
+      mimo-push-v1_10: 5996434436527326791
+      mimo-push-v1_11: -5381869291097043275
+      mimo-push-v1_12: 4171773634353747296
+      mimo-push-v1_13: 5818951915154148364
+      mimo-push-v1_14: -7019174907018105668
+      mimo-push-v1_15: -3144370934454781896
+      mimo-push-v1_16: 4352161056006427306
+      mimo-push-v1_17: -4697116378159314083
+      mimo-push-v1_18: 593130000728861671
+      mimo-push-v1_19: 1832929480871591101
+      mimo-push-v1_2: -3588054772670943642
+      mimo-push-v1_20: 3345115582541518763
+      mimo-push-v1_21: -3197938279380464450
+      mimo-push-v1_22: -6297843309059988125
+      mimo-push-v1_23: 2090686941691264395
+      mimo-push-v1_24: -3933244371149676009
+      mimo-push-v1_3: 6268627424686419789
+      mimo-push-v1_4: 2681953157817417341
+      mimo-push-v1_5: -5679579650139367047
+      mimo-push-v1_6: -6460707789205318089
+      mimo-push-v1_7: 1233346368078955683
+      mimo-push-v1_8: 1928523947956003225
+      mimo-push-v1_9: -5393137504398109503
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

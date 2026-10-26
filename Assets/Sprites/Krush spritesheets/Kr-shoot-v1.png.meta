@@ -1,0 +1,795 @@
+fileFormatVersion: 2
+guid: 2632224678a76c64bb69e4ea46bcacff
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -2260520960931011983
+    second: Kr-shoot-v1_0
+  - first:
+      213: 2105916934446227093
+    second: Kr-shoot-v1_1
+  - first:
+      213: 838247588416941636
+    second: Kr-shoot-v1_2
+  - first:
+      213: -501543817727531453
+    second: Kr-shoot-v1_3
+  - first:
+      213: -7947252015248674283
+    second: Kr-shoot-v1_4
+  - first:
+      213: -4468311574386283903
+    second: Kr-shoot-v1_5
+  - first:
+      213: -4790615058461946369
+    second: Kr-shoot-v1_6
+  - first:
+      213: -7721317309498437184
+    second: Kr-shoot-v1_7
+  - first:
+      213: -6793295336636014010
+    second: Kr-shoot-v1_8
+  - first:
+      213: -5577669433075781766
+    second: Kr-shoot-v1_9
+  - first:
+      213: 1666994458167575333
+    second: Kr-shoot-v1_10
+  - first:
+      213: 8116457286537647240
+    second: Kr-shoot-v1_11
+  - first:
+      213: -4105381751573739631
+    second: Kr-shoot-v1_12
+  - first:
+      213: 2665591537891515848
+    second: Kr-shoot-v1_13
+  - first:
+      213: -7072306504635820742
+    second: Kr-shoot-v1_14
+  - first:
+      213: -3629896481544584364
+    second: Kr-shoot-v1_15
+  - first:
+      213: 7453451279160768532
+    second: Kr-shoot-v1_16
+  - first:
+      213: -7989525856875973931
+    second: Kr-shoot-v1_17
+  - first:
+      213: 834356062945103531
+    second: Kr-shoot-v1_18
+  - first:
+      213: 3679272594330043532
+    second: Kr-shoot-v1_19
+  - first:
+      213: 3205431673002781994
+    second: Kr-shoot-v1_20
+  - first:
+      213: -1698172679837824254
+    second: Kr-shoot-v1_21
+  - first:
+      213: -745968682718666328
+    second: Kr-shoot-v1_22
+  - first:
+      213: -5833242341554918270
+    second: Kr-shoot-v1_23
+  - first:
+      213: -193109909274839761
+    second: Kr-shoot-v1_24
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Kr-shoot-v1_0
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 1056
+        width: 113
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 172e16ca92401a0e0800000000000000
+      internalID: -2260520960931011983
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_1
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 1055
+        width: 113
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 59e95245b48b93d10800000000000000
+      internalID: 2105916934446227093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_2
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 1056
+        width: 113
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 44e6b6d8dbd02ab00800000000000000
+      internalID: 838247588416941636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_3
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 1056
+        width: 113
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 346ae091e882a09f0800000000000000
+      internalID: -501543817727531453
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_4
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 1055
+        width: 113
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51278920660b5b190800000000000000
+      internalID: -7947252015248674283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_5
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 799
+        width: 113
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18a60f61c4e5df1c0800000000000000
+      internalID: -4468311574386283903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_6
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 800
+        width: 113
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffd0db07cf0548db0800000000000000
+      internalID: -4790615058461946369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_7
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 800
+        width: 113
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c15549f0de58d490800000000000000
+      internalID: -7721317309498437184
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_8
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 800
+        width: 113
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6422e7d32ed59b1a0800000000000000
+      internalID: -6793295336636014010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_9
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 800
+        width: 113
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a7fa6fec3332892b0800000000000000
+      internalID: -5577669433075781766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_10
+      rect:
+        serializedVersion: 2
+        x: 82
+        y: 543
+        width: 114
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5238f99a0aa522710800000000000000
+      internalID: 1666994458167575333
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_11
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 543
+        width: 113
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88415b636e273a070800000000000000
+      internalID: 8116457286537647240
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_12
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 544
+        width: 113
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19783165c01c607c0800000000000000
+      internalID: -4105381751573739631
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_13
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 543
+        width: 113
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cd9f4c71651ef420800000000000000
+      internalID: 2665591537891515848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_14
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 543
+        width: 113
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a355f7864be1add90800000000000000
+      internalID: -7072306504635820742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_15
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 287
+        width: 108
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 453481ec16400adc0800000000000000
+      internalID: -3629896481544584364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_16
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 287
+        width: 95
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 418fe05c27aff6760800000000000000
+      internalID: 7453451279160768532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_17
+      rect:
+        serializedVersion: 2
+        x: 594
+        y: 287
+        width: 95
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d2fb1140908f1190800000000000000
+      internalID: -7989525856875973931
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_18
+      rect:
+        serializedVersion: 2
+        x: 850
+        y: 287
+        width: 98
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bae490c2b6a349b00800000000000000
+      internalID: 834356062945103531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_19
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 287
+        width: 101
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c844fd05ee66f0330800000000000000
+      internalID: 3679272594330043532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_20
+      rect:
+        serializedVersion: 2
+        x: 83
+        y: 31
+        width: 107
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a2ded1d9f1bfb7c20800000000000000
+      internalID: 3205431673002781994
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_21
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 31
+        width: 112
+        height: 175
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20b4efae1f0ee68e0800000000000000
+      internalID: -1698172679837824254
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_22
+      rect:
+        serializedVersion: 2
+        x: 595
+        y: 32
+        width: 113
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a1ecf47f69c5a5f0800000000000000
+      internalID: -745968682718666328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_23
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 32
+        width: 113
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28ce9d60ff82c0fa0800000000000000
+      internalID: -5833242341554918270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Kr-shoot-v1_24
+      rect:
+        serializedVersion: 2
+        x: 1107
+        y: 32
+        width: 113
+        height: 174
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f25b0178f8fe15df0800000000000000
+      internalID: -193109909274839761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      Kr-shoot-v1_0: -2260520960931011983
+      Kr-shoot-v1_1: 2105916934446227093
+      Kr-shoot-v1_10: 1666994458167575333
+      Kr-shoot-v1_11: 8116457286537647240
+      Kr-shoot-v1_12: -4105381751573739631
+      Kr-shoot-v1_13: 2665591537891515848
+      Kr-shoot-v1_14: -7072306504635820742
+      Kr-shoot-v1_15: -3629896481544584364
+      Kr-shoot-v1_16: 7453451279160768532
+      Kr-shoot-v1_17: -7989525856875973931
+      Kr-shoot-v1_18: 834356062945103531
+      Kr-shoot-v1_19: 3679272594330043532
+      Kr-shoot-v1_2: 838247588416941636
+      Kr-shoot-v1_20: 3205431673002781994
+      Kr-shoot-v1_21: -1698172679837824254
+      Kr-shoot-v1_22: -745968682718666328
+      Kr-shoot-v1_23: -5833242341554918270
+      Kr-shoot-v1_24: -193109909274839761
+      Kr-shoot-v1_3: -501543817727531453
+      Kr-shoot-v1_4: -7947252015248674283
+      Kr-shoot-v1_5: -4468311574386283903
+      Kr-shoot-v1_6: -4790615058461946369
+      Kr-shoot-v1_7: -7721317309498437184
+      Kr-shoot-v1_8: -6793295336636014010
+      Kr-shoot-v1_9: -5577669433075781766
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

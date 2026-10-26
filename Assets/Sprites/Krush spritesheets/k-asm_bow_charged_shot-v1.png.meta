@@ -1,0 +1,1341 @@
+fileFormatVersion: 2
+guid: 82caa391332b75f4da13b753e27f0aad
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8197281641401217204
+    second: k-asm_bow_charged_shot-v1_0
+  - first:
+      213: -977880918132567127
+    second: k-asm_bow_charged_shot-v1_1
+  - first:
+      213: 3133427747057941486
+    second: k-asm_bow_charged_shot-v1_2
+  - first:
+      213: 5186493361919560543
+    second: k-asm_bow_charged_shot-v1_3
+  - first:
+      213: 887231422995493093
+    second: k-asm_bow_charged_shot-v1_4
+  - first:
+      213: -5496370487441241484
+    second: k-asm_bow_charged_shot-v1_5
+  - first:
+      213: 1567865984451295691
+    second: k-asm_bow_charged_shot-v1_6
+  - first:
+      213: -9038145557018993527
+    second: k-asm_bow_charged_shot-v1_7
+  - first:
+      213: -4400685347761721929
+    second: k-asm_bow_charged_shot-v1_8
+  - first:
+      213: 4195800813809855375
+    second: k-asm_bow_charged_shot-v1_9
+  - first:
+      213: 3882094293952591249
+    second: k-asm_bow_charged_shot-v1_10
+  - first:
+      213: 4661747169586048690
+    second: k-asm_bow_charged_shot-v1_11
+  - first:
+      213: -6185090391683463759
+    second: k-asm_bow_charged_shot-v1_12
+  - first:
+      213: 3963863742405018020
+    second: k-asm_bow_charged_shot-v1_13
+  - first:
+      213: 5971806259302123178
+    second: k-asm_bow_charged_shot-v1_14
+  - first:
+      213: 2956017521060655459
+    second: k-asm_bow_charged_shot-v1_15
+  - first:
+      213: 7258266763160381287
+    second: k-asm_bow_charged_shot-v1_16
+  - first:
+      213: -4291185792616802813
+    second: k-asm_bow_charged_shot-v1_17
+  - first:
+      213: -4736171160801949001
+    second: k-asm_bow_charged_shot-v1_18
+  - first:
+      213: 6375185942367470975
+    second: k-asm_bow_charged_shot-v1_19
+  - first:
+      213: -8042412371410597886
+    second: k-asm_bow_charged_shot-v1_20
+  - first:
+      213: -7858126217122466150
+    second: k-asm_bow_charged_shot-v1_21
+  - first:
+      213: -2240861990440249292
+    second: k-asm_bow_charged_shot-v1_22
+  - first:
+      213: 2690149331387164370
+    second: k-asm_bow_charged_shot-v1_23
+  - first:
+      213: -8717189972763053712
+    second: k-asm_bow_charged_shot-v1_24
+  - first:
+      213: 6936161705636067241
+    second: k-asm_bow_charged_shot-v1_25
+  - first:
+      213: -547531322199312706
+    second: k-asm_bow_charged_shot-v1_26
+  - first:
+      213: 4195255834699105460
+    second: k-asm_bow_charged_shot-v1_27
+  - first:
+      213: 2582707552245703290
+    second: k-asm_bow_charged_shot-v1_28
+  - first:
+      213: -3958550382064560190
+    second: k-asm_bow_charged_shot-v1_29
+  - first:
+      213: -3805259134852543183
+    second: k-asm_bow_charged_shot-v1_30
+  - first:
+      213: 362121335355367181
+    second: k-asm_bow_charged_shot-v1_31
+  - first:
+      213: 2973707563569484505
+    second: k-asm_bow_charged_shot-v1_32
+  - first:
+      213: 3810935399575606972
+    second: k-asm_bow_charged_shot-v1_33
+  - first:
+      213: 7328736476964583768
+    second: k-asm_bow_charged_shot-v1_34
+  - first:
+      213: 5793998693546904638
+    second: k-asm_bow_charged_shot-v1_35
+  - first:
+      213: -2913804385561569119
+    second: k-asm_bow_charged_shot-v1_36
+  - first:
+      213: -8588826479455660376
+    second: k-asm_bow_charged_shot-v1_37
+  - first:
+      213: 5116670801251557553
+    second: k-asm_bow_charged_shot-v1_38
+  - first:
+      213: -1212331136418345820
+    second: k-asm_bow_charged_shot-v1_39
+  - first:
+      213: -2916940874447859105
+    second: k-asm_bow_charged_shot-v1_40
+  - first:
+      213: 6911381589121984382
+    second: k-asm_bow_charged_shot-v1_41
+  - first:
+      213: -5209514790681474968
+    second: k-asm_bow_charged_shot-v1_42
+  - first:
+      213: 6923386994844071553
+    second: k-asm_bow_charged_shot-v1_43
+  - first:
+      213: -7196200213131499513
+    second: k-asm_bow_charged_shot-v1_44
+  - first:
+      213: -4820569237491545012
+    second: k-asm_bow_charged_shot-v1_45
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationMethod: 0
+  spriteTessellationDetail: -1
+  spriteGeometrySubdivision: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_0
+      rect:
+        serializedVersion: 2
+        x: 209
+        y: 2078
+        width: 114
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4f037837c76d3e80800000000000000
+      internalID: -8197281641401217204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_1
+      rect:
+        serializedVersion: 2
+        x: 720
+        y: 2078
+        width: 116
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a3531a6c7edd62f0800000000000000
+      internalID: -977880918132567127
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_2
+      rect:
+        serializedVersion: 2
+        x: 1233
+        y: 2078
+        width: 114
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eebbdb03feb2c7b20800000000000000
+      internalID: 3133427747057941486
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_3
+      rect:
+        serializedVersion: 2
+        x: 1745
+        y: 2077
+        width: 112
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5b0323cb302af740800000000000000
+      internalID: 5186493361919560543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_4
+      rect:
+        serializedVersion: 2
+        x: 2255
+        y: 2078
+        width: 110
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e0f5394744105c00800000000000000
+      internalID: 887231422995493093
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_5
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 1565
+        width: 113
+        height: 186
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47acf16a928f8b3b0800000000000000
+      internalID: -5496370487441241484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_6
+      rect:
+        serializedVersion: 2
+        x: 715
+        y: 1565
+        width: 117
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bc933a25ecd22c510800000000000000
+      internalID: 1567865984451295691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_7
+      rect:
+        serializedVersion: 2
+        x: 1226
+        y: 1565
+        width: 118
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98c9b95808e029280800000000000000
+      internalID: -9038145557018993527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_8
+      rect:
+        serializedVersion: 2
+        x: 1736
+        y: 1565
+        width: 127
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7bd6566fdff9de2c0800000000000000
+      internalID: -4400685347761721929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_9
+      rect:
+        serializedVersion: 2
+        x: 2251
+        y: 1566
+        width: 112
+        height: 191
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f8b6e6f1c9a7a3a30800000000000000
+      internalID: 4195800813809855375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_10
+      rect:
+        serializedVersion: 2
+        x: 2379
+        y: 1719
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1957d9f2138ffd530800000000000000
+      internalID: 3882094293952591249
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_11
+      rect:
+        serializedVersion: 2
+        x: 2386
+        y: 1701
+        width: 43
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2beebdb0a5ad1b040800000000000000
+      internalID: 4661747169586048690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_12
+      rect:
+        serializedVersion: 2
+        x: 2472
+        y: 1694
+        width: 88
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b5860c0f052a2aa0800000000000000
+      internalID: -6185090391683463759
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_13
+      rect:
+        serializedVersion: 2
+        x: 2384
+        y: 1669
+        width: 19
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a10a108219720730800000000000000
+      internalID: 3963863742405018020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_14
+      rect:
+        serializedVersion: 2
+        x: 202
+        y: 1053
+        width: 106
+        height: 193
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa64821272e10e250800000000000000
+      internalID: 5971806259302123178
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_15
+      rect:
+        serializedVersion: 2
+        x: 310
+        y: 1238
+        width: 8
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 361b6a41642e50920800000000000000
+      internalID: 2956017521060655459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_16
+      rect:
+        serializedVersion: 2
+        x: 333
+        y: 1207
+        width: 27
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 767e2374a2b8ab460800000000000000
+      internalID: 7258266763160381287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_17
+      rect:
+        serializedVersion: 2
+        x: 711
+        y: 1054
+        width: 118
+        height: 207
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3065fddd145a274c0800000000000000
+      internalID: -4291185792616802813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_18
+      rect:
+        serializedVersion: 2
+        x: 871
+        y: 1241
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ba43fc2c6db54eb0800000000000000
+      internalID: -4736171160801949001
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_19
+      rect:
+        serializedVersion: 2
+        x: 1218
+        y: 1053
+        width: 106
+        height: 195
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f7580ef56d5397850800000000000000
+      internalID: 6375185942367470975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_20
+      rect:
+        serializedVersion: 2
+        x: 1727
+        y: 1054
+        width: 106
+        height: 192
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2084dd80f8c936090800000000000000
+      internalID: -8042412371410597886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_21
+      rect:
+        serializedVersion: 2
+        x: 2236
+        y: 1053
+        width: 107
+        height: 189
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a963b34f6d352f290800000000000000
+      internalID: -7858126217122466150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_22
+      rect:
+        serializedVersion: 2
+        x: 309
+        y: 1220
+        width: 6
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 438522d64ebd6e0e0800000000000000
+      internalID: -2240861990440249292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_23
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 1199
+        width: 12
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2d6261a5094555520800000000000000
+      internalID: 2690149331387164370
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_24
+      rect:
+        serializedVersion: 2
+        x: 872
+        y: 1202
+        width: 9
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0717cd9c7e1560780800000000000000
+      internalID: -8717189972763053712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_25
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 1180
+        width: 163
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9a7fa196252324060800000000000000
+      internalID: 6936161705636067241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_26
+      rect:
+        serializedVersion: 2
+        x: 863
+        y: 1134
+        width: 133
+        height: 61
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb6f8e4d927c668f0800000000000000
+      internalID: -547531322199312706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_27
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 1168
+        width: 10
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4b4002944fa883a30800000000000000
+      internalID: 4195255834699105460
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_28
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 1164
+        width: 10
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a72e252c5de97d320800000000000000
+      internalID: 2582707552245703290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_29
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 1156
+        width: 6
+        height: 7
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c71e8b96676019c0800000000000000
+      internalID: -3958550382064560190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_30
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 1151
+        width: 8
+        height: 8
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13dcdcc5af0013bc0800000000000000
+      internalID: -3805259134852543183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_31
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 1143
+        width: 17
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d0f52779f63860500800000000000000
+      internalID: 362121335355367181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_32
+      rect:
+        serializedVersion: 2
+        x: 305
+        y: 1135
+        width: 9
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d29370164bb44920800000000000000
+      internalID: 2973707563569484505
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_33
+      rect:
+        serializedVersion: 2
+        x: 325
+        y: 1137
+        width: 7
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb65aa10e8923e430800000000000000
+      internalID: 3810935399575606972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_34
+      rect:
+        serializedVersion: 2
+        x: 816
+        y: 1126
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 859fbe91ff6e4b560800000000000000
+      internalID: 7328736476964583768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_35
+      rect:
+        serializedVersion: 2
+        x: 840
+        y: 1126
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3cc0f52d1b686050800000000000000
+      internalID: 5793998693546904638
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_36
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 541
+        width: 109
+        height: 184
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1a890ad69561097d0800000000000000
+      internalID: -2913804385561569119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_37
+      rect:
+        serializedVersion: 2
+        x: 696
+        y: 542
+        width: 111
+        height: 172
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a6939e82db5ec880800000000000000
+      internalID: -8588826479455660376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_38
+      rect:
+        serializedVersion: 2
+        x: 1207
+        y: 541
+        width: 116
+        height: 169
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b066350cf0120740800000000000000
+      internalID: 5116670801251557553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_39
+      rect:
+        serializedVersion: 2
+        x: 1722
+        y: 542
+        width: 119
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4ac83af214fec2fe0800000000000000
+      internalID: -1212331136418345820
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_40
+      rect:
+        serializedVersion: 2
+        x: 2242
+        y: 541
+        width: 117
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f52d7b3bab1f487d0800000000000000
+      internalID: -2916940874447859105
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_41
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 29
+        width: 112
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e776aceefe82aef50800000000000000
+      internalID: 6911381589121984382
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_42
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 29
+        width: 106
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 868894926e514b7b0800000000000000
+      internalID: -5209514790681474968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_43
+      rect:
+        serializedVersion: 2
+        x: 1232
+        y: 29
+        width: 106
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1867d364acfc41060800000000000000
+      internalID: 6923386994844071553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_44
+      rect:
+        serializedVersion: 2
+        x: 1744
+        y: 29
+        width: 106
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 708e4b38806f12c90800000000000000
+      internalID: -7196200213131499513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: k-asm_bow_charged_shot-v1_45
+      rect:
+        serializedVersion: 2
+        x: 2255
+        y: 29
+        width: 107
+        height: 170
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c4c0428a1d5e91db0800000000000000
+      internalID: -4820569237491545012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      k-asm_bow_charged_shot-v1_0: -8197281641401217204
+      k-asm_bow_charged_shot-v1_1: -977880918132567127
+      k-asm_bow_charged_shot-v1_10: 3882094293952591249
+      k-asm_bow_charged_shot-v1_11: 4661747169586048690
+      k-asm_bow_charged_shot-v1_12: -6185090391683463759
+      k-asm_bow_charged_shot-v1_13: 3963863742405018020
+      k-asm_bow_charged_shot-v1_14: 5971806259302123178
+      k-asm_bow_charged_shot-v1_15: 2956017521060655459
+      k-asm_bow_charged_shot-v1_16: 7258266763160381287
+      k-asm_bow_charged_shot-v1_17: -4291185792616802813
+      k-asm_bow_charged_shot-v1_18: -4736171160801949001
+      k-asm_bow_charged_shot-v1_19: 6375185942367470975
+      k-asm_bow_charged_shot-v1_2: 3133427747057941486
+      k-asm_bow_charged_shot-v1_20: -8042412371410597886
+      k-asm_bow_charged_shot-v1_21: -7858126217122466150
+      k-asm_bow_charged_shot-v1_22: -2240861990440249292
+      k-asm_bow_charged_shot-v1_23: 2690149331387164370
+      k-asm_bow_charged_shot-v1_24: -8717189972763053712
+      k-asm_bow_charged_shot-v1_25: 6936161705636067241
+      k-asm_bow_charged_shot-v1_26: -547531322199312706
+      k-asm_bow_charged_shot-v1_27: 4195255834699105460
+      k-asm_bow_charged_shot-v1_28: 2582707552245703290
+      k-asm_bow_charged_shot-v1_29: -3958550382064560190
+      k-asm_bow_charged_shot-v1_3: 5186493361919560543
+      k-asm_bow_charged_shot-v1_30: -3805259134852543183
+      k-asm_bow_charged_shot-v1_31: 362121335355367181
+      k-asm_bow_charged_shot-v1_32: 2973707563569484505
+      k-asm_bow_charged_shot-v1_33: 3810935399575606972
+      k-asm_bow_charged_shot-v1_34: 7328736476964583768
+      k-asm_bow_charged_shot-v1_35: 5793998693546904638
+      k-asm_bow_charged_shot-v1_36: -2913804385561569119
+      k-asm_bow_charged_shot-v1_37: -8588826479455660376
+      k-asm_bow_charged_shot-v1_38: 5116670801251557553
+      k-asm_bow_charged_shot-v1_39: -1212331136418345820
+      k-asm_bow_charged_shot-v1_4: 887231422995493093
+      k-asm_bow_charged_shot-v1_40: -2916940874447859105
+      k-asm_bow_charged_shot-v1_41: 6911381589121984382
+      k-asm_bow_charged_shot-v1_42: -5209514790681474968
+      k-asm_bow_charged_shot-v1_43: 6923386994844071553
+      k-asm_bow_charged_shot-v1_44: -7196200213131499513
+      k-asm_bow_charged_shot-v1_45: -4820569237491545012
+      k-asm_bow_charged_shot-v1_5: -5496370487441241484
+      k-asm_bow_charged_shot-v1_6: 1567865984451295691
+      k-asm_bow_charged_shot-v1_7: -9038145557018993527
+      k-asm_bow_charged_shot-v1_8: -4400685347761721929
+      k-asm_bow_charged_shot-v1_9: 4195800813809855375
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
