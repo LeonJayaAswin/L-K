@@ -281,11 +281,17 @@ public class PlayerMovement2D : MonoBehaviour
             return;
         }
 
-        // Never walk on air.
+        // Allow movement in air for better feel
         if (!IsGrounded)
         {
-            velocity.x = 0f;
+            float airTargetSpeed = moveInput * moveSpeed;
+            bool airReversing = !Mathf.Approximately(moveInput, 0f)
+                && Mathf.Abs(velocity.x) > 0.01f
+                && Mathf.Sign(airTargetSpeed) != Mathf.Sign(velocity.x);
+            float airRate = airReversing ? turnSpeed : (Mathf.Approximately(moveInput, 0f) ? (deceleration * 0.5f) : (acceleration * 0.7f));
+            velocity.x = Mathf.MoveTowards(velocity.x, airTargetSpeed, airRate * Time.fixedDeltaTime);
             body.linearVelocity = velocity;
+            if (!Mathf.Approximately(moveInput, 0f)) body.WakeUp();
             return;
         }
 

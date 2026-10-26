@@ -63,6 +63,9 @@ public class PlayerAttack2D : MonoBehaviour
     [Tooltip("How fast the pushed object travels while the push animation plays. Units per second, forward only.")]
     [SerializeField, Min(0.1f)] private float pushStrength = 2f;
 
+    [Tooltip("Duration to hold/stop at the end before restarting the push cycle (seconds). Adjustable in editor.")]
+    [SerializeField, Range(0f, 2f)] private float pushEndHoldDuration = 0.9f;
+
     [Tooltip("Tag of the pushable objects that can be pushed.")]
     [SerializeField] private string pushTag = "PushObject";
 
@@ -100,6 +103,8 @@ public class PlayerAttack2D : MonoBehaviour
     private bool pushIsActive;  // Animation event flag: controls if object moves NOW
     private float pushDirection;
     private Transform pushTarget;
+    private float pushEndHoldTimer; // timer for end hold
+    private bool pushInHold; // true when holding at end frame
 
     // Set when the push is cancelled with A (or by input against the push
     // direction). Keeps the push cancelled until E is released and pressed
@@ -152,7 +157,25 @@ public class PlayerAttack2D : MonoBehaviour
             }
             else
             {
-                ApplyPush();
+                if (pushInHold)
+                {
+                    pushEndHoldTimer -= Time.deltaTime;
+                    if (pushEndHoldTimer <= 0f)
+                    {
+                        pushInHold = false;
+                        pushIsActive = true;
+                        // Restart animation from beginning for seamless loop feel
+                        if (animator != null)
+                        {
+                            animator.Play("Push", 0, 0f);
+                        }
+                    }
+                    // Keep object stopped during hold
+                }
+                else
+                {
+                    ApplyPush();
+                }
             }
         }
         else
@@ -186,6 +209,8 @@ public class PlayerAttack2D : MonoBehaviour
         isPushing = false;
         pushIsActive = false;  // Stop movement when push ends
         pushTarget = null;
+        pushInHold = false;
+        pushEndHoldTimer = 0f;
 
         if (animator != null) animator.SetInteger(pushParamHash, 0);
 
@@ -223,6 +248,9 @@ public class PlayerAttack2D : MonoBehaviour
         pushTarget = target.transform;
         pushDirection = forward;
         isPushing = true;
+        pushInHold = false;
+        pushEndHoldTimer = 0f;
+        pushIsActive = true;
 
         // A push and a swing can never be active at the same time, so make
         // sure the attack parameter is neutral before the Push animation
@@ -459,11 +487,26 @@ public class PlayerAttack2D : MonoBehaviour
     }
 
     /// <summary>
-    /// Called by animation event at frame 23 (1.15s) of push animation.
-    /// Disables object movement during hold/freeze frames.
+    /// Called by animation event at end of push animation.
+    /// Disables object movement and starts hold timer before restarting.
     /// </summary>
     public void OnPushEnd()
     {
         pushIsActive = false;
+        if (isPushing && pushEndHoldDuration > 0f)
+        {
+            pushInHold = true;
+            pushEndHoldTimer = pushEndHoldDuration;
+        }
+        else if (isPushing)
+        {
+            // No hold, restart immediately
+            pushInHold = false;
+            pushIsActive = true;
+            if (animator != null)
+            {
+                animator.Play("Push", 0, 0f);
+            }
+        }
     }
 }

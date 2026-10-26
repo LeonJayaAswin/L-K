@@ -829,6 +829,10 @@ MonoBehaviour:
   syncRunToSpeed: 1
   minRunPlaybackSpeed: 0.5
   maxRunPlaybackSpeed: 3
+  jumpForce: 8
+  fallGravityScale: 1.5
+  jumpParameter: IsJumping
+  coyoteTime: 0.1
   spriteRenderer: {fileID: 1200955316}
   startsFacingRight: 1
 --- !u!50 &1200955319
@@ -881,6 +885,7 @@ MonoBehaviour:
   pushRange: 1
   pushSearchRadius: 6
   pushStrength: 2
+  pushEndHoldDuration: 0.2
   pushTag: PushObject
   pushObject: {fileID: 0}
   cancelPushKey: 15
