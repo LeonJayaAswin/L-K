@@ -13,6 +13,7 @@ using UnityEngine.InputSystem;
 /// Movement:
 ///  - A/D (or the left stick) accelerate Leon up to moveSpeed.
 ///  - While an attack is playing Leon is locked in place.
+///  - While a hit reaction is playing Leon is locked in place.
 ///  - While a push is playing Leon walks the object forward, never back.
 /// </summary>
 [DefaultExecutionOrder(-100)]
@@ -135,7 +136,13 @@ public class PlayerMovement2D : MonoBehaviour
     /// </summary>
     public float PushSpeed { get; set; } = 2f;
 
-    private bool movementLocked => IsAttacking || IsPushing;
+    /// <summary>
+    /// Set by PlayerHealthHurt for as long as the Hurt animation is on screen.
+    /// A hit staggers Leon, so he cannot steer or flip while it plays.
+    /// </summary>
+    public bool IsHurt { get; set; }
+
+    private bool movementLocked => IsAttacking || IsPushing || IsHurt;
 
     private void Awake()
     {
@@ -260,6 +267,16 @@ public class PlayerMovement2D : MonoBehaviour
         if (!IsGrounded && velocity.y < 0f)
         {
             velocity.y += Physics2D.gravity.y * (fallGravityScale - 1f) * Time.fixedDeltaTime;
+        }
+
+        // A hit is committed too: the Hurt animation owns Leon's body, so he
+        // plants his feet instantly and cannot drift (or keep air control)
+        // until the reaction ends. This takes priority over a push or a swing.
+        if (IsHurt)
+        {
+            velocity.x = 0f;
+            body.linearVelocity = velocity;
+            return;
         }
 
         // A push is committed: Leon walks the object forward and never back.
