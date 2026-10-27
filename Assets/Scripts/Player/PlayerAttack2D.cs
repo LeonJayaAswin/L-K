@@ -95,6 +95,7 @@ public class PlayerAttack2D : MonoBehaviour
     private int pushParamHash;
     private int comboStep;
     private int queuedStep;
+    private int swingSequence;
 
     private int lastSeenState;
     private float stateEnteredTime = -999f;
@@ -115,6 +116,13 @@ public class PlayerAttack2D : MonoBehaviour
     public bool IsSwinging => lastSeenState == 1 || lastSeenState == 2;
     public bool IsPushing => isPushing;
     public int ComboStep => comboStep;
+
+    /// <summary>
+    /// Increments once for every swing that starts, including the second half
+    /// of a combo. Enemies watch this number so one swing can only ever land
+    /// one hit, no matter how many frames it is on screen.
+    /// </summary>
+    public int SwingSequence => swingSequence;
 
     /// <summary>The locked push direction: +1 right, -1 left.</summary>
     public float PushDirection => pushDirection;
@@ -428,6 +436,7 @@ public class PlayerAttack2D : MonoBehaviour
                 comboStep = queuedStep;
                 queuedStep = 0;
                 stateEnteredTime = Time.time;
+                swingSequence++;
                 animator.SetInteger(attackParamHash, comboStep);
             }
             return;
@@ -465,6 +474,7 @@ public class PlayerAttack2D : MonoBehaviour
 
         comboStep = 1;
         queuedStep = 0;
+        swingSequence++;
         animator.SetInteger(attackParamHash, comboStep);
     }
 

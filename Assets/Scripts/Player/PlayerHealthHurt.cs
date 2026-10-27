@@ -2,12 +2,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Hit reactions for Leon.
+/// Hit reactions and health for Leon.
 ///
-/// Pressing the hurt key takes one hit. Every hit plays the Hurt trigger, and
-/// the hit that reaches <see cref="hitsBeforeDeath"/> plays Death instead and
-/// takes control away for good. Both triggers are wired to Any State
-/// transitions in Leon.controller, so they interrupt whatever he is doing.
+/// Enemy attacks call <see cref="TakeHit"/>. Every hit plays the Hurt
+/// trigger, and the hit that reaches <see cref="hitsBeforeDeath"/> plays Death
+/// instead and takes control away for good. Both triggers are wired to Any
+/// State transitions in Leon.controller, so they interrupt whatever he is
+/// doing. H is only an optional debug key; by default enemies are the damage
+/// source and five of their hits kill Leon.
 ///
 /// The death clips are centre-pivoted sprite swaps, so their visible bottom
 /// rises as the frames get shorter. While Death plays, the sprite bottom is
@@ -19,12 +21,15 @@ using UnityEngine.InputSystem;
 public class PlayerHealthHurt : MonoBehaviour
 {
     [Header("Input")]
-    [Tooltip("Debug key that takes a hit.")]
+    [Tooltip("Optional debug key that takes a hit. Off by default: enemy attacks are the real damage source.")]
+    [SerializeField] private bool enableDebugHurtKey;
+
+    [Tooltip("Debug key used when Enable Debug Hurt Key is on.")]
     [SerializeField] private Key hurtKey = Key.H;
 
     [Header("Hits")]
     [Tooltip("How many hits Leon can take. The hit that reaches this number plays Death.")]
-    [SerializeField, Min(1)] private int hitsBeforeDeath = 10;
+    [SerializeField, Min(1)] private int hitsBeforeDeath = 5;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -89,7 +94,7 @@ public class PlayerHealthHurt : MonoBehaviour
         // A dead Leon ignores further hits.
         if (isDead) return;
 
-        if (Keyboard.current != null && Keyboard.current[hurtKey].wasPressedThisFrame)
+        if (enableDebugHurtKey && Keyboard.current != null && Keyboard.current[hurtKey].wasPressedThisFrame)
         {
             TakeHit();
 
@@ -140,8 +145,9 @@ public class PlayerHealthHurt : MonoBehaviour
     }
 
     /// <summary>
-    /// Registers one hit. The hit that reaches the death threshold kills Leon
-    /// instead of staggering him, so ten presses of H kill him on the tenth.
+    /// Registers one hit, called by an enemy attack. The hit that reaches the
+    /// death threshold kills Leon instead of staggering him, so five skeleton
+    /// hits kill him on the fifth.
     /// </summary>
     public void TakeHit()
     {
