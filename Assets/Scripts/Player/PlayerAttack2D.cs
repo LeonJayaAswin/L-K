@@ -85,6 +85,16 @@ public class PlayerAttack2D : MonoBehaviour
     [Tooltip("Animator int parameter: 0 = neutral, 1 = first swing, 2 = combo swing.")]
     [SerializeField] private string attackParameter = "Attack";
 
+    [Header("Hit Detection")]
+    [Tooltip("Range to detect enemies when attacking.")]
+    [SerializeField, Min(0.1f)] private float attackHitRange = 1.8f;
+
+    [Tooltip("Vertical tolerance for hitting enemies.")]
+    [SerializeField, Min(0.1f)] private float attackHitHeight = 2.0f;
+
+    [Tooltip("Layer mask for enemies.")]
+    [SerializeField] private LayerMask enemyLayerMask = -1;
+
     [Header("References")]
     [SerializeField] private Animator animator;
 
@@ -143,6 +153,9 @@ public class PlayerAttack2D : MonoBehaviour
         // Leon's body until the push is cancelled.
         bool attackPressed = ReadPressEdge(IsAttackHeld(), ref attackKeyHeld);
         if (!isPushing && attackPressed) AdvanceCombo();
+
+        // Try to hit enemies during active swing frames
+        if (IsSwinging && !isPushing) TryHitEnemies();
 
         ReleaseFinishedSwing();
 
@@ -413,6 +426,9 @@ public class PlayerAttack2D : MonoBehaviour
         return false;
     }
 
+    private int lastHitState = 0;
+    private float lastHitTime = -1f;
+
     private void TrackAnimatorState()
     {
         int state = CurrentAttackState();
@@ -420,6 +436,41 @@ public class PlayerAttack2D : MonoBehaviour
         {
             lastSeenState = state;
             stateEnteredTime = Time.time;
+            if (state == 0) lastHitState = 0;
+        }
+    }
+
+    private void TryHitEnemies()
+    {
+        if (lastSeenState == 0) return;
+        if (Time.time - lastHitTime < 0.05f) return; // Prevent multiple hits per frame
+        if (lastHitState == lastSeenState) return; // Only hit once per swing state entry
+        
+        lastHitState = lastSeenState;
+        lastHitTime = Time.time;
+
+        float forward = movement != null && movement.FacingRight ? 1f : -1f;
+        Vector2 origin = (Vector2)transform.position + new Vector2(forward * 0.4f, 0f);
+        
+        Collider2D[] hits = Physics2D.OverlapCircleAll(origin, attackHitRange, enemyLayerMask);
+        
+        foreach (var hit in hits)
+        {
+            if (hit == null) continue;
+            if (hit.transform == transform || hit.transform.IsChildOf(transform)) continue;
+            
+            float dx = hit.transform.position.x - transform.position.x;
+            if (Mathf.Abs(dx) > attackHitRange) continue;
+            if (Mathf.Sign(dx) != Mathf.Sign(forward) && Mathf.Abs(dx) > 0.05f) continue;
+            
+            if (Mathf.Abs(hit.transform.position.y - transform.position.y) > attackHitHeight) continue;
+            
+            SkeletonAI skeleton = hit.GetComponent<SkeletonAI>();
+            if (skeleton == null) skeleton = hit.GetComponentInParent<SkeletonAI>();
+            if (skeleton != null && !skeleton.IsDead)
+            {
+                skeleton.TakeSwordHit(transform.position);
+            }
         }
     }
 
@@ -475,7 +526,7 @@ public class PlayerAttack2D : MonoBehaviour
         comboStep = 1;
         queuedStep = 0;
         swingSequence++;
-        animator.SetInteger(attackParamHash, comboStep);
+        if (animator != null) animator.SetInteger(attackParamHash, comboStep);
     }
 
     public void ResetCombo()

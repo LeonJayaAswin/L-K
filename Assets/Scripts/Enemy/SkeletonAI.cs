@@ -30,8 +30,14 @@ public class SkeletonAI : MonoBehaviour
     [Tooltip("How far the skeleton walks from its spawn point in each direction, in metres.")]
     [SerializeField, Min(0.1f)] private float patrolDistance = 1f;
 
-    [Tooltip("Normal patrol walking speed.")]
-    [SerializeField, Min(0.1f)] private float walkSpeed = 1.1f;
+    [Tooltip("Normal patrol walking speed. Match to player speed.")]
+    [SerializeField, Min(0.1f)] private float walkSpeed = 3f;
+
+    [Tooltip("Animation reference speed for walk animation to match player feel (slower).")]
+    [SerializeField, Min(0.1f)] private float walkAnimationReferenceSpeed = 3.8f;
+
+    [Tooltip("Scale walk animation playback to match movement speed (slower).")]
+    [SerializeField, Range(0f, 2f)] private float walkAnimationSync = 0.8f;
 
     [Header("Detection")]
     [Tooltip("The player is noticed inside this radius, measured from the skeleton.")]
@@ -40,11 +46,11 @@ public class SkeletonAI : MonoBehaviour
     [Tooltip("How far the player can run before the skeleton gives up and goes back to patrolling.")]
     [SerializeField, Min(0.5f)] private float loseTargetRange = 6f;
 
-    [Tooltip("Chase speed. The Walk clip is sped up to match so the legs read as a fast walk.")]
-    [SerializeField, Min(0.1f)] private float chaseSpeed = 2.2f;
+    [Tooltip("Chase speed. The Walk clip is sped up to match so the legs read as a fast walk. Match to player speed.")]
+    [SerializeField, Min(0.1f)] private float chaseSpeed = 3f;
 
     [Tooltip("Maximum playback multiplier for the chase walk.")]
-    [SerializeField, Range(1f, 3f)] private float maxChaseAnimationSpeed = 2f;
+    [SerializeField, Range(1f, 3f)] private float maxChaseAnimationSpeed = 2.2f;
 
     [Header("Combat")]
     [Tooltip("Horizontal distance at which the skeleton stops and attacks.")]
@@ -62,8 +68,8 @@ public class SkeletonAI : MonoBehaviour
     [Tooltip("Length of the attack clip. The skeleton returns to chasing after this.")]
     [SerializeField, Min(0.05f)] private float attackDuration = 0.67f;
 
-    [Tooltip("Pause between attacks while the player stays in range.")]
-    [SerializeField, Min(0f)] private float attackCooldown = 0.8f;
+    [Tooltip("Pause between attacks while the player stays in range. Rest after one hit - make it 0.7 sec.")]
+    [SerializeField, Min(0f)] private float attackCooldown = 0.7f;
 
     [Tooltip("How many sword hits the skeleton survives. The hit that reaches this number plays Death.")]
     [SerializeField, Min(1)] private int hitsToDie = 5;
@@ -79,10 +85,10 @@ public class SkeletonAI : MonoBehaviour
     [SerializeField, Min(0f)] private float hitStunTime = 0.35f;
 
     [Tooltip("Horizontal reach of Leon's sword. The skeleton can only be hit inside this distance.")]
-    [SerializeField, Min(0.2f)] private float playerHitReach = 1.55f;
+    [SerializeField, Min(0.2f)] private float playerHitReach = 2.0f;
 
     [Tooltip("Vertical tolerance for Leon's sword, so a jump cannot hit the skeleton's feet from far above.")]
-    [SerializeField, Min(0.2f)] private float playerHitHeight = 1.6f;
+    [SerializeField, Min(0.2f)] private float playerHitHeight = 2.2f;
 
     [Header("Death Grounding")]
     [Tooltip("Pins the visible bottom of the death sprite to the ground so the corpse cannot float or sink.")]
@@ -270,7 +276,7 @@ public class SkeletonAI : MonoBehaviour
     {
         state = State.Patrol;
         desiredVelocityX = 0f;
-        PlayAnimation(walkState);
+        PlayAnimation(walkState, GetWalkAnimationSpeed());
     }
 
     private void EnterChase()
@@ -345,7 +351,7 @@ public class SkeletonAI : MonoBehaviour
 
         desiredVelocityX = Mathf.Sign(toTarget) * walkSpeed;
         SetFacing(desiredVelocityX);
-        PlayAnimation(walkState);
+        PlayAnimation(walkState, GetWalkAnimationSpeed());
     }
 
     private void TickChase(bool playerAlive, float dx, float distance)
@@ -563,7 +569,18 @@ public class SkeletonAI : MonoBehaviour
     private float ChaseAnimationSpeed()
     {
         if (walkSpeed <= 0.001f) return 1f;
-        return Mathf.Clamp(chaseSpeed / walkSpeed, 1f, maxChaseAnimationSpeed);
+        float speed = chaseSpeed / walkSpeed;
+        if (walkAnimationSync <= 0f) return Mathf.Clamp(speed, 0.5f, maxChaseAnimationSpeed);
+        float synced = (walkAnimationReferenceSpeed > 0.001f) ? (chaseSpeed / walkAnimationReferenceSpeed) * walkAnimationSync : speed * walkAnimationSync;
+        return Mathf.Clamp(synced, 0.4f, maxChaseAnimationSpeed);
+    }
+
+    private float GetWalkAnimationSpeed()
+    {
+        if (walkSpeed <= 0.001f) return 1f;
+        if (walkAnimationSync <= 0f) return 1f;
+        if (walkAnimationReferenceSpeed <= 0.001f) return Mathf.Clamp(walkSpeed / walkSpeed, 0.5f, 2f);
+        return Mathf.Clamp((walkSpeed / walkAnimationReferenceSpeed) * walkAnimationSync, 0.4f, 2f);
     }
 
     private void SetFacing(float dx)
