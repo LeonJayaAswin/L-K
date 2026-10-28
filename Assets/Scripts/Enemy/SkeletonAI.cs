@@ -34,10 +34,10 @@ public class SkeletonAI : MonoBehaviour
     [SerializeField, Min(0.1f)] private float walkSpeed = 3f;
 
     [Tooltip("Animation reference speed for walk animation to match player feel (slower).")]
-    [SerializeField, Min(0.1f)] private float walkAnimationReferenceSpeed = 3.8f;
+    [SerializeField, Min(0.1f)] private float walkAnimationReferenceSpeed = 3.0f;
 
     [Tooltip("Scale walk animation playback to match movement speed (slower).")]
-    [SerializeField, Range(0f, 2f)] private float walkAnimationSync = 0.8f;
+    [SerializeField, Range(0f, 2f)] private float walkAnimationSync = 1.0f;
 
     [Header("Detection")]
     [Tooltip("The player is noticed inside this radius, measured from the skeleton.")]

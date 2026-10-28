@@ -426,8 +426,7 @@ public class PlayerAttack2D : MonoBehaviour
         return false;
     }
 
-    private int lastHitState = 0;
-    private float lastHitTime = -1f;
+    private int lastHitSwingSequence = 0;
 
     private void TrackAnimatorState()
     {
@@ -436,41 +435,51 @@ public class PlayerAttack2D : MonoBehaviour
         {
             lastSeenState = state;
             stateEnteredTime = Time.time;
-            if (state == 0) lastHitState = 0;
         }
     }
 
     private void TryHitEnemies()
     {
         if (lastSeenState == 0) return;
-        if (Time.time - lastHitTime < 0.05f) return; // Prevent multiple hits per frame
-        if (lastHitState == lastSeenState) return; // Only hit once per swing state entry
-        
-        lastHitState = lastSeenState;
-        lastHitTime = Time.time;
+
+        // Only hit once per swing sequence - each swing can only hit once
+        if (lastHitSwingSequence == swingSequence) return;
 
         float forward = movement != null && movement.FacingRight ? 1f : -1f;
-        Vector2 origin = (Vector2)transform.position + new Vector2(forward * 0.4f, 0f);
-        
+        Vector2 origin = (Vector2)transform.position + new Vector2(forward * 0.5f, 0f);
+
         Collider2D[] hits = Physics2D.OverlapCircleAll(origin, attackHitRange, enemyLayerMask);
-        
+
+        bool hitAny = false;
         foreach (var hit in hits)
         {
             if (hit == null) continue;
             if (hit.transform == transform || hit.transform.IsChildOf(transform)) continue;
-            
+
             float dx = hit.transform.position.x - transform.position.x;
+
+            // Check if target is in front of the player
+            if (Mathf.Sign(dx) != Mathf.Sign(forward)) continue;
+
+            // Check horizontal reach
             if (Mathf.Abs(dx) > attackHitRange) continue;
-            if (Mathf.Sign(dx) != Mathf.Sign(forward) && Mathf.Abs(dx) > 0.05f) continue;
-            
+
+            // Check vertical reach
             if (Mathf.Abs(hit.transform.position.y - transform.position.y) > attackHitHeight) continue;
-            
+
             SkeletonAI skeleton = hit.GetComponent<SkeletonAI>();
             if (skeleton == null) skeleton = hit.GetComponentInParent<SkeletonAI>();
             if (skeleton != null && !skeleton.IsDead)
             {
                 skeleton.TakeSwordHit(transform.position);
+                hitAny = true;
             }
+        }
+
+        // Mark this swing sequence as hit so it only hits once
+        if (hitAny)
+        {
+            lastHitSwingSequence = swingSequence;
         }
     }
 
