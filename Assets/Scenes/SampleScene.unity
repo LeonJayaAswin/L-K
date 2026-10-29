@@ -893,7 +893,7 @@ MonoBehaviour:
   minimumSwingTime: 1.25
   releaseLeadTime: 0.08
   attackParameter: Attack
-  attackHitRange: 1.8
+  attackHitRange: 2
   attackHitHeight: 2
   enemyLayerMask:
     serializedVersion: 2
@@ -1184,18 +1184,19 @@ MonoBehaviour:
   loseTargetRange: 6
   chaseSpeed: 3
   maxChaseAnimationSpeed: 2
-  attackRange: 1.15
-  attackHitReach: 1.5
+  attackRange: 1.5
+  attackHitReach: 1.9
   attackHitDelay: 0.32
   attack2HitDelay: 0.5
-  attackDuration: 0.67
-  attackCooldown: 5
+  attackDuration: 0.9
+  attackCooldown: 0.7
   hitsToDie: 5
   knockbackDistance: 0.6
   knockbackTime: 0.3
   hitStunTime: 0.35
-  playerHitReach: 1.55
-  playerHitHeight: 1.6
+  attackAnimationSpeed: 0.75
+  hitAnimationSpeed: 0.8
+  deathAnimationSpeed: 0.6
   pinDeathToGround: 1
   groundTag: Ground
   deathArtBottomPadding: 0.49
@@ -1207,7 +1208,6 @@ MonoBehaviour:
   deathState: Death
   player: {fileID: 1200955317}
   playerHealth: {fileID: 1200955322}
-  playerAttack: {fileID: 1200955320}
   playerMovement: {fileID: 1200955318}
   animator: {fileID: 1500955403}
   spriteRenderer: {fileID: 1500955402}

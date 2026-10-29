@@ -199,16 +199,12 @@ public class PlayerMovement2D : MonoBehaviour
         // and we must not rescale the action with ground speed.
         if (!movementLocked)
         {
-            // Input wins over velocity: the sprite turns the instant the
-            // player presses a direction, which is what makes the push
-            // direction predictable.
+            // Facing comes from input only. Following velocity here would let
+            // an enemy that shoves Leon turn him away from it, so the next
+            // sword swing would point at empty air.
             if (!Mathf.Approximately(moveInput, 0f))
             {
                 facingRight = moveInput > 0f;
-            }
-            else if (Mathf.Abs(velocityX) > 0.01f)
-            {
-                facingRight = velocityX > 0f;
             }
 
             spriteRenderer.flipX = !facingRight;
@@ -349,6 +345,19 @@ public class PlayerMovement2D : MonoBehaviour
 
     /// <summary>True while Leon faces right. Drives the push direction (forward = right).</summary>
     public bool FacingRight => facingRight;
+
+    /// <summary>
+    /// Snaps Leon to face a horizontal direction and updates the sprite.
+    /// Used by the attack assist so a swing always points at the enemy Leon is
+    /// fighting, even if an enemy push just moved him.
+    /// </summary>
+    public void FaceDirection(float horizontalDelta)
+    {
+        if (Mathf.Abs(horizontalDelta) < 0.0001f) return;
+
+        facingRight = horizontalDelta > 0f;
+        if (spriteRenderer != null) spriteRenderer.flipX = !facingRight;
+    }
 
     /// <summary>World space position of Leon's feet (the bottom of his collider).</summary>
     public Vector2 FeetPosition

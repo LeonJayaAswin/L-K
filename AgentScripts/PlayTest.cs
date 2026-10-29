@@ -137,7 +137,7 @@ public static class PlayTest
         var plSr = pl.GetComponent<SpriteRenderer>();
         var plRb = pl.GetComponent<Rigidbody2D>();
         var fFacing = typeof(PlayerMovement2D).GetField("facingRight", BindingFlags.NonPublic | BindingFlags.Instance);
-        var fLast = typeof(SkeletonAI).GetField("lastPlayerSwingSequence", BindingFlags.NonPublic | BindingFlags.Instance);
+        var fLast = typeof(PlayerAttack2D).GetField("lastHitSwingSequence", BindingFlags.NonPublic | BindingFlags.Instance);
         var fState = typeof(SkeletonAI).GetField("state", BindingFlags.NonPublic | BindingFlags.Instance);
         var sb = new StringBuilder();
 
@@ -177,7 +177,7 @@ public static class PlayTest
         var plSr = pl.GetComponent<SpriteRenderer>();
         var plRb = pl.GetComponent<Rigidbody2D>();
         var fFacing = typeof(PlayerMovement2D).GetField("facingRight", BindingFlags.NonPublic | BindingFlags.Instance);
-        var fLast = typeof(SkeletonAI).GetField("lastPlayerSwingSequence", BindingFlags.NonPublic | BindingFlags.Instance);
+        var fLast = typeof(PlayerAttack2D).GetField("lastHitSwingSequence", BindingFlags.NonPublic | BindingFlags.Instance);
         var sb = new StringBuilder();
 
         for (int i = 1; i <= 6; i++)
@@ -209,6 +209,116 @@ public static class PlayTest
             await Task.Delay(400);
         }
 
+        return sb.ToString();
+    }
+
+    public static async Task<string> HitDiag(float startDx)
+    {
+        var sk = Sk();
+        var pl = Pl();
+        var atk = pl.GetComponent<PlayerAttack2D>();
+        var mv = pl.GetComponent<PlayerMovement2D>();
+        var plSr = pl.GetComponent<SpriteRenderer>();
+        var plRb = pl.GetComponent<Rigidbody2D>();
+        var flags = BindingFlags.NonPublic | BindingFlags.Instance;
+        var fFacing = typeof(PlayerMovement2D).GetField("facingRight", flags);
+        var fSeen = typeof(PlayerAttack2D).GetField("lastSeenState", flags);
+        var fLastHit = typeof(PlayerAttack2D).GetField("lastHitSwingSequence", flags);
+        var maskField = typeof(PlayerAttack2D).GetField("enemyLayerMask", flags);
+        float range = (float)typeof(PlayerAttack2D).GetField("attackHitRange", flags).GetValue(atk);
+        float height = (float)typeof(PlayerAttack2D).GetField("attackHitHeight", flags).GetValue(atk);
+        var sb = new StringBuilder();
+
+        plRb.position = new Vector2(sk.transform.position.x - startDx, -3.37f);
+        plRb.linearVelocity = Vector2.zero;
+        fFacing.SetValue(mv, true);
+        plSr.flipX = false;
+        await Task.Delay(200);
+
+        sb.AppendLine("PRE pl=" + pl.transform.position.ToString("F3") +
+                      " sk=" + sk.transform.position.ToString("F3") +
+                      " dx=" + (sk.transform.position.x - pl.transform.position.x).ToString("F3") +
+                      " facing=" + mv.FacingRight + " flip=" + plSr.flipX +
+                      " skDead=" + sk.IsDead + " skLayer=" + sk.gameObject.layer +
+                      " mask=" + ((LayerMask)maskField.GetValue(atk)).value +
+                      " range=" + range + " height=" + height +
+                      " skCol=" + (sk.GetComponent<Collider2D>() != null ? sk.GetComponent<Collider2D>().enabled.ToString() : "none") +
+                      " skBody=" + sk.GetComponent<Collider2D>().bounds.center.ToString("F3"));
+
+        atk.ResetCombo();
+        atk.AdvanceCombo();
+
+        for (int i = 0; i < 14; i++)
+        {
+            await Task.Delay(100);
+            float forward = mv.FacingRight ? 1f : -1f;
+            Vector2 origin = (Vector2)pl.transform.position + new Vector2(forward * 0.5f, 0f);
+            var hits = Physics2D.OverlapCircleAll(origin, range, (LayerMask)maskField.GetValue(atk));
+            string names = "";
+            foreach (var h in hits)
+            {
+                if (h == null) continue;
+                names += h.name + "@" + h.transform.position.x.ToString("F2") + " ";
+            }
+            sb.AppendLine("+" + ((i + 1) * 100) + "ms facing=" + mv.FacingRight +
+                          " seenState=" + fSeen.GetValue(atk) +
+                          " seq=" + atk.SwingSequence + " lastHit=" + fLastHit.GetValue(atk) +
+                          " pl=" + pl.transform.position.x.ToString("F3") +
+                          " skX=" + sk.transform.position.x.ToString("F3") +
+                          " dx=" + (sk.transform.position.x - pl.transform.position.x).ToString("F3") +
+                          " hits=" + sk.HitsTaken +
+                          " overlaps=[" + names + "]");
+        }
+        return sb.ToString();
+    }
+
+    public static async Task<string> ComboTrace(float startDx)
+    {
+        var sk = Sk();
+        var pl = Pl();
+        var atk = pl.GetComponent<PlayerAttack2D>();
+        var mv = pl.GetComponent<PlayerMovement2D>();
+        var plSr = pl.GetComponent<SpriteRenderer>();
+        var plRb = pl.GetComponent<Rigidbody2D>();
+        var fFacing = typeof(PlayerMovement2D).GetField("facingRight", BindingFlags.NonPublic | BindingFlags.Instance);
+        var fState = typeof(SkeletonAI).GetField("state", BindingFlags.NonPublic | BindingFlags.Instance);
+        var fLastHitSeq = typeof(PlayerAttack2D).GetField("lastHitSwingSequence", BindingFlags.NonPublic | BindingFlags.Instance);
+        var sb = new StringBuilder();
+
+        plRb.position = new Vector2(sk.transform.position.x - startDx, -3.37f);
+        plRb.linearVelocity = Vector2.zero;
+        fFacing.SetValue(mv, true);
+        plSr.flipX = false;
+        await Task.Delay(150);
+
+        int hits0 = sk.HitsTaken;
+        sb.AppendLine("START dx=" + (sk.transform.position.x - pl.transform.position.x).ToString("F2") +
+                      " hits=" + hits0 + " seq=" + atk.SwingSequence +
+                      " reach=" + typeof(PlayerAttack2D).GetField("attackHitRange", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(atk) +
+                      " skReach=" + typeof(SkeletonAI).GetField("playerHitReach", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(sk));
+
+        atk.ResetCombo();
+        atk.AdvanceCombo();
+        await Task.Delay(250);
+        atk.AdvanceCombo();   // queue the combo follow-up, like a real second press
+        sb.AppendLine("queued combo: seq=" + atk.SwingSequence + " step=" + atk.ComboStep);
+
+        for (int i = 0; i < 30; i++)
+        {
+            await Task.Delay(100);
+            sb.AppendLine("+" + ((i + 1) * 100 + 250) + "ms seq=" + atk.SwingSequence +
+                          " seen=" + fLastHitSeq.GetValue(atk) +
+                          " step=" + atk.ComboStep + " swing=" + atk.IsSwinging +
+                          " dx=" + (sk.transform.position.x - pl.transform.position.x).ToString("F2") +
+                          " hits=" + sk.HitsTaken +
+                          " skState=" + fState.GetValue(sk) +
+                          " skAnim=" + Anim(sk.GetComponent<Animator>()));
+            if (sk.IsDead) break;
+        }
+
+        sb.AppendLine("RESULT startDx=" + startDx.ToString("F2") +
+                      " hits=" + sk.HitsTaken + " gained=" + (sk.HitsTaken - hits0) +
+                      " dead=" + sk.IsDead);
         return sb.ToString();
     }
 

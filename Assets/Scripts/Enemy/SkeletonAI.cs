@@ -33,18 +33,18 @@ public class SkeletonAI : MonoBehaviour
     [Tooltip("Normal patrol walking speed. Match to player speed.")]
     [SerializeField, Min(0.1f)] private float walkSpeed = 3f;
 
-    [Tooltip("Animation reference speed for walk animation to match player feel (slower).")]
-    [SerializeField, Min(0.1f)] private float walkAnimationReferenceSpeed = 3.0f;
+    [Tooltip("Animation reference speed for walk animation to match player feel.")]
+    [SerializeField, Min(0.1f)] private float walkAnimationReferenceSpeed = 3.878f;
 
-    [Tooltip("Scale walk animation playback to match movement speed (slower).")]
+    [Tooltip("Scale walk animation playback to match movement speed.")]
     [SerializeField, Range(0f, 2f)] private float walkAnimationSync = 1.0f;
 
     [Header("Detection")]
     [Tooltip("The player is noticed inside this radius, measured from the skeleton.")]
-    [SerializeField, Min(0.5f)] private float detectionRange = 4f;
+    [SerializeField, Min(0.5f)] private float detectionRange = 6f;
 
     [Tooltip("How far the player can run before the skeleton gives up and goes back to patrolling.")]
-    [SerializeField, Min(0.5f)] private float loseTargetRange = 6f;
+    [SerializeField, Min(0.5f)] private float loseTargetRange = 8f;
 
     [Tooltip("Chase speed. The Walk clip is sped up to match so the legs read as a fast walk. Match to player speed.")]
     [SerializeField, Min(0.1f)] private float chaseSpeed = 3f;
@@ -54,10 +54,10 @@ public class SkeletonAI : MonoBehaviour
 
     [Header("Combat")]
     [Tooltip("Horizontal distance at which the skeleton stops and attacks.")]
-    [SerializeField, Min(0.2f)] private float attackRange = 1.15f;
+    [SerializeField, Min(0.2f)] private float attackRange = 1.6f;
 
     [Tooltip("The attack only hurts the player when they are still within this horizontal distance at the hit frame.")]
-    [SerializeField, Min(0.2f)] private float attackHitReach = 1.5f;
+    [SerializeField, Min(0.2f)] private float attackHitReach = 1.9f;
 
     [Tooltip("Seconds into the Attack1 clip when the blow lands.")]
     [SerializeField, Min(0f)] private float attackHitDelay = 0.32f;
@@ -65,8 +65,8 @@ public class SkeletonAI : MonoBehaviour
     [Tooltip("Seconds into the Attack2 clip when the blow lands. Its lunge is later than Attack1's.")]
     [SerializeField, Min(0f)] private float attack2HitDelay = 0.5f;
 
-    [Tooltip("Length of the attack clip. The skeleton returns to chasing after this.")]
-    [SerializeField, Min(0.05f)] private float attackDuration = 0.67f;
+    [Tooltip("Real-time length of the attack, including the slower attackAnimationSpeed. The skeleton returns to chasing after this.")]
+    [SerializeField, Min(0.05f)] private float attackDuration = 0.9f;
 
     [Tooltip("Pause between attacks while the player stays in range. Rest after one hit - make it 0.7 sec.")]
     [SerializeField, Min(0f)] private float attackCooldown = 0.7f;
@@ -84,11 +84,15 @@ public class SkeletonAI : MonoBehaviour
     [Tooltip("How long the skeleton stays staggered after being hit.")]
     [SerializeField, Min(0f)] private float hitStunTime = 0.35f;
 
-    [Tooltip("Horizontal reach of Leon's sword. The skeleton can only be hit inside this distance.")]
-    [SerializeField, Min(0.2f)] private float playerHitReach = 2.0f;
+    [Header("Animation Speeds")]
+    [Tooltip("Playback speed of the attack clips. Below 1 is slower; 0.75 makes one skeleton swing read at about Leon's swing length.")]
+    [SerializeField, Range(0.2f, 2f)] private float attackAnimationSpeed = 0.75f;
 
-    [Tooltip("Vertical tolerance for Leon's sword, so a jump cannot hit the skeleton's feet from far above.")]
-    [SerializeField, Min(0.2f)] private float playerHitHeight = 2.2f;
+    [Tooltip("Playback speed of the Take Hit clip.")]
+    [SerializeField, Range(0.2f, 2f)] private float hitAnimationSpeed = 0.8f;
+
+    [Tooltip("Playback speed of the Death clip.")]
+    [SerializeField, Range(0.2f, 2f)] private float deathAnimationSpeed = 0.6f;
 
     [Header("Death Grounding")]
     [Tooltip("Pins the visible bottom of the death sprite to the ground so the corpse cannot float or sink.")]
@@ -113,7 +117,6 @@ public class SkeletonAI : MonoBehaviour
     [SerializeField] private Transform player;
 
     [SerializeField] private PlayerHealthHurt playerHealth;
-    [SerializeField] private PlayerAttack2D playerAttack;
     [SerializeField] private PlayerMovement2D playerMovement;
     [SerializeField] private Animator animator;
     [SerializeField] private SpriteRenderer spriteRenderer;
@@ -141,7 +144,6 @@ public class SkeletonAI : MonoBehaviour
     private float hitStunTimer;
 
     private int hitsTaken;
-    private int lastPlayerSwingSequence;
     private float playerSearchTimer;
 
     private bool isDead;
@@ -198,10 +200,6 @@ public class SkeletonAI : MonoBehaviour
                 return;
             }
         }
-
-        // Between the Animator updating the swing state and this script
-        // running, one new swing gets one hit check.
-        RegisterPlayerSwing();
 
         bool playerAlive = playerHealth == null || !playerHealth.IsDead;
         float dx = player.position.x - transform.position.x;
@@ -296,8 +294,8 @@ public class SkeletonAI : MonoBehaviour
         SetFacing(dx);
 
         useAttack2 = !useAttack2;
-        attackHitTimer = useAttack2 ? attack2HitDelay : attackHitDelay;
-        PlayAnimation(useAttack2 ? attack2State : attack1State, 1f, true);
+        attackHitTimer = (useAttack2 ? attack2HitDelay : attackHitDelay) / Mathf.Max(0.05f, attackAnimationSpeed);
+        PlayAnimation(useAttack2 ? attack2State : attack1State, attackAnimationSpeed, true);
     }
 
     private void EnterHurt(float dx)
@@ -311,7 +309,7 @@ public class SkeletonAI : MonoBehaviour
         hitStunTimer = Mathf.Max(hitStunTime, knockbackTime);
 
         SetFacing(-knockbackDirection);
-        PlayAnimation(takeHitState, 1f, true);
+        PlayAnimation(takeHitState, hitAnimationSpeed, true);
     }
 
     private void TickIdle(bool playerAlive, float distance)
@@ -431,41 +429,6 @@ public class SkeletonAI : MonoBehaviour
 
     // --------------------------------------------------------------- combat
 
-    /// <summary>
-    /// Watches Leon's swing counter. Every swing (Attack1, or the Attack2
-    /// combo follow-up) gets exactly one hit check, so holding F cannot chew
-    /// through the skeleton in a handful of physics frames.
-    /// </summary>
-    private void RegisterPlayerSwing()
-    {
-        if (playerAttack == null || player == null) return;
-
-        int sequence = playerAttack.SwingSequence;
-        if (sequence == lastPlayerSwingSequence) return;
-
-        lastPlayerSwingSequence = sequence;
-
-        if (isDead) return;
-        if (playerHealth != null && playerHealth.IsDead) return;
-        if (playerAttack.IsPushing) return;
-
-        float dx = transform.position.x - player.position.x;
-        if (Mathf.Abs(dx) > playerHitReach) return;
-
-        Vector2 enemyCenter = bodyCollider != null
-            ? (Vector2)bodyCollider.bounds.center
-            : (Vector2)transform.position;
-
-        if (Mathf.Abs(enemyCenter.y - player.position.y) > playerHitHeight) return;
-
-        // Leon only hits what is in front of him.
-        bool facingRight = playerMovement == null || playerMovement.FacingRight;
-        if (facingRight && dx < 0f) return;
-        if (!facingRight && dx > 0f) return;
-
-        TakeSwordHit(player.position);
-    }
-
     private void TryHitPlayer()
     {
         if (playerHealth == null || playerHealth.IsDead || player == null) return;
@@ -509,7 +472,7 @@ public class SkeletonAI : MonoBehaviour
         // lands on the ground instead of freezing in mid-air.
         deathGroundY = ResolveDeathGroundY();
 
-        PlayAnimation(deathState, 1f, true);
+        PlayAnimation(deathState, deathAnimationSpeed, true);
 
         if (body != null)
         {
@@ -613,7 +576,6 @@ public class SkeletonAI : MonoBehaviour
         if (playerHealth != null)
         {
             if (player == null) player = playerHealth.transform;
-            if (playerAttack == null) playerAttack = playerHealth.GetComponent<PlayerAttack2D>();
             if (playerMovement == null) playerMovement = playerHealth.GetComponent<PlayerMovement2D>();
         }
 
@@ -626,7 +588,6 @@ public class SkeletonAI : MonoBehaviour
         if (player != null)
         {
             if (playerHealth == null) playerHealth = player.GetComponent<PlayerHealthHurt>();
-            if (playerAttack == null) playerAttack = player.GetComponent<PlayerAttack2D>();
             if (playerMovement == null) playerMovement = player.GetComponent<PlayerMovement2D>();
         }
     }

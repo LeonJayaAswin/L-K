@@ -87,10 +87,10 @@ public class PlayerAttack2D : MonoBehaviour
 
     [Header("Hit Detection")]
     [Tooltip("Range to detect enemies when attacking.")]
-    [SerializeField, Min(0.1f)] private float attackHitRange = 1.8f;
+    [SerializeField, Min(0.1f)] private float attackHitRange = 2.6f;
 
     [Tooltip("Vertical tolerance for hitting enemies.")]
-    [SerializeField, Min(0.1f)] private float attackHitHeight = 2.0f;
+    [SerializeField, Min(0.1f)] private float attackHitHeight = 3.0f;
 
     [Tooltip("Layer mask for enemies.")]
     [SerializeField] private LayerMask enemyLayerMask = -1;
@@ -154,7 +154,6 @@ public class PlayerAttack2D : MonoBehaviour
         bool attackPressed = ReadPressEdge(IsAttackHeld(), ref attackKeyHeld);
         if (!isPushing && attackPressed) AdvanceCombo();
 
-        // Try to hit enemies during active swing frames
         if (IsSwinging && !isPushing) TryHitEnemies();
 
         ReleaseFinishedSwing();
@@ -440,7 +439,12 @@ public class PlayerAttack2D : MonoBehaviour
 
     private void TryHitEnemies()
     {
-        if (lastSeenState == 0) return;
+        if (lastSeenState == 0 || comboStep == 0) return;
+
+        // The hit belongs to the swing that is on screen. Gating on the combo
+        // step as well as the Animator state stops the follow-up from landing
+        // on the last frame of the first swing, before its attack starts.
+        if (lastSeenState != comboStep) return;
 
         // Only hit once per swing sequence - each swing can only hit once
         if (lastHitSwingSequence == swingSequence) return;
@@ -456,7 +460,10 @@ public class PlayerAttack2D : MonoBehaviour
             if (hit == null) continue;
             if (hit.transform == transform || hit.transform.IsChildOf(transform)) continue;
 
-            float dx = hit.transform.position.x - transform.position.x;
+            // Measure from the collider, not the transform: the skeleton's
+            // pivot sits above its feet, and a wing or arm can stick out.
+            Vector2 target = hit.bounds.center;
+            float dx = target.x - transform.position.x;
 
             // Check if target is in front of the player
             if (Mathf.Sign(dx) != Mathf.Sign(forward)) continue;
@@ -465,7 +472,7 @@ public class PlayerAttack2D : MonoBehaviour
             if (Mathf.Abs(dx) > attackHitRange) continue;
 
             // Check vertical reach
-            if (Mathf.Abs(hit.transform.position.y - transform.position.y) > attackHitHeight) continue;
+            if (Mathf.Abs(target.y - transform.position.y) > attackHitHeight) continue;
 
             SkeletonAI skeleton = hit.GetComponent<SkeletonAI>();
             if (skeleton == null) skeleton = hit.GetComponentInParent<SkeletonAI>();
@@ -483,6 +490,44 @@ public class PlayerAttack2D : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// Turns Leon toward the nearest living enemy inside sword range when a
+    /// swing starts. Without this an enemy shoving Leon from behind would leave
+    /// the swing pointing the wrong way and the hit would be rejected.
+    /// </summary>
+    private void FaceNearestEnemy()
+    {
+        Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, attackHitRange, enemyLayerMask);
+
+        float bestDistance = float.MaxValue;
+        float bestDx = 0f;
+
+        foreach (var hit in hits)
+        {
+            if (hit == null) continue;
+            if (hit.transform == transform || hit.transform.IsChildOf(transform)) continue;
+
+            Vector2 target = hit.bounds.center;
+            if (Mathf.Abs(target.y - transform.position.y) > attackHitHeight) continue;
+
+            SkeletonAI skeleton = hit.GetComponent<SkeletonAI>();
+            if (skeleton == null) skeleton = hit.GetComponentInParent<SkeletonAI>();
+            if (skeleton == null || skeleton.IsDead) continue;
+
+            float dx = target.x - transform.position.x;
+            float distance = Mathf.Abs(dx);
+            if (distance > attackHitRange || distance >= bestDistance) continue;
+
+            bestDistance = distance;
+            bestDx = dx;
+        }
+
+        if (Mathf.Abs(bestDx) > 0.0001f && movement != null)
+        {
+            movement.FaceDirection(bestDx);
+        }
+    }
+
     private void ReleaseFinishedSwing()
     {
         if (!IsSwinging) return;
@@ -496,7 +541,9 @@ public class PlayerAttack2D : MonoBehaviour
                 comboStep = queuedStep;
                 queuedStep = 0;
                 stateEnteredTime = Time.time;
+                FaceNearestEnemy();
                 swingSequence++;
+                if (movement != null) movement.IsAttacking = true;
                 animator.SetInteger(attackParamHash, comboStep);
             }
             return;
@@ -534,7 +581,12 @@ public class PlayerAttack2D : MonoBehaviour
 
         comboStep = 1;
         queuedStep = 0;
+        FaceNearestEnemy();
         swingSequence++;
+        // Lock movement on the same frame the swing starts, before the
+        // Animator has switched state, so input cannot flip Leon away from the
+        // enemy between the assist and the first hit check.
+        if (movement != null) movement.IsAttacking = true;
         if (animator != null) animator.SetInteger(attackParamHash, comboStep);
     }
 
