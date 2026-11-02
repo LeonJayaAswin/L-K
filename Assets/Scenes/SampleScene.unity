@@ -890,10 +890,12 @@ MonoBehaviour:
   pushTag: PushObject
   pushObject: {fileID: 0}
   cancelPushKey: 15
-  minimumSwingTime: 1.25
   releaseLeadTime: 0.08
+  comboBufferTime: 0.35
+  swingStartLockTime: 0.1
   attackParameter: Attack
   attackHitRange: 2
+  comboHitReachBonus: 0.5
   attackHitHeight: 2
   enemyLayerMask:
     serializedVersion: 2
@@ -1189,7 +1191,7 @@ MonoBehaviour:
   attackHitDelay: 0.32
   attack2HitDelay: 0.5
   attackDuration: 0.9
-  attackCooldown: 0.7
+  attackCooldown: 2
   hitsToDie: 5
   knockbackDistance: 0.6
   knockbackTime: 0.3

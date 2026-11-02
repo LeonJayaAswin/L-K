@@ -212,6 +212,76 @@ public static class PlayTest
         return sb.ToString();
     }
 
+    public static async Task<string> SwingStates(float startDx, bool queueCombo)
+    {
+        var sk = Sk();
+        var pl = Pl();
+        var atk = pl.GetComponent<PlayerAttack2D>();
+        var mv = pl.GetComponent<PlayerMovement2D>();
+        var plSr = pl.GetComponent<SpriteRenderer>();
+        var plRb = pl.GetComponent<Rigidbody2D>();
+        var anim = pl.GetComponent<Animator>();
+        var flags = BindingFlags.NonPublic | BindingFlags.Instance;
+        var fFacing = typeof(PlayerMovement2D).GetField("facingRight", flags);
+        var fSeen = typeof(PlayerAttack2D).GetField("lastSeenState", flags);
+        var fQueued = typeof(PlayerAttack2D).GetField("queuedStep", flags);
+        var fEntered = typeof(PlayerAttack2D).GetField("stateEnteredTime", flags);
+        var fLastHit = typeof(PlayerAttack2D).GetField("lastHitSwingSequence", flags);
+        var sb = new StringBuilder();
+
+        plRb.position = new Vector2(sk.transform.position.x - startDx, -3.37f);
+        plRb.linearVelocity = Vector2.zero;
+        fFacing.SetValue(mv, true);
+        plSr.flipX = false;
+        await Task.Delay(400);
+
+        sb.AppendLine("PRE pl=" + pl.transform.position.ToString("F2") +
+                      " dx=" + (sk.transform.position.x - pl.transform.position.x).ToString("F2") +
+                      " anim=" + PlayerAnim(anim) + " swing=" + atk.IsSwinging +
+                      " step=" + atk.ComboStep + " seq=" + atk.SwingSequence +
+                      " hurt=" + pl.HurtCount + " dead=" + pl.IsDead);
+
+        atk.ResetCombo();
+        atk.AdvanceCombo();
+
+        for (int i = 0; i < 60; i++)
+        {
+            await Task.Delay(50);
+            if (queueCombo && i == 4) atk.AdvanceCombo(); // press again ~250ms in
+
+            var st = anim.GetCurrentAnimatorStateInfo(0);
+            sb.AppendLine((i + 1) * 50 + "ms anim=" + PlayerAnim(anim) +
+                          " clipT=" + st.normalizedTime.ToString("F2") +
+                          " len=" + st.length.ToString("F2") +
+                          " trans=" + anim.IsInTransition(0) +
+                          " swing=" + atk.IsSwinging +
+                          " seen=" + fSeen.GetValue(atk) +
+                          " step=" + atk.ComboStep +
+                          " q=" + fQueued.GetValue(atk) +
+                          " entered=" + ((float)fEntered.GetValue(atk)).ToString("F2") +
+                          " seq=" + atk.SwingSequence +
+                          " lastHit=" + fLastHit.GetValue(atk) +
+                          " dx=" + (sk.transform.position.x - pl.transform.position.x).ToString("F2") +
+                          " hits=" + sk.HitsTaken +
+                          " pHurt=" + pl.HurtCount);
+        }
+        return sb.ToString();
+    }
+
+    static string PlayerAnim(Animator a)
+    {
+        var st = a.GetCurrentAnimatorStateInfo(0);
+        if (st.IsName("Attack1")) return "Attack1";
+        if (st.IsName("Attack2")) return "Attack2";
+        if (st.IsName("Idle")) return "Idle";
+        if (st.IsName("Run")) return "Run";
+        if (st.IsName("Hurt")) return "Hurt";
+        if (st.IsName("Death")) return "Death";
+        if (st.IsName("Push")) return "Push";
+        if (st.IsName("Jump")) return "Jump";
+        return "other";
+    }
+
     public static async Task<string> HitDiag(float startDx)
     {
         var sk = Sk();
@@ -295,7 +365,8 @@ public static class PlayTest
         sb.AppendLine("START dx=" + (sk.transform.position.x - pl.transform.position.x).ToString("F2") +
                       " hits=" + hits0 + " seq=" + atk.SwingSequence +
                       " reach=" + typeof(PlayerAttack2D).GetField("attackHitRange", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(atk) +
-                      " skReach=" + typeof(SkeletonAI).GetField("playerHitReach", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(sk));
+                      " skAttackRange=" + typeof(SkeletonAI).GetField("attackRange", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(sk) +
+                      " skCooldown=" + typeof(SkeletonAI).GetField("attackCooldown", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(sk));
 
         atk.ResetCombo();
         atk.AdvanceCombo();
@@ -502,6 +573,169 @@ public static class PlayTest
                       " anim=" + Anim(sk.GetComponent<Animator>()) +
                       " artBottom=" + ArtBottom(sk) + " groundTop=" + GroundTop() +
                       " playerDead=" + pl.IsDead + " playerHits=" + pl.HurtCount);
+        return sb.ToString();
+    }
+
+    static object Field(object target, string name)
+    {
+        return target.GetType().GetField(name, BindingFlags.NonPublic | BindingFlags.Instance).GetValue(target);
+    }
+
+    public static string Tuning()
+    {
+        var sk = Sk();
+        var pl = Pl();
+        var atk = pl.GetComponent<PlayerAttack2D>();
+        var mv = pl.GetComponent<PlayerMovement2D>();
+        var sb = new StringBuilder();
+        sb.AppendLine("skeleton cooldown=" + Field(sk, "attackCooldown") +
+                      " duration=" + Field(sk, "attackDuration") +
+                      " range=" + Field(sk, "attackRange") +
+                      " hitReach=" + Field(sk, "attackHitReach") +
+                      " walkSpeed=" + Field(sk, "walkSpeed") +
+                      " chaseSpeed=" + Field(sk, "chaseSpeed") +
+                      " attackSpeed=" + Field(sk, "attackAnimationSpeed") +
+                      " hitSpeed=" + Field(sk, "hitAnimationSpeed") +
+                      " deathSpeed=" + Field(sk, "deathAnimationSpeed") +
+                      " hitsToDie=" + Field(sk, "hitsToDie"));
+        sb.AppendLine("player moveSpeed=" + Field(mv, "moveSpeed") +
+                      " attackHitRange=" + Field(atk, "attackHitRange") +
+                      " comboChainLeadTime=" + Field(atk, "comboChainLeadTime") +
+                      " releaseLeadTime=" + Field(atk, "releaseLeadTime") +
+                      " minimumSwingTime=" + Field(atk, "minimumSwingTime") +
+                      " hitsBeforeDeath=" + Field(pl, "hitsBeforeDeath"));
+        return sb.ToString();
+    }
+
+    public static async Task<string> AttackCadence()
+    {
+        var sk = Sk();
+        var pl = Pl();
+        var plRb = pl.GetComponent<Rigidbody2D>();
+        var mv = pl.GetComponent<PlayerMovement2D>();
+        var anim = sk.GetComponent<Animator>();
+        var flags = BindingFlags.NonPublic | BindingFlags.Instance;
+        var fState = typeof(SkeletonAI).GetField("state", flags);
+        var sb = new StringBuilder();
+        sb.AppendLine("cooldown=" + Field(sk, "attackCooldown") +
+                      " duration=" + Field(sk, "attackDuration") +
+                      " attackSpeed=" + Field(sk, "attackAnimationSpeed") +
+                      " playerHitsBeforeDeath=" + Field(pl, "hitsBeforeDeath"));
+
+        bool faceRight = mv.FacingRight;
+        plRb.position = new Vector2(sk.transform.position.x + (faceRight ? -1.0f : 1.0f), plRb.position.y);
+        plRb.linearVelocity = Vector2.zero;
+        await Task.Delay(300);
+
+        string prev = fState.GetValue(sk).ToString();
+        float startT = -1f;
+        float lastEndT = -1f;
+        int lastHits = pl.HurtCount;
+        int attacks = 0;
+
+        for (int i = 0; i < 100 && !pl.IsDead; i++)
+        {
+            await Task.Delay(100);
+
+            if (!pl.IsDead)
+            {
+                bool fr = mv.FacingRight;
+                plRb.position = new Vector2(sk.transform.position.x + (fr ? -1.0f : 1.0f), plRb.position.y);
+                plRb.linearVelocity = Vector2.zero;
+            }
+
+            string now = fState.GetValue(sk).ToString();
+            if (now != prev)
+            {
+                if (now == "Attack")
+                {
+                    startT = Time.time;
+                    attacks++;
+                    sb.AppendLine("attack#" + attacks + " start t=" + startT.ToString("F2") +
+                                  (lastEndT > 0f ? " rest=" + (startT - lastEndT).ToString("F2") : " rest=first") +
+                                  " animSpeed=" + anim.speed.ToString("F2"));
+                }
+                else if (prev == "Attack")
+                {
+                    lastEndT = Time.time;
+                    sb.AppendLine("attack end t=" + lastEndT.ToString("F2") +
+                                  " duration=" + (lastEndT - startT).ToString("F2") +
+                                  " anim=" + Anim(anim));
+                }
+                prev = now;
+            }
+
+            if (pl.HurtCount != lastHits)
+            {
+                sb.AppendLine("  leon hit " + pl.HurtCount + " at t=" + Time.time.ToString("F2") +
+                              " sinceAttackStart=" + (startT > 0f ? (Time.time - startT).ToString("F2") : "?") +
+                              " anim=" + Anim(sk.GetComponent<Animator>()));
+                lastHits = pl.HurtCount;
+            }
+        }
+
+        sb.AppendLine("FINAL attacks=" + attacks + " leonHits=" + pl.HurtCount +
+                      " dead=" + pl.IsDead + " skState=" + fState.GetValue(sk) +
+                      " skAnim=" + Anim(sk.GetComponent<Animator>()));
+        return sb.ToString();
+    }
+
+    public static async Task<string> ComboKill()
+    {
+        var sk = Sk();
+        var pl = Pl();
+        var atk = pl.GetComponent<PlayerAttack2D>();
+        var mv = pl.GetComponent<PlayerMovement2D>();
+        var plRb = pl.GetComponent<Rigidbody2D>();
+        var skAnim = sk.GetComponent<Animator>();
+        var flags = BindingFlags.NonPublic | BindingFlags.Instance;
+        var sb = new StringBuilder();
+
+        // Isolate the sword kill: stop the skeleton from opening fire so Leon
+        // cannot die (and lose his attack component) halfway through the test.
+        var fNextAttack = typeof(SkeletonAI).GetField("nextAttackTime", flags);
+        fNextAttack.SetValue(sk, Time.time + 9999f);
+
+        sb.AppendLine("start hits=" + sk.HitsTaken + " playerHits=" + pl.HurtCount +
+                      " swingRange=" + Field(atk, "attackHitRange"));
+
+        for (int round = 1; round <= 3 && !sk.IsDead; round++)
+        {
+            for (int half = 1; half <= 2 && !sk.IsDead; half++)
+            {
+                bool faceRight = mv.FacingRight;
+                plRb.position = new Vector2(sk.transform.position.x + (faceRight ? -1.15f : 1.15f), plRb.position.y);
+                plRb.linearVelocity = Vector2.zero;
+                await Task.Delay(160);
+
+                atk.ResetCombo();
+                atk.AdvanceCombo();
+                await Task.Delay(260);
+                atk.AdvanceCombo();
+                sb.AppendLine("combo " + round + "." + half +
+                              " queued seq=" + atk.SwingSequence + " step=" + atk.ComboStep +
+                              " dx=" + (sk.transform.position.x - pl.transform.position.x).ToString("F2") +
+                              " hitsBefore=" + sk.HitsTaken);
+
+                await Task.Delay(2300);
+                sb.AppendLine("  -> hits=" + sk.HitsTaken + " dead=" + sk.IsDead +
+                              " seq=" + atk.SwingSequence +
+                              " dx=" + (sk.transform.position.x - pl.transform.position.x).ToString("F2") +
+                              " skAnim=" + Anim(skAnim) + " artBottom=" + ArtBottom(sk));
+            }
+        }
+
+        for (int i = 0; i < 6; i++)
+        {
+            await Task.Delay(250);
+            sb.AppendLine("post-death +" + ((i + 1) * 250) + "ms anim=" + Anim(skAnim) +
+                          " artBottom=" + ArtBottom(sk) + " y=" + sk.transform.position.y.ToString("F4"));
+        }
+
+        sb.AppendLine("FINAL hits=" + sk.HitsTaken + " dead=" + sk.IsDead +
+                      " anim=" + Anim(skAnim) + " artBottom=" + ArtBottom(sk) +
+                      " groundTop=" + GroundTop() +
+                      " leonHits=" + pl.HurtCount + " leonDead=" + pl.IsDead);
         return sb.ToString();
     }
 

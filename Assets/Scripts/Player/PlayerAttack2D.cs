@@ -5,14 +5,17 @@ using UnityEngine.InputSystem;
 /// Sword combo plus push action.
 ///
 /// Combo:
-///  - A swing ALWAYS plays to the end. The controller releases Attack1 on exit
-///    time with no condition, so it can never be cut off or parked on its last
-///    frame.
-///  - Attack2 loops, so it would run forever unless the combo is released. It
-///    is held for at least one full cycle before the combo is allowed to end,
-///    otherwise a short combo window would chop the loop in half.
-///  - Movement is locked from the Animator state, not from the combo timer, so
-///    Leon is free the instant a swing ends instead of waiting out a timer.
+///  - An attack press writes the next step straight to the Animator's Attack
+///    parameter. Exit-time transitions on Attack1/Attack2 decide when the
+///    follow-up starts, so a swing always plays through and a press can never
+///    be lost to a start-up race.
+///  - After a swing ends the chain stays open for <see cref="comboBufferTime"/>
+///    seconds, so a slightly late press continues the combo instead of
+///    restarting at step 1. Attack2 loops and is released on its exit time.
+///  - Damage is dealt by the <c>OnAttackHitFrame</c> animation event placed on
+///    the exact sprite contact frame of each clip, never by a timer.
+///  - Movement is locked from the Animator state, not from a combo timer, so
+///    Leon is free the instant a swing ends.
 ///
 /// Push:
 ///  - E (or gamepad South) starts a push, but only when a pushable object is
@@ -76,11 +79,14 @@ public class PlayerAttack2D : MonoBehaviour
     [SerializeField] private Key cancelPushKey = Key.A;
 
     [Header("Combo")]
-    [Tooltip("Minimum time a swing is held before the combo may end. Set this to the length of the longest swing clip so it always completes.")]
-    [SerializeField, Min(0.1f)] private float minimumSwingTime = 1.25f;
-
     [Tooltip("How early the Attack parameter is cleared before the Animator's exit-time transition fires. Prevents Idle/Run from re-entering the same swing, which is what leaves the character stuck on the final frame.")]
     [SerializeField, Min(0.01f)] private float releaseLeadTime = 0.08f;
+
+    [Tooltip("How long after a swing ends an attack press still continues the combo. Keeps the chain alive for late presses without cutting the current swing short.")]
+    [SerializeField, Min(0f)] private float comboBufferTime = 0.35f;
+
+    [Tooltip("Short lock applied the moment a swing is requested, so movement cannot flip Leon before the Animator enters the attack state.")]
+    [SerializeField, Min(0f)] private float swingStartLockTime = 0.1f;
 
     [Tooltip("Animator int parameter: 0 = neutral, 1 = first swing, 2 = combo swing.")]
     [SerializeField] private string attackParameter = "Attack";
@@ -88,6 +94,9 @@ public class PlayerAttack2D : MonoBehaviour
     [Header("Hit Detection")]
     [Tooltip("Range to detect enemies when attacking.")]
     [SerializeField, Min(0.1f)] private float attackHitRange = 2.6f;
+
+    [Tooltip("Extra forward reach on the follow-up contact frames of a combo swing (Attack2's frame 15). The previous hit knocks the enemy back, so without this the finisher usually fires just out of range.")]
+    [SerializeField, Min(0f)] private float comboHitReachBonus = 0.5f;
 
     [Tooltip("Vertical tolerance for hitting enemies.")]
     [SerializeField, Min(0.1f)] private float attackHitHeight = 3.0f;
@@ -108,7 +117,13 @@ public class PlayerAttack2D : MonoBehaviour
     private int swingSequence;
 
     private int lastSeenState;
-    private float stateEnteredTime = -999f;
+
+    // After a swing ends the combo stays open for a short buffer so a press
+    // that arrives just after the animation can still chain instead of
+    // restarting at step 1.
+    private int lastCompletedStep;
+    private float comboWindowUntil = -999f;
+    private float swingStartGraceUntil = -999f;
 
     private bool isPushing;
     private bool pushIsActive;  // Animation event flag: controls if object moves NOW
@@ -123,7 +138,7 @@ public class PlayerAttack2D : MonoBehaviour
     private bool pushCancelLatch;
 
     private bool attackKeyHeld;
-    public bool IsSwinging => lastSeenState == 1 || lastSeenState == 2;
+    public bool IsSwinging => lastSeenState == 1 || lastSeenState == 2 || Time.time < swingStartGraceUntil;
     public bool IsPushing => isPushing;
     public int ComboStep => comboStep;
 
@@ -152,11 +167,12 @@ public class PlayerAttack2D : MonoBehaviour
         // Attacks are ignored while a push is running: the Push animation owns
         // Leon's body until the push is cancelled.
         bool attackPressed = ReadPressEdge(IsAttackHeld(), ref attackKeyHeld);
-        if (!isPushing && attackPressed) AdvanceCombo();
+        if (!isPushing && attackPressed) RequestAttack();
 
-        if (IsSwinging && !isPushing) TryHitEnemies();
-
-        ReleaseFinishedSwing();
+        // Clear the Animator parameter just before the exit-time transition so
+        // Idle/Run never re-enter a finished swing. Damage itself is now driven
+        // by the OnAttackHitFrame animation event, not by this Update loop.
+        ClearFinishedSwingParameter();
 
         if (isPushing)
         {
@@ -425,19 +441,144 @@ public class PlayerAttack2D : MonoBehaviour
         return false;
     }
 
-    private int lastHitSwingSequence = 0;
+    private int hitsLandedThisSwing;
+    private int hitEventsThisSwing = 1;
 
     private void TrackAnimatorState()
     {
         int state = CurrentAttackState();
-        if (state != lastSeenState)
+        if (state == lastSeenState) return;
+
+        int previous = lastSeenState;
+        lastSeenState = state;
+
+        if (state == 1 || state == 2)
         {
-            lastSeenState = state;
-            stateEnteredTime = Time.time;
+            // A swing really started. Take ownership of the step from the
+            // Animator state so the hit frame and the visible animation always
+            // agree, and give this swing its own sequence number.
+            comboStep = state;
+            queuedStep = 0;
+            swingSequence++;
+            hitsLandedThisSwing = 0;
+            hitEventsThisSwing = CountHitEvents(state);
+            swingStartGraceUntil = Time.time + swingStartLockTime;
+            FaceNearestEnemy();
+            if (movement != null) movement.IsAttacking = true;
+            return;
+        }
+
+        if (previous == 1 || previous == 2)
+        {
+            // The swing finished. Keep the combo open for a short buffer and
+            // neutralise the parameter so Idle/Run cannot re-enter the swing.
+            lastCompletedStep = previous;
+            comboWindowUntil = Time.time + comboBufferTime;
+            comboStep = 0;
+            queuedStep = 0;
+            if (animator != null) animator.SetInteger(attackParamHash, 0);
         }
     }
 
-    private void TryHitEnemies()
+    /// <summary>
+    /// Handles an attack press. Starts the first swing, or queues the next step
+    /// of the combo while a swing is already on screen.
+    ///
+    /// The queued step is written straight to the Animator parameter. The
+    /// exit-time transitions on Attack1/Attack2 decide when the follow-up
+    /// actually begins, so the current swing always finishes and a press can
+    /// never be lost to a start-up race.
+    /// </summary>
+    private void RequestAttack()
+    {
+        if (movement != null && movement.IsHurt) return;
+
+        if ((lastSeenState == 1 || lastSeenState == 2) && comboStep != 0)
+        {
+            int next = comboStep == 1 ? 2 : 1;
+            if (queuedStep == 0)
+            {
+                queuedStep = next;
+                if (animator != null) animator.SetInteger(attackParamHash, next);
+            }
+            return;
+        }
+
+        // Outside a swing: continue the chain while the post-swing buffer is
+        // open, otherwise start a fresh combo at step 1.
+        int step = (lastCompletedStep != 0 && Time.time <= comboWindowUntil)
+            ? (lastCompletedStep == 1 ? 2 : 1)
+            : 1;
+
+        StartSwing(step);
+    }
+
+    private void StartSwing(int step)
+    {
+        comboStep = step;
+        queuedStep = 0;
+        lastCompletedStep = 0; // the buffer has been consumed
+        swingStartGraceUntil = Time.time + swingStartLockTime;
+        FaceNearestEnemy();
+        if (movement != null) movement.IsAttacking = true;
+        if (animator != null) animator.SetInteger(attackParamHash, step);
+    }
+
+    /// <summary>
+    /// Clears the Attack parameter near the end of a swing that has no queued
+    /// follow-up. The Animator's exit-time transition then returns to Idle/Run
+    /// instead of re-entering the same swing.
+    /// </summary>
+    private void ClearFinishedSwingParameter()
+    {
+        if (animator == null) return;
+        if (queuedStep != 0) return;
+        if (lastSeenState != 1 && lastSeenState != 2) return;
+
+        var info = animator.GetCurrentAnimatorStateInfo(0);
+        float length = info.length;
+        if (length <= 0f) return;
+
+        // normalizedTime keeps counting past 1 on the looping Attack2 clip.
+        float played = info.normalizedTime * length;
+        if (played < length - releaseLeadTime) return;
+
+        if (animator.GetInteger(attackParamHash) != 0)
+        {
+            animator.SetInteger(attackParamHash, 0);
+        }
+    }
+
+    /// <summary>
+    /// How many <c>OnAttackHitFrame</c> events the swing that just started
+    /// carries. Attack1 has one contact frame; Attack2 is the combo swing and
+    /// has two (frame 9 and frame 15). Counting the events keeps the per-swing
+    /// hit limit in step with the animation instead of using a hand-tuned
+    /// Inspector value.
+    /// </summary>
+    private int CountHitEvents(int state)
+    {
+        int fallback = state == 2 ? 2 : 1;
+        if (animator == null) return fallback;
+
+        var clips = animator.GetCurrentAnimatorClipInfo(0);
+        if (clips == null || clips.Length == 0 || clips[0].clip == null) return fallback;
+
+        int count = 0;
+        foreach (var e in clips[0].clip.events)
+        {
+            if (e.functionName == nameof(OnAttackHitFrame)) count++;
+        }
+        return count > 0 ? count : fallback;
+    }
+
+    /// <summary>
+    /// Animation event placed on Attack1/Attack2 at the exact sprite contact
+    /// frame. This is the only place a sword swing deals damage. Attack1 has
+    /// one of these events; the Attack2 combo swing has two, so it lands a
+    /// second hit on frame 15.
+    /// </summary>
+    public void OnAttackHitFrame()
     {
         if (lastSeenState == 0 || comboStep == 0) return;
 
@@ -446,15 +587,23 @@ public class PlayerAttack2D : MonoBehaviour
         // on the last frame of the first swing, before its attack starts.
         if (lastSeenState != comboStep) return;
 
-        // Only hit once per swing sequence - each swing can only hit once
-        if (lastHitSwingSequence == swingSequence) return;
+        // Each authored contact frame lands one hit. A looping clip would
+        // replay the same events, so cap the swing at the number of events it
+        // owns instead of letting one swing deal unlimited damage.
+        if (hitsLandedThisSwing >= hitEventsThisSwing) return;
+
+        // A follow-up contact frame is a lunge: the previous hit has just
+        // knocked the target back, so check slightly further ahead or the
+        // finisher would whiff at the far end of the knockback.
+        bool followUpHit = hitsLandedThisSwing > 0;
+        float reach = attackHitRange + (followUpHit ? comboHitReachBonus : 0f);
+        hitsLandedThisSwing++;
 
         float forward = movement != null && movement.FacingRight ? 1f : -1f;
         Vector2 origin = (Vector2)transform.position + new Vector2(forward * 0.5f, 0f);
 
-        Collider2D[] hits = Physics2D.OverlapCircleAll(origin, attackHitRange, enemyLayerMask);
+        Collider2D[] hits = Physics2D.OverlapCircleAll(origin, reach, enemyLayerMask);
 
-        bool hitAny = false;
         foreach (var hit in hits)
         {
             if (hit == null) continue;
@@ -469,7 +618,7 @@ public class PlayerAttack2D : MonoBehaviour
             if (Mathf.Sign(dx) != Mathf.Sign(forward)) continue;
 
             // Check horizontal reach
-            if (Mathf.Abs(dx) > attackHitRange) continue;
+            if (Mathf.Abs(dx) > reach) continue;
 
             // Check vertical reach
             if (Mathf.Abs(target.y - transform.position.y) > attackHitHeight) continue;
@@ -479,14 +628,7 @@ public class PlayerAttack2D : MonoBehaviour
             if (skeleton != null && !skeleton.IsDead)
             {
                 skeleton.TakeSwordHit(transform.position);
-                hitAny = true;
             }
-        }
-
-        // Mark this swing sequence as hit so it only hits once
-        if (hitAny)
-        {
-            lastHitSwingSequence = swingSequence;
         }
     }
 
@@ -528,40 +670,6 @@ public class PlayerAttack2D : MonoBehaviour
         }
     }
 
-    private void ReleaseFinishedSwing()
-    {
-        if (!IsSwinging) return;
-        if (lastSeenState != 1 && lastSeenState != 2) return;
-
-        if (queuedStep != 0)
-        {
-            float playedNow = Time.time - stateEnteredTime;
-            if (playedNow >= CurrentSwingLength() - releaseLeadTime)
-            {
-                comboStep = queuedStep;
-                queuedStep = 0;
-                stateEnteredTime = Time.time;
-                FaceNearestEnemy();
-                swingSequence++;
-                if (movement != null) movement.IsAttacking = true;
-                animator.SetInteger(attackParamHash, comboStep);
-            }
-            return;
-        }
-
-        float played = Time.time - stateEnteredTime;
-        float needed = CurrentSwingLength();
-
-        if (played >= needed - releaseLeadTime) ResetCombo();
-    }
-
-    private float CurrentSwingLength()
-    {
-        if (animator == null) return minimumSwingTime;
-        float len = animator.GetCurrentAnimatorStateInfo(0).length;
-        return len > 0f ? len : minimumSwingTime;
-    }
-
     private int CurrentAttackState()
     {
         if (animator == null) return 0;
@@ -571,31 +679,23 @@ public class PlayerAttack2D : MonoBehaviour
         return 0;
     }
 
+    /// <summary>
+    /// Public entry point kept for tools and tests; behaves exactly like a
+    /// real attack press.
+    /// </summary>
     public void AdvanceCombo()
     {
-        if (comboStep != 0)
-        {
-            queuedStep = comboStep == 1 ? 2 : 1;
-            return;
-        }
-
-        comboStep = 1;
-        queuedStep = 0;
-        FaceNearestEnemy();
-        swingSequence++;
-        // Lock movement on the same frame the swing starts, before the
-        // Animator has switched state, so input cannot flip Leon away from the
-        // enemy between the assist and the first hit check.
-        if (movement != null) movement.IsAttacking = true;
-        if (animator != null) animator.SetInteger(attackParamHash, comboStep);
+        RequestAttack();
     }
 
     public void ResetCombo()
     {
         comboStep = 0;
         queuedStep = 0;
+        lastCompletedStep = 0;
+        comboWindowUntil = -999f;
+        swingStartGraceUntil = -999f;
         lastSeenState = 0;
-        stateEnteredTime = -999f;
         if (animator != null) animator.SetInteger(attackParamHash, 0);
     }
 
