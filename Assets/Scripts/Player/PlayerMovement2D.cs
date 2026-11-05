@@ -2,7 +2,25 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Horizontal platformer movement for Leon.
+/// Where a player's movement and jump input comes from.
+///
+/// Two players share one keyboard, so each character has to be bound to a
+/// different device. Leon stays on the keyboard and Krush runs on a gamepad.
+/// </summary>
+public enum PlayerInputMode
+{
+    /// <summary>Keyboard and gamepad both drive the character (single-player default).</summary>
+    KeyboardAndGamepad,
+
+    /// <summary>Only the keyboard drives the character (player 1 in local co-op).</summary>
+    KeyboardOnly,
+
+    /// <summary>Only the gamepad drives the character (player 2 in local co-op).</summary>
+    GamepadOnly
+}
+
+/// <summary>
+/// Horizontal platformer movement for Leon and Krush.
 ///
 /// Grounding:
 ///  - Leon only ever moves while he is standing on a collider tagged with
@@ -22,6 +40,13 @@ using UnityEngine.InputSystem;
 [AddComponentMenu("L&K/Player/Player Movement 2D")]
 public class PlayerMovement2D : MonoBehaviour
 {
+    [Header("Input")]
+    [Tooltip("Which device drives this character. Local co-op uses KeyboardOnly for player 1 and GamepadOnly for player 2 so the two never fight over the same device.")]
+    [SerializeField] private PlayerInputMode inputMode = PlayerInputMode.KeyboardAndGamepad;
+
+    [Tooltip("Index into Gamepad.all. 0 uses the active gamepad, which is right for a single controller. Set it to 1 for the second controller in a two-gamepad setup.")]
+    [SerializeField, Min(0)] private int gamepadIndex = 0;
+
     [Header("Movement")]
     [Tooltip("Top horizontal speed in units/second.")]
     [SerializeField, Min(0f)] private float moveSpeed = 3f;
@@ -437,12 +462,16 @@ public class PlayerMovement2D : MonoBehaviour
     {
         bool jumpPressed = false;
 
-        if (Keyboard.current != null && Keyboard.current.spaceKey.wasPressedThisFrame)
+        if (inputMode != PlayerInputMode.GamepadOnly
+            && Keyboard.current != null
+            && Keyboard.current.spaceKey.wasPressedThisFrame)
         {
             jumpPressed = true;
         }
 
-        if (Gamepad.current != null && Gamepad.current.buttonSouth.wasPressedThisFrame)
+        // A / Cross on the gamepad is the jump button for both players.
+        Gamepad gamepad = ActiveGamepad();
+        if (gamepad != null && gamepad.buttonSouth.wasPressedThisFrame)
         {
             jumpPressed = true;
         }
@@ -488,7 +517,7 @@ public class PlayerMovement2D : MonoBehaviour
     {
         float value = 0f;
 
-        if (Keyboard.current != null)
+        if (inputMode != PlayerInputMode.GamepadOnly && Keyboard.current != null)
         {
             if (Keyboard.current.aKey.isPressed || Keyboard.current.leftArrowKey.isPressed)
             {
@@ -501,9 +530,12 @@ public class PlayerMovement2D : MonoBehaviour
             }
         }
 
-        if (Gamepad.current != null)
+        // Left stick X. The deadzone kills controller drift so a resting stick
+        // never nudges the character into the run animation.
+        Gamepad gamepad = ActiveGamepad();
+        if (gamepad != null)
         {
-            float stick = Gamepad.current.leftStick.x.ReadValue();
+            float stick = gamepad.leftStick.x.ReadValue();
             if (Mathf.Abs(stick) > inputDeadzone)
             {
                 value = stick;
@@ -512,6 +544,27 @@ public class PlayerMovement2D : MonoBehaviour
 
         return Mathf.Clamp(value, -1f, 1f);
     }
+
+    /// <summary>
+    /// The gamepad this character listens to, or null when it is keyboard only.
+    /// Index 0 means "the active gamepad", which is what a single-controller
+    /// setup wants; higher indices select Gamepad.all entries for two pads.
+    /// </summary>
+    public Gamepad ActiveGamepad()
+    {
+        if (inputMode == PlayerInputMode.KeyboardOnly) return null;
+
+        if (gamepadIndex > 0)
+        {
+            var pads = Gamepad.all;
+            if (gamepadIndex < pads.Count) return pads[gamepadIndex];
+        }
+
+        return Gamepad.current;
+    }
+
+    /// <summary>The device mode this character is bound to.</summary>
+    public PlayerInputMode InputMode => inputMode;
 
 #if UNITY_EDITOR
     private void OnValidate()
