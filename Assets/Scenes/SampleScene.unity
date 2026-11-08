@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 339679977}
   - component: {fileID: 339679976}
   - component: {fileID: 339679975}
+  - component: {fileID: 339679981}
   m_Layer: 0
   m_Name: Krush
   m_TagString: Untagged
@@ -542,6 +543,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &339679981
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339679972}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d4865df983adc479221718b5213996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSeparation2D
+  other: {fileID: 1200955323}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -979,6 +993,7 @@ GameObject:
   - component: {fileID: 1200955320}
   - component: {fileID: 1200955321}
   - component: {fileID: 1200955322}
+  - component: {fileID: 1200955323}
   m_Layer: 0
   m_Name: Leon
   m_TagString: Untagged
@@ -1055,7 +1070,7 @@ SpriteRenderer:
   m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_MaskInteraction: 0
   m_Sprite: {fileID: 7919875608620219713, guid: df5a0c89df2540d4eac1a95f12527bcb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -1260,6 +1275,19 @@ MonoBehaviour:
   body: {fileID: 1200955319}
   movement: {fileID: 1200955318}
   attack: {fileID: 1200955320}
+--- !u!114 &1200955323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1200955314}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d4d4865df983adc479221718b5213996, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerSeparation2D
+  other: {fileID: 339679981}
 --- !u!1 &1500955400
 GameObject:
   m_ObjectHideFlags: 0

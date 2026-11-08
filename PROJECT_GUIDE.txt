@@ -1,0 +1,1883 @@
+================================================================================
+                    L & K  -  LEON AND KRUSH
+              COMPLETE PROJECT GUIDE (EVERYTHING IN ONE FILE)
+================================================================================
+Written: 8 November 2026
+Project path: D:\Unity\l&k\L-K
+Engine: Unity 6000.6.0f1  (2D + URP)
+Game type: Local co-op 2D side-scrolling platformer
+Players: Leon (player 1, keyboard) and Krush (player 2, gamepad)
+Enemy: Skeleton
+
+This is a plain-text document. Open it with Notepad. It describes every folder,
+every script, every scene object, every animation and every mechanic in the
+project, including the mechanisms that Leon, Krush and the Skeleton share and
+the ones that are different.
+
+--------------------------------------------------------------------------------
+TABLE OF CONTENTS
+--------------------------------------------------------------------------------
+ 1. Quick facts
+ 2. How to open and play
+ 3. Top-level folder map (the whole project)
+ 4. Assets folder tree (every folder inside Assets)
+ 5. Scenes
+ 6. SampleScene objects (positions, scale, components, values)
+ 7. LEON - every mechanic
+ 8. KRUSH - every mechanic
+ 9. LEON vs KRUSH - what is shared and what is different
+10. Shared player mechanic 1: movement and jumping
+11. Shared player mechanic 2: pushing
+12. Shared player mechanic 3: hurt and death
+13. Shared player mechanic 4: player-vs-player pass-through
+14. ENEMY - Skeleton, every mechanic
+15. Pushable object
+16. Animation system (clips, controllers, parameters, events)
+17. Input system (keyboard and gamepad)
+18. Physics, tags and layers
+19. Script reference (every script and its fields)
+20. AgentScripts (Unity Editor automation and tests)
+21. Root helper scripts (.py) and documents (.md)
+22. Packages
+23. ProjectSettings
+24. Sprites and art assets
+25. Store assets (third-party packs)
+26. Settings folder
+27. Verification and test results
+28. Known limitations and possible next steps
+29. Git / working-tree state
+
+
+================================================================================
+1. QUICK FACTS
+================================================================================
+  Engine version ......... Unity 6000.6.0f1
+  Render pipeline ........ Universal Render Pipeline (URP) 17.6.0, 2D Renderer
+  Input package .......... com.unity.inputsystem 1.20.0
+  Main scene ............. Assets/Scenes/SampleScene.unity
+  Build scenes ........... SampleScene only (enabled)
+  Fixed timestep ......... 0.02 s  (50 physics steps per second)
+  Physics 2D gravity ..... (0, -9.81)
+  Tags used .............. Ground, PushObject
+  Layers used ............ Default only (layer 0)
+  Collision matrix ....... all layers collide (all bits on)
+  Camera ................. orthographic, size 5, position (0, 0, -10)
+  Ground top ............ approximately Y = -4.50
+  Leon start ............ (-7.52, -3.37)
+  Krush start ........... (-6.7063, -3.44)
+  Skeleton start ........ (-1.8952, -3.2901)
+  Push_object start ..... (-4.46, -2.8962), inactive in the scene
+
+
+================================================================================
+2. HOW TO OPEN AND PLAY
+================================================================================
+  1. Open the project folder in Unity Hub with Unity 6000.6.0f1.
+  2. Open Assets/Scenes/SampleScene.unity.
+  3. Press Play.
+
+  LEON (player 1 - keyboard):
+      Move ........ A / D  or  Left / Right arrow
+      Jump ........ Space
+      Attack ...... Left mouse button  or  F
+      Push ........ Hold E
+      Cancel push . A  (or steer against the push direction)
+
+  KRUSH (player 2 - gamepad):
+      Move ........ Left stick
+      Jump ........ A / Cross (South button)
+      Push ........ Hold RB / Right Shoulder
+      Attack ...... none (by design)
+
+  The Skeleton patrols and attacks Leon. Five skeleton hits kill a player.
+  Leon's sword kills the Skeleton in five hits. Krush has no attack.
+
+  To test pushing, enable the Push_object GameObject in the Hierarchy first,
+  because it starts inactive.
+
+
+================================================================================
+3. TOP-LEVEL FOLDER MAP (THE WHOLE PROJECT)
+================================================================================
+D:\Unity\l&k\L-K\
+|
++-- .git\                  Git version-control data. Not part of the game.
++-- .gitignore             Git ignore rules.
++-- .vsconfig              Visual Studio component configuration.
+|
++-- AgentScripts\          Editor-only C# automation and play-mode test scripts.
+|                          Not included in the game build. Used through the
+|                          Unity Pipeline package ("unity command run_script").
+|
++-- Assets\                All game source assets (scripts, scenes, art, anims).
+|
++-- Library\               Unity-generated import cache and package cache.
+|                          Rebuilt automatically. Do not edit or commit.
+|
++-- Logs\                  Unity Editor logs (Editor.log, AssetImportWorker logs,
+|                          UDS logs, relay.txt, traces.jsonl). Generated.
+|
++-- Packages\              Unity Package Manager manifest and lock file.
+|   +-- manifest.json      List of installed packages.
+|   +-- packages-lock.json Resolved package versions and hashes.
+|
++-- ProjectSettings\       Unity project configuration (physics, tags, quality,
+|                          time, input, graphics, build settings, etc.).
+|
++-- Temp\                  Unity temporary files. Generated. Safe to ignore.
+|
++-- UserSettings\          Per-user editor layout and preferences. Generated.
+|
++-- add_any_trans.py       Legacy one-off Python patch scripts used during
++-- add_hurt_death_ctrl.py development to edit the Leon animator controller
++-- check_hurt.py          and player scripts. Not part of the game.
++-- check_hurt_death.py
++-- check_sm.py
++-- fix_ctrl2.py
++-- fix_ctrl_proper.py
++-- fix_hurt_script.py
++-- fix_hurt_script2.py
++-- fix_jump_anim.py
++-- fix_scope.py
++-- fix_syntax.py
++-- make_hurt_death.py
++-- make_hurt_death2.py
+|
++-- README.md              Older document: Leon jump system completion notes.
++-- CODE_EXPLANATION.md    Older document: jump code explained.
++-- JUMP_IMPLEMENTATION_GUIDE.md  Older document: jump animation guide.
++-- ANIMATOR_SETUP_QUICK.md       Older document: animator setup checklist.
++-- FIXES_SUMMARY.md       Older document: enemy combat fixes summary.
++-- TEST_REPORT.md         Older document: enemy combat verification report.
++-- WORK_DONE.md           Current consolidated status document.
++-- PROJECT_GUIDE.txt      This file.
+|
++-- Assembly-CSharp.csproj            Generated C# project for runtime scripts.
++-- Assembly-CSharp-Editor.csproj     Generated C# project for editor scripts.
++-- Unity.2D.Welcome.csproj           Generated project for the Welcome package.
++-- L-K.slnx                          Solution file.
++-- L_K.slnx                          Solution file (alternate name).
+
+
+================================================================================
+4. ASSETS FOLDER TREE (EVERY FOLDER INSIDE ASSETS)
+================================================================================
+Assets\
+|
++-- Animations\
+|   +-- Enemies\
+|   |   +-- Skeleton\        Skeleton.controller + 6 Skeleton clips.
+|   +-- Krush\               Krush.controller + 6 Krush clips.
+|   +-- Leon\                Leon.controller + 8 Leon clips.
+|
++-- Assets from stores\      Third-party asset packs (see section 25).
+|   +-- 2D Pixel Art Platformer Biome - American Forest\
+|   |   +-- Tilemap\         Tile assets + Tilemap.prefab.
+|   +-- Monsters Creatures Fantasy\
+|       +-- Animations\      Flying eye, Goblin, Mushroom, Skeleton.
+|       +-- Demo\            SceneDemo.unity.
+|       +-- Sprites\         Flying eye, Goblin, Mushroom, Skeleton.
+|
++-- Physics\                 SkeletonFrictionless.physicsMaterial2D.
+|
++-- Scenes\                  SampleScene.unity (the only game scene).
+|
++-- Scripts\
+|   +-- Enemy\               SkeletonAI.cs
+|   +-- Player\              PlayerMovement2D.cs, PlayerAttack2D.cs,
+|                            PlayerPush2D.cs, PlayerHealthHurt.cs,
+|                            PlayerSeparation2D.cs, PushableObject2D.cs
+|
++-- Settings\                URP, volume, input actions and scene templates.
+|   +-- Scenes\              URP2DSceneTemplate.unity
+|
++-- Sprites\
+|   +-- Enemies\
+|   |   +-- Skeleton\        Skeleton spritesheets.
+|   +-- Krush spritesheets\  Krush spritesheets (including unused bow/shoot).
+|   +-- Leon spritesheets\   Leon spritesheets.
+|
++-- Welcome\                 Unity 2D template welcome-page assets.
+
+
+================================================================================
+5. SCENES
+================================================================================
+There is one gameplay scene:
+
+  Assets/Scenes/SampleScene.unity
+
+It is the only scene enabled in EditorBuildSettings, so it is the scene that
+loads when the game starts.
+
+There is also a URP template scene that is not part of gameplay:
+  Assets/Settings/Scenes/URP2DSceneTemplate.unity
+
+And demo scenes that belong to the third-party store packs:
+  Assets/Assets from stores/2D Pixel Art Platformer Biome - American Forest/Demo.unity
+  Assets/Assets from stores/Monsters Creatures Fantasy/Demo/SceneDemo.unity
+
+SampleScene root objects (7 roots):
+  1. Main Camera
+  2. Global Light 2D
+  3. Leon
+  4. Skeleton
+  5. SampleGround
+  6. Push_object
+  7. Krush
+
+
+================================================================================
+6. SAMPLESCENE OBJECTS
+================================================================================
+--------------------------------------------------------------------------------
+6.1 Main Camera
+--------------------------------------------------------------------------------
+  Transform ......... position (0, 0, -10), rotation identity, scale 1
+  Camera ............ orthographic = true
+                      orthographic size = 5
+                      near clip = 0.3, far clip = 1000
+                      clear flags = solid colour
+                      background colour = (0.192, 0.302, 0.475)
+                      HDR = true
+  AudioListener ..... present
+  UniversalAdditionalCameraData ... present (URP)
+
+--------------------------------------------------------------------------------
+6.2 Global Light 2D
+--------------------------------------------------------------------------------
+  Transform ......... default
+  Light2D ........... global 2D light (URP 2D lighting)
+
+--------------------------------------------------------------------------------
+6.3 SampleGround
+--------------------------------------------------------------------------------
+  Transform ......... position (-1.86, -4.93, 0)
+                      scale (18.6729, 1, 1)
+  SpriteRenderer .... ground sprite
+  BoxCollider2D ..... size (1, 0.93014), offset (0, -0.03493)
+  Tag ............... Ground
+
+  Because the object is scaled by 18.6729 in X, the collider is about
+  18.67 units wide. Its top edge is at about Y = -4.50.
+
+--------------------------------------------------------------------------------
+6.4 Leon
+--------------------------------------------------------------------------------
+  Transform ......... position (-7.52, -3.37, 0)
+                      scale (1.4879, 1.4879, 1.4879)
+  SpriteRenderer .... Leon sprite, flipX controlled by facing,
+                      sorting order 4
+  Animator .......... Leon.controller
+                      (GUID 56c670e3b3e53ef4fae77858dac1b23b)
+  Rigidbody2D ....... Dynamic (body type 0)
+                      mass 1
+                      gravity scale 1
+                      interpolate = Interpolate
+                      collision detection = Continuous
+                      constraints = Freeze Rotation
+                      simulated = true
+  BoxCollider2D ..... size (0.37, 1.78), offset (0, 0)
+  PlayerMovement2D . inputMode = KeyboardOnly (1), gamepadIndex = 0,
+                      moveSpeed 3, acceleration 55, deceleration 40,
+                      turnSpeed 90, attackLockDeceleration 250,
+                      inputDeadzone 0.15, groundTag "Ground",
+                      groundProbeDepth 0.25, groundProbeLift 0.06,
+                      groundProbeWidth 0, groundCheckOffset -0.89,
+                      groundCheckRadius 0.15,
+                      speedParameter "Speed", runThreshold 0.1,
+                      animationReferenceSpeed 3.878, syncRunToSpeed 1,
+                      minRunPlaybackSpeed 0.5, maxRunPlaybackSpeed 3,
+                      jumpForce 8, fallGravityScale 1.5,
+                      jumpParameter "IsJumping", coyoteTime 0.1,
+                      startsFacingRight true
+  PlayerAttack2D .... allowMouse true, allowKeyboard true,
+                      keyboardKey F (20), allowGamepad FALSE,
+                      allowPush true, pushKeyboardKey E (19),
+                      allowPushGamepad FALSE,
+                      pushParameter "Push", pushRange 1,
+                      pushSearchRadius 6, pushStrength 2,
+                      pushEndHoldDuration 0.2, pushTag "PushObject",
+                      pushObject none, cancelPushKey A (15),
+                      releaseLeadTime 0.08, comboBufferTime 0.35,
+                      swingStartLockTime 0.1, attackParameter "Attack",
+                      attackHitRange 2, comboHitReachBonus 0.5,
+                      attackHitHeight 2, enemyLayerMask = Everything
+  PlayerHealthHurt .. enableDebugHurtKey false, hurtKey H (22),
+                      hitsBeforeDeath 5, hurtTrigger "Hurt",
+                      deathTrigger "Death", hurtStateName "Hurt",
+                      pinDeathToGround true, groundTag "Ground",
+                      references wired to Leon's own components
+  PlayerSeparation2D  other = Krush's PlayerSeparation2D
+                      (collision between the two players is switched off)
+
+--------------------------------------------------------------------------------
+6.5 Krush
+--------------------------------------------------------------------------------
+  Transform ......... position (-6.7063, -3.44, 0)
+                      scale (1.4190717, 1.4190717, 1.4190717)
+  SpriteRenderer .... Krush sprite, flipX controlled by facing,
+                      sorting order 3
+  Animator .......... Krush.controller
+                      (GUID 6e5127020cc756f4d8473809ac2dabca)
+  Rigidbody2D ....... Dynamic, mass 1, gravity scale 1,
+                      interpolate = Interpolate,
+                      collision detection = Continuous,
+                      constraints = Freeze Rotation,
+                      simulated = true
+  BoxCollider2D ..... size (0.37, 1.70), offset (0, 0)
+  PlayerMovement2D . inputMode = GamepadOnly (2), gamepadIndex = 0,
+                      moveSpeed 4 (everything else same as Leon)
+  PlayerPush2D ...... allowKeyboard FALSE, pushKeyboardKey E (19),
+                      allowGamepad true,
+                      pushGamepadButton = RightShoulder (5),
+                      cancelPushKey A (15), pushParameter "Push",
+                      pushRange 1, pushSearchRadius 6, pushStrength 2,
+                      pushEndHoldDuration 0.2, pushTag "PushObject",
+                      pushObject none,
+                      references wired to Krush's Animator and movement
+  PlayerHealthHurt .. enableDebugHurtKey false, hurtKey H (22),
+                      hitsBeforeDeath 5, hurtTrigger "Hurt",
+                      deathTrigger "Death", hurtStateName "Hurt",
+                      pinDeathToGround true, groundTag "Ground",
+                      attack reference is EMPTY (Krush has no attack)
+  PlayerSeparation2D  other = Leon's PlayerSeparation2D
+                      (collision between the two players is switched off)
+
+--------------------------------------------------------------------------------
+6.6 Skeleton
+--------------------------------------------------------------------------------
+  Transform ......... position (-1.8952, -3.2901, 0)
+                      scale (4.4714766, 4.4246955, 4.331567)
+  SpriteRenderer .... Skeleton sprite, flipX controlled by facing
+  Animator .......... Skeleton.controller
+  Rigidbody2D ....... Dynamic, mass 1, gravity scale 1,
+                      interpolate = Interpolate,
+                      collision detection = Continuous,
+                      constraints = Freeze Rotation,
+                      material = SkeletonFrictionless
+  BoxCollider2D ..... size (0.45, 0.5), offset (0, -0.01),
+                      material = SkeletonFrictionless
+  SkeletonAI ........ idleTime 2, patrolDistance 1, walkSpeed 3,
+                      walkAnimationReferenceSpeed 3.8,
+                      walkAnimationSync 0.8,
+                      detectionRange 4, loseTargetRange 6,
+                      chaseSpeed 3, maxChaseAnimationSpeed 2,
+                      attackRange 1.5, attackHitReach 1.9,
+                      attackHitDelay 0.32, attack2HitDelay 0.5,
+                      attackDuration 0.9, attackCooldown 2,
+                      hitsToDie 5, knockbackDistance 0.6,
+                      knockbackTime 0.3, hitStunTime 0.35,
+                      attackAnimationSpeed 0.75,
+                      hitAnimationSpeed 0.8,
+                      deathAnimationSpeed 0.6,
+                      pinDeathToGround true, groundTag "Ground",
+                      deathArtBottomPadding 0.49,
+                      states: Idle, Walk, Attack1, Attack2, TakeHit, Death,
+                      player references wired to Leon
+
+--------------------------------------------------------------------------------
+6.7 Push_object
+--------------------------------------------------------------------------------
+  Active in scene ... NO (starts inactive)
+  Transform ......... position (-4.46, -2.8962, 0)
+                      scale (2.1476, 2.9968135, 1)
+  SpriteRenderer .... box/prop sprite
+  BoxCollider2D ..... size (1, 1), offset (0, 0)
+  Rigidbody2D ....... Dynamic, mass 50, gravity scale 1,
+                      interpolate = Interpolate,
+                      collision detection = Continuous,
+                      constraints = Freeze Rotation
+  PushableObject2D .. present
+  Tag ............... PushObject
+
+
+================================================================================
+7. LEON - EVERY MECHANIC
+================================================================================
+Leon is the complete character: movement, jump, sword combo, push, hurt and
+death. He is bound to the keyboard only, so the gamepad belongs to Krush.
+
+--------------------------------------------------------------------------------
+7.1 Movement
+--------------------------------------------------------------------------------
+  Script: PlayerMovement2D
+  Input mode: KeyboardOnly
+
+  Horizontal input comes from A / D or the Left / Right arrow keys.
+  The character accelerates toward moveSpeed (3 units/s) with acceleration 55.
+  Releasing input decelerates at 40.
+  Turning around uses turnSpeed 90, which is deliberately much higher than the
+  acceleration, so Leon pivots instantly instead of sliding backwards.
+
+  The Rigidbody2D is set to NeverSleep in Awake, because a sleeping body would
+  ignore linearVelocity assignments and freeze the character.
+
+  While in the air, movement is still allowed (air control):
+      - acceleration is 70% of ground acceleration
+      - deceleration is 50% of ground deceleration
+      - reversing direction uses the full turnSpeed
+
+--------------------------------------------------------------------------------
+7.2 Grounding
+--------------------------------------------------------------------------------
+  The ground check is a box probe that straddles the bottom of Leon's collider.
+  It is not a single ray, so it still works while the sprite changes frame or
+  scale.
+
+  Probe values:
+      groundTag ............ "Ground"
+      groundProbeDepth ..... 0.25
+      groundProbeLift ...... 0.06
+      groundProbeWidth ..... 0 (derived as 75% of the collider width)
+      fallback offset ...... -0.89 (only if there is no collider)
+      fallback radius ...... 0.15
+
+  The probe runs in both Update (so the Animator has a fresh value every render
+  frame) and FixedUpdate (so movement decisions use the physics state).
+
+  The character's own collider is always ignored when looking for ground.
+
+--------------------------------------------------------------------------------
+7.3 Jump
+--------------------------------------------------------------------------------
+  Jump is read from Space (keyboard only, because Leon is KeyboardOnly).
+
+  jumpForce ................ 8
+  fallGravityScale ......... 1.5  (extra gravity while falling)
+  coyoteTime ............... 0.1 s
+  jumpParameter ............ "IsJumping" (bool)
+
+  Jump input is queued and executed in FixedUpdate. A jump is allowed only if:
+      - the character is not attacking
+      - the character is not pushing
+      - coyote time is still available (grounded within the last 0.1 s)
+
+  While airborne, the Speed parameter is forced to 0 so the Run animation never
+  plays in mid-air. The IsJumping bool is set to "not grounded".
+
+  A 0.1 s jump-input cooldown prevents double-taps from firing twice.
+
+--------------------------------------------------------------------------------
+7.4 Run animation sync
+--------------------------------------------------------------------------------
+  speedParameter ........... "Speed" (float, 0 = idle, 1 = full run)
+  runThreshold ............. 0.1
+  animationReferenceSpeed .. 3.878
+  syncRunToSpeed ........... 1 (full sync)
+  minRunPlaybackSpeed ...... 0.5
+  maxRunPlaybackSpeed ...... 3
+
+  The run clip was authored for a ground speed of 3.878 units/s. The Animator's
+  playback speed is scaled by (actual speed / 3.878), clamped between 0.5 and 3.
+  This keeps the stride length constant, so the feet do not slide at different
+  speeds.
+
+  While attacking, pushing or hurt, Animator speed is reset to 1 and the action
+  clip owns the body.
+
+--------------------------------------------------------------------------------
+7.5 Facing
+--------------------------------------------------------------------------------
+  Facing is driven by movement input, not by velocity. That way an enemy shoving
+  Leon cannot turn him away from the enemy.
+
+  The sprite art faces right, so facing left sets SpriteRenderer.flipX = true.
+
+  FaceDirection(delta) is a public method used by the attack assist to snap Leon
+  toward the nearest enemy when a swing starts.
+
+--------------------------------------------------------------------------------
+7.6 Sword attack (combo)
+--------------------------------------------------------------------------------
+  Script: PlayerAttack2D
+  Inputs: Left mouse button, or F. Gamepad attack is DISABLED.
+  Animation parameter: "Attack" (int): 0 = neutral, 1 = Attack1, 2 = Attack2.
+
+  Combo flow:
+      - First press starts Attack1.
+      - Pressing again during a swing queues Attack2. The queued step is written
+        straight to the Animator parameter; exit-time transitions decide when
+        the follow-up actually starts.
+      - After a swing ends, the combo stays open for comboBufferTime = 0.35 s,
+        so a slightly late press continues the chain instead of restarting.
+      - releaseLeadTime = 0.08 s clears the parameter just before the exit-time
+        transition, so Idle/Run cannot re-enter the same swing and freeze on the
+        last frame.
+      - swingStartLockTime = 0.1 s locks movement from the moment a swing is
+        requested, before the Animator enters the state.
+
+  Damage:
+      - Damage is dealt ONLY by the "OnAttackHitFrame" animation event, placed
+        on the exact contact frame of each clip.
+      - Attack1 has one hit event at 0.375 s.
+      - Attack2 has two hit events at 0.45 s and 0.75 s.
+      - Each swing has a unique swingSequence number, and the number of allowed
+        hits is counted from the clip's own events, so one swing can never deal
+        unlimited damage.
+      - Hit detection is an OverlapCircleAll in front of Leon:
+            attackHitRange ....... 2.0
+            comboHitReachBonus ... 0.5 (extra reach on follow-up hits)
+            attackHitHeight ...... 2.0
+            enemyLayerMask ....... Everything
+      - The target must be in front of Leon and within horizontal and vertical
+        reach. If it has a SkeletonAI, TakeSwordHit is called.
+      - When a swing starts, FaceNearestEnemy turns Leon toward the closest
+        living enemy within range.
+
+  Movement lock:
+      - While IsSwinging, movement decelerates at attackLockDeceleration = 250,
+        so Leon plants his feet almost immediately.
+      - The lock ends the instant the Animator leaves the attack state, not on a
+        timer.
+
+--------------------------------------------------------------------------------
+7.7 Push
+--------------------------------------------------------------------------------
+  Leon's push lives inside PlayerAttack2D (the push half, without a separate
+  script).
+
+  Inputs:
+      - Hold E (keyboard).
+      - Gamepad push is DISABLED for Leon.
+      - Cancel with A, the Left arrow key, or by steering against the push
+        direction.
+
+  Rules:
+      - A push starts only when a collider tagged "PushObject" is within
+        pushRange = 1 (gap between colliders) and is in front of Leon.
+      - The search radius is 6 units.
+      - pushStrength = 2 units/s.
+      - The push direction is locked to the way Leon is facing at the moment the
+        push starts. It can never turn into a backwards shove.
+      - The Push animation plays for as long as E is held.
+      - Animation events OnPushStart (time 0) and OnPushEnd (time 1.15) gate when
+        the object actually moves.
+      - After OnPushEnd the object stops for pushEndHoldDuration = 0.2 s, then
+        the animation restarts from 0 for a seamless loop.
+      - Releasing the button ends the push immediately.
+      - Stepping off the ground ends the push.
+      - A cancel latches until the button is released, so holding E cannot
+        restart the push every frame.
+      - While pushing, movement is forced to PushDirection * pushStrength, so
+        Leon walks forward with the object.
+
+--------------------------------------------------------------------------------
+7.8 Hurt and death
+--------------------------------------------------------------------------------
+  Script: PlayerHealthHurt
+  hitsBeforeDeath = 5 (the fifth hit is the killing hit)
+  Debug hurt key = H, DISABLED by default (enemies are the real damage source).
+
+  Hurt:
+      - TakeHit() increments hurtCount.
+      - If the count is below 5, the Hurt trigger plays.
+      - Movement is locked on the same frame the hit lands (0.3 s grace timer
+        covers the frame between setting the trigger and entering the state).
+      - Movement stays locked for as long as the Animator is in the "Hurt"
+        state.
+      - A stray Death trigger is reset before playing Hurt.
+
+  Death:
+      - On the fifth hit, Die() runs.
+      - The ground line is captured first (see below).
+      - The Death trigger plays. The Hurt trigger is reset first so it cannot
+        interrupt Death.
+      - PlayerMovement2D is disabled.
+      - PlayerAttack2D is disabled (Leon only).
+      - Rigidbody2D velocity is zeroed and simulated = false.
+      - LateUpdate pins the visible bottom of the death sprite to the captured
+        ground line, so the corpse does not float as the frames get shorter.
+
+  Ground capture:
+      - If the player is grounded, the ground line is the bottom of the collider.
+      - If the player dies in mid-air, a downward RaycastAll finds the highest
+        collider tagged "Ground" below the player.
+      - If no ground is found, the collider bottom is used.
+
+--------------------------------------------------------------------------------
+7.9 Player-vs-player pass-through
+--------------------------------------------------------------------------------
+  Script: PlayerSeparation2D (also on Krush).
+  See section 13 for the full mechanism.
+
+
+================================================================================
+8. KRUSH - EVERY MECHANIC
+================================================================================
+Krush is a full second character built to mirror Leon's movement, jump, push,
+hurt and death, but with NO attack. She is controller-only.
+
+--------------------------------------------------------------------------------
+8.1 Movement
+--------------------------------------------------------------------------------
+  Script: PlayerMovement2D
+  Input mode: GamepadOnly, gamepadIndex 0 (the active gamepad).
+  moveSpeed = 4 (Leon uses 3).
+
+  Everything else is identical to Leon:
+      acceleration 55, deceleration 40, turnSpeed 90,
+      air control, jump force 8, fall gravity 1.5, coyote 0.1,
+      the same box ground probe and the same run-animation speed sync.
+
+  Move input: left stick X. A deadzone of 0.15 kills stick drift.
+  Jump input: A / Cross (South button).
+
+--------------------------------------------------------------------------------
+8.2 Push
+--------------------------------------------------------------------------------
+  Script: PlayerPush2D (this is Leon's push logic without the sword combo).
+
+  Inputs:
+      - Hold RB / Right Shoulder (pushGamepadButton = RightShoulder).
+      - Keyboard push is DISABLED.
+      - Cancel with the configured cancel key (A) or by steering against the
+        push direction.
+
+  Rules (one-for-one with Leon's push):
+      - Starts only when a "PushObject"-tagged collider is within pushRange = 1
+        and in front of Krush.
+      - pushSearchRadius = 6.
+      - pushStrength = 2.
+      - Direction is locked to Krush's facing at push start.
+      - Push animation plays while the button is held.
+      - OnPushStart (0 s) and OnPushEnd (1.15 s) gate object movement.
+      - End hold = 0.2 s, then the animation restarts from 0.
+      - Releasing RB ends the push.
+      - Leaving the ground ends the push.
+      - Steering against the push direction cancels it, and the cancel latches
+        until RB is released.
+      - While pushing, movement is forced forward at pushStrength.
+
+--------------------------------------------------------------------------------
+8.3 Hurt and death
+--------------------------------------------------------------------------------
+  Same PlayerHealthHurt component as Leon:
+      - 5 hits to die.
+      - Hurt locks movement for the duration of the Hurt state.
+      - Death disables movement, zeroes velocity and sets simulated = false.
+      - The corpse is pinned to the ground.
+      - Krush has no attack component, so there is nothing to disable there.
+
+--------------------------------------------------------------------------------
+8.4 Animation
+--------------------------------------------------------------------------------
+  Controller: Assets/Animations/Krush/Krush.controller
+  States: Idle, Run, Jump, Push, Hurt, Death.
+  There is also an unused "Krush-Shot" state in the working tree (see section
+  29); it is not used by gameplay.
+
+  Parameters:
+      Speed (float)
+      Push (int)
+      IsJumping (bool)
+      Hurt (trigger)
+      Death (trigger)
+
+  Run timing was matched exactly to Leon:
+      Krush-Run: 12 fps, 2.0833 s, 25 keyed sprite frames (same as Leon-Run).
+
+  Krush has no Attack parameter and no Attack states.
+
+--------------------------------------------------------------------------------
+8.5 Player-vs-player pass-through
+--------------------------------------------------------------------------------
+  Same PlayerSeparation2D component as Leon. See section 13.
+
+--------------------------------------------------------------------------------
+8.6 What Krush does NOT have
+--------------------------------------------------------------------------------
+  - No sword.
+  - No attack input, no Attack parameter, no attack states, no damage code.
+  - No gamepad attack or keyboard push; she is controller-only.
+  - The bow and shoot sprites in Assets/Sprites/Krush spritesheets are unused.
+
+
+================================================================================
+9. LEON vs KRUSH - SHARED AND DIFFERENT
+================================================================================
+SHARED (same script or same behaviour):
+  - PlayerMovement2D for run, air control, jump, coyote time, grounding,
+    facing and run-animation speed sync.
+  - PlayerHealthHurt for hurt reactions, 5-hit death and corpse grounding.
+  - PlayerSeparation2D for no collision between the two players (pass-through).
+  - PushableObject2D for the prop.
+  - The same push rules: range 1, search radius 6, strength 2, forward-only,
+    animation-event gating, 0.2 s end hold, cancel latch.
+  - Rigidbody2D setup: dynamic, mass 1, freeze rotation, interpolate,
+    continuous collision detection, never sleep at runtime.
+  - The same 0.37-wide box collider (heights differ: Leon 1.78, Krush 1.70).
+  - Same hurt/death animation timing (20 fps, 1.25 s).
+
+DIFFERENT:
+  - Leon is KeyboardOnly; Krush is GamepadOnly.
+  - Leon moveSpeed 3; Krush moveSpeed 4.
+  - Leon has PlayerAttack2D (sword combo + push); Krush has PlayerPush2D
+    (push only).
+  - Leon's gamepad attack and gamepad push are disabled; Krush's keyboard push
+    is disabled.
+  - Leon has 8 animation clips; Krush has 6 (no attack clips).
+  - Leon's controller has Attack1/Attack2; Krush's does not.
+  - Krush has no attack reference in PlayerHealthHurt.
+
+
+================================================================================
+10. SHARED PLAYER MECHANIC 1: MOVEMENT AND JUMPING
+================================================================================
+  Script: Assets/Scripts/Player/PlayerMovement2D.cs
+  Execution order: -100 (runs before normal scripts).
+
+  Public properties:
+      IsGrounded ....... true while standing on a collider tagged Ground
+      IsLocked ......... true while attacking, pushing or hurt
+      FacingRight ...... true while facing right
+      IsAttacking ...... set by the attack script
+      IsPushing ........ set by the push script
+      PushDirection .... +1 right / -1 left while pushing
+      PushSpeed ........ speed while pushing
+      IsHurt ........... set by PlayerHealthHurt
+      InputMode ........ the device mode
+      FeetPosition ..... world position of the bottom of the collider
+
+  Update:
+      1. Read horizontal input (keyboard then gamepad override).
+      2. Refresh IsGrounded.
+      3. Update coyote counter.
+      4. Read jump input and queue it.
+      5. If not locked, update facing from input and flip the sprite.
+      6. Set Animator Speed (0 while airborne).
+      7. Set Animator IsJumping.
+      8. If locked, reset Animator speed to 1 and return.
+      9. Otherwise scale Animator speed from actual velocity.
+
+  FixedUpdate:
+      1. Re-check IsGrounded.
+      2. Execute a queued jump.
+      3. Apply extra fall gravity if falling.
+      4. If hurt: zero horizontal velocity and return (highest priority).
+      5. If pushing: force velocity = PushDirection * PushSpeed and return.
+      6. If attacking: decelerate hard toward zero and return.
+      7. If airborne: move toward air target speed with air rates.
+      8. If grounded: move toward input * moveSpeed, using turnSpeed when
+         reversing, acceleration when speeding up, deceleration when stopping.
+      9. Wake the body when there is input.
+
+  Lock priority: Hurt > Push > Attack.
+
+  ReadHorizontalInput:
+      - Keyboard A / Left arrow gives -1.
+      - Keyboard D / Right arrow gives +1.
+      - Gamepad left stick overrides the keyboard when its magnitude is above
+        the 0.15 deadzone.
+      - The result is clamped to -1..1.
+
+  ActiveGamepad:
+      - Returns null for KeyboardOnly.
+      - gamepadIndex 0 returns Gamepad.current (the active pad).
+      - gamepadIndex > 0 returns Gamepad.all[index].
+
+
+================================================================================
+11. SHARED PLAYER MECHANIC 2: PUSHING
+================================================================================
+  There are two push scripts with the same rules:
+      PlayerAttack2D ... Leon: push + sword combo.
+      PlayerPush2D ..... Krush: push only.
+
+  PushableObject2D:
+      - The prop stores a pending delta.
+      - Push(direction, distance) flattens the direction to X, normalizes it,
+        adds it to the pending delta, records LastPushDirection and sets
+        IsBeingPushed.
+      - FixedUpdate applies the pending delta with Rigidbody2D.MovePosition, so
+        the prop slides smoothly and pushes dynamic bodies out of the way.
+      - The prop is set to NeverSleep so a later push is never swallowed.
+      - StopPush() clears the pending delta.
+
+  Why a push is forward-only:
+      - The direction is locked when the push starts, from the character's
+        facing.
+      - The target must be on the same side as that facing, otherwise the push
+        is rejected.
+      - Steering against the locked direction cancels the push.
+
+  Animation-event gating:
+      - OnPushStart sets pushIsActive = true, so the object moves.
+      - OnPushEnd sets pushIsActive = false and starts the end-hold timer.
+      - After the hold, the animation restarts from time 0 and movement resumes.
+
+  Scene tag:
+      Push_object has the tag "PushObject".
+      The prop starts inactive; enable it to test pushing.
+
+
+================================================================================
+12. SHARED PLAYER MECHANIC 3: HURT AND DEATH
+================================================================================
+  Script: Assets/Scripts/Player/PlayerHealthHurt.cs
+
+  Fields:
+      enableDebugHurtKey ... false
+      hurtKey .............. H (22)
+      hitsBeforeDeath ...... 5
+      hurtTrigger .......... "Hurt"
+      deathTrigger ......... "Death"
+      hurtStateName ........ "Hurt"
+      pinDeathToGround ..... true
+      groundTag ............ "Ground"
+
+  Public state:
+      HurtCount ... how many hits have been taken
+      IsDead ...... true after the Death trigger
+
+  Behaviour:
+      - Update ignores everything once dead.
+      - Optional debug key calls TakeHit.
+      - The Hurt lock is applied while the Animator is in the Hurt state, with a
+        0.3 s grace timer.
+      - TakeHit increments the count. The hit that reaches 5 calls Die instead.
+      - Die captures the ground, resets Hurt, plays Death, disables movement
+        (and attack for Leon), zeroes velocity and sets simulated = false.
+      - LateUpdate pins the visible sprite bottom to the captured ground line.
+
+  Used by both Leon and Krush. The Skeleton calls TakeHit() on its target.
+
+
+================================================================================
+13. SHARED PLAYER MECHANIC 4: PLAYER-VS-PLAYER PASS-THROUGH
+================================================================================
+  Script: Assets/Scripts/Player/PlayerSeparation2D.cs
+  Added to both Leon and Krush.
+
+  Goal:
+      The two players must not collide at all. They can stand on the same spot,
+      walk through each other and jump through each other, and neither one ever
+      blocks, bounces off or nudges the other.
+
+  How it works:
+      1. COLLISION PAIR IS SWITCHED OFF
+         In Start/ResolvePair, each player calls
+             Physics2D.IgnoreCollision(myCollider, otherCollider, true)
+         so the Rigidbody2D solver ignores that one collider pair completely.
+
+      2. NO POSITIONAL CORRECTION
+         The component does not move either body and has no push-apart code.
+         Overlap is allowed, so the players simply pass through one another.
+
+      3. WORLD COLLISION IS UNTOUCHED
+         Both players still collide normally with the ground, walls, the
+         Skeleton and pushable props. Only the player-vs-player pair is ignored.
+
+  Inspector fields:
+      other ................. the other player's PlayerSeparation2D
+
+  Pair resolution:
+      - If "other" is empty, the script finds the other PlayerSeparation2D.
+      - It waits until the other component has run Awake.
+      - It calls IgnoreCollision once, then marks the pair ready.
+
+  Test results:
+      - Collision ignored Leon <-> Krush: true in both directions.
+      - Krush walks through Leon: Krush crossed to the other side (16.966
+        units) with a 0.507 maximum overlap; Leon did not move.
+      - Both standing on the same spot: stayed stacked with a 0.538 overlap,
+        no push-apart.
+      - Sprite draw order while overlapping: Leon 4, Krush 3, distinct and
+        unchanged after the pass-through.
+
+
+================================================================================
+14. ENEMY - SKELETON, EVERY MECHANIC
+================================================================================
+  Script: Assets/Scripts/Enemy/SkeletonAI.cs
+  Controller: Assets/Animations/Enemies/Skeleton/Skeleton.controller
+  Physics material: Assets/Physics/SkeletonFrictionless.physicsMaterial2D
+
+  The Skeleton has no Animator parameters. It plays states by name through
+  animator.Play(stateName, 0, 0f), with a playback speed chosen per state.
+
+--------------------------------------------------------------------------------
+14.1 State machine
+--------------------------------------------------------------------------------
+  States: Idle, Patrol, Chase, Attack, Hurt, Dead.
+
+  Idle:
+      - Stands still for idleTime = 2 s.
+      - If the player is alive and within detectionRange, enters Chase.
+      - Otherwise enters Patrol.
+
+  Patrol:
+      - Walks left and right between (startX - patrolDistance) and
+        (startX + patrolDistance), patrolDistance = 1.
+      - walkSpeed = 3.
+      - Walk animation playback is synced to speed using
+        walkAnimationReferenceSpeed = 3.8 and walkAnimationSync = 0.8.
+      - At each end it reverses direction and idles for idleTime.
+      - If the player is within detectionRange, enters Chase.
+
+  Chase:
+      - If the player is dead or farther than loseTargetRange = 6, goes back to
+        Idle.
+      - If the player is within attackRange = 1.5 horizontally, stops, faces the
+        player and plays Idle while waiting for the attack cooldown.
+      - Otherwise walks toward the player at chaseSpeed = 3, with the Walk clip
+        sped up (max 2x).
+
+  Attack:
+      - Alternates Attack1 and Attack2 on each attack.
+      - attackDuration = 0.9 s.
+      - attackAnimationSpeed = 0.75 (slower, so one swing reads at about Leon's
+        swing length).
+      - The hit lands after a delay:
+            Attack1: attackHitDelay 0.32 s
+            Attack2: attack2HitDelay 0.50 s
+        The delay is divided by attackAnimationSpeed because the clip plays
+        slower.
+      - At the hit moment, TryHitPlayer checks:
+            horizontal distance <= attackHitReach 1.9
+            vertical difference <= 2
+        If both pass and the player is not dead, playerHealth.TakeHit() is
+        called.
+      - After attackDuration, sets nextAttackTime = now + attackCooldown
+        (2 s) and returns to Chase.
+
+  Hurt:
+      - Entered when Leon's sword hits.
+      - The Skeleton is knocked away from the hit source:
+            knockbackDistance = 0.6 over knockbackTime = 0.3 s
+      - The knockback is integrated in FixedUpdate with a triangular speed
+        curve, so it covers exactly 0.6 units regardless of frame rate.
+      - hitStunTime = 0.35 s.
+      - It turns back to face the attacker and plays TakeHit at 0.8x speed.
+      - After the stun, it returns to Chase if the player is near, otherwise
+        Idle.
+
+  Dead:
+      - Death is triggered by the fifth sword hit.
+      - The ground line is captured before physics is disabled.
+      - Plays Death at 0.6x speed.
+      - Zeroes velocity, sets simulated = false and disables the collider.
+      - LateUpdate pins the visible sprite bottom to the ground line, using
+        deathArtBottomPadding = 0.49 to account for the transparent margin in
+        the sheet.
+
+--------------------------------------------------------------------------------
+14.2 Combat numbers
+--------------------------------------------------------------------------------
+  hitsToDie .............. 5 sword hits
+  knockbackDistance ...... 0.6
+  knockbackTime .......... 0.3 s
+  hitStunTime ............ 0.35 s
+  detectionRange ......... 4
+  loseTargetRange ........ 6
+  attackRange ............ 1.5
+  attackHitReach ......... 1.9
+  attackCooldown ......... 2 s
+  attackAnimationSpeed ... 0.75
+  hitAnimationSpeed ...... 0.8
+  deathAnimationSpeed .... 0.6
+
+  Player reference:
+      The Skeleton is wired to Leon's Transform, PlayerHealthHurt and
+      PlayerMovement2D. If the reference is missing, it searches for a
+      PlayerHealthHurt, then for a GameObject tagged "Player", every 0.5 s.
+
+--------------------------------------------------------------------------------
+14.3 Physics
+--------------------------------------------------------------------------------
+  Rigidbody2D: dynamic, mass 1, freeze rotation, interpolate, continuous
+  collision detection, NeverSleep at runtime.
+  BoxCollider2D: 0.45 x 0.5, offset (0, -0.01).
+  Material: SkeletonFrictionless, so the Skeleton does not stick to the ground
+  or to the players.
+
+--------------------------------------------------------------------------------
+14.4 Animator
+--------------------------------------------------------------------------------
+  States: Idle, Walk, Attack1, Attack2, TakeHit, Death.
+  No parameters. The script calls Play by name and sets animator.speed.
+  Clips are 12 fps; Idle/Walk/TakeHit/Death are 0.3333 s, Attack1/Attack2 are
+  0.6667 s.
+
+
+================================================================================
+15. PUSHABLE OBJECT
+================================================================================
+  Script: Assets/Scripts/Player/PushableObject2D.cs
+  Scene object: Push_object (starts inactive)
+  Tag: PushObject
+
+  The prop is a dynamic Rigidbody2D with mass 50 and a 1x1 BoxCollider2D,
+  scaled to about 2.15 x 3.0.
+
+  Mechanism:
+      - A push is accumulated during Update.
+      - It is applied in FixedUpdate with MovePosition.
+      - MovePosition slides the body instead of teleporting it, so the physics
+        solver stays happy and pushes characters out of the way.
+      - The prop only moves along the push direction.
+      - The body never sleeps, so a later push is never lost.
+      - Public state: IsBeingPushed, LastPushDirection.
+      - Push(direction, distance) and StopPush() are the public API.
+
+  Used by both Leon's PlayerAttack2D and Krush's PlayerPush2D.
+
+
+================================================================================
+16. ANIMATION SYSTEM
+================================================================================
+--------------------------------------------------------------------------------
+16.1 Leon clips - Assets/Animations/Leon/
+--------------------------------------------------------------------------------
+  Clip            FPS   Length     Loop   Events
+  Leon-Idle       12    2.0833 s   yes    none
+  Leon-Run        12    2.0833 s   yes    none
+  Leon-Jump       20    0.25 s     no     none
+  Leon-Push       20    1.20 s     yes    OnPushStart @0, OnPushEnd @1.15
+  Leon-Attack1    24    0.9167 s   no     OnAttackHitFrame @0.375
+  Leon-Attack2    20    1.25 s     yes    OnAttackHitFrame @0.45 and @0.75
+  Leon-Hurt       20    1.25 s     no     none
+  Leon-Death      20    1.25 s     no     none
+
+  Leon controller states:
+      Idle, Run, Jump, Push, Attack1, Attack2, Hurt, Death.
+
+  Leon controller parameters:
+      Speed (float)
+      Attack (int)
+      Push (int)
+      IsJumping (bool)
+      Hurt (trigger)
+      Death (trigger)
+
+  Note: the controller file currently contains repeated Hurt/Death trigger
+  parameter entries (created by the build scripts). Unity uses the first set;
+  the duplicates are harmless but could be cleaned up in the Animator window.
+
+--------------------------------------------------------------------------------
+16.2 Krush clips - Assets/Animations/Krush/
+--------------------------------------------------------------------------------
+  Clip            FPS   Length     Loop   Events
+  Krush-Idle      12    2.0833 s   yes    none
+  Krush-Run       12    2.0833 s   yes    none
+  Krush-Jump      20    1.25 s     no     none
+  Krush-Push      20    1.25 s     yes    OnPushStart @0, OnPushEnd @1.15
+  Krush-Hurt      20    1.25 s     no     none
+  Krush-Death     20    1.25 s     no     none
+
+  Krush controller states:
+      Idle, Run, Jump, Push, Hurt, Death.
+      (Plus an unused Krush-Shot state in the current working tree.)
+
+  Krush controller parameters:
+      Speed (float)
+      Push (int)
+      IsJumping (bool)
+      Hurt (trigger)
+      Death (trigger)
+
+  The Run clip has the same 12 fps / 2.0833 s / 25 keyed sprite frames as Leon,
+  so the run timing matches exactly.
+
+--------------------------------------------------------------------------------
+16.3 Skeleton clips - Assets/Animations/Enemies/Skeleton/
+--------------------------------------------------------------------------------
+  Clip               FPS   Length
+  Skeleton-Idle      12    0.3333 s
+  Skeleton-Walk      12    0.3333 s
+  Skeleton-Attack1   12    0.6667 s
+  Skeleton-Attack2   12    0.6667 s
+  Skeleton-TakeHit   12    0.3333 s
+  Skeleton-Death     12    0.3333 s
+
+  Skeleton controller states:
+      Idle, Walk, Attack1, Attack2, TakeHit, Death.
+      No parameters; states are played by name.
+
+--------------------------------------------------------------------------------
+16.4 Animator transition behaviour
+--------------------------------------------------------------------------------
+  Leon / Krush:
+      - Idle <-> Run driven by the Speed float and run threshold.
+      - Jump driven by IsJumping.
+      - Push driven by the Push int.
+      - Attack driven by the Attack int (Leon only) with exit-time transitions.
+      - Hurt and Death are Any State triggers, so they interrupt any action.
+
+  Skeleton:
+      - All transitions are driven by the script calling Play(name).
+      - No Animator parameters are used.
+
+--------------------------------------------------------------------------------
+16.5 Animation events
+--------------------------------------------------------------------------------
+  OnAttackHitFrame ... Leon Attack1/Attack2. The only place a sword swing deals
+                       damage.
+  OnPushStart ........ Leon and Krush Push clips, time 0. Enables object motion.
+  OnPushEnd .......... Leon and Krush Push clips, time 1.15. Stops object
+                       motion and starts the end hold.
+
+--------------------------------------------------------------------------------
+16.6 Sprite sorting order
+--------------------------------------------------------------------------------
+  All gameplay sprites are on the Default sorting layer.
+
+      Ground / Push_object .... sorting order 0
+      Skeleton ................ sorting order 2
+      Krush ................... sorting order 3
+      Leon .................... sorting order 4
+
+  Leon and Krush used to share sorting order 3. When they overlapped, the
+  renderer could swap which sprite was drawn on top every frame, which looked
+  like the characters flickering front and back. Giving each player a fixed,
+  different order makes the draw order stable: Leon is always drawn in front of
+  Krush when their sprites overlap. Swap the two values if Krush should be in
+  front instead.
+
+
+================================================================================
+17. INPUT SYSTEM
+================================================================================
+  Package: com.unity.inputsystem 1.20.0.
+
+  The gameplay scripts read devices directly:
+      Keyboard.current
+      Gamepad.current
+      Gamepad.all
+      InputSystem.QueueStateEvent (only in the test scripts)
+
+  The project also contains Assets/Settings/InputSystem_Actions.inputactions,
+  which is the default Unity template action asset (Move, Look, Attack,
+  Interact, Crouch, Jump, Previous, Next, Sprint with keyboard, mouse and
+  gamepad bindings). The gameplay scripts do NOT use this asset; they poll the
+  devices directly. The asset is referenced by the project settings, but it does
+  not drive the characters.
+
+--------------------------------------------------------------------------------
+17.1 Leon bindings
+--------------------------------------------------------------------------------
+  Move ......... A / D or Left / Right arrow
+  Jump ......... Space
+  Attack ....... Left mouse button or F
+  Push ......... Hold E
+  Cancel push .. A or Left arrow or steering against the push
+  Gamepad ...... ignored (inputMode KeyboardOnly; gamepad attack/push disabled)
+
+--------------------------------------------------------------------------------
+17.2 Krush bindings
+--------------------------------------------------------------------------------
+  Move ......... Gamepad left stick (deadzone 0.15)
+  Jump ......... Gamepad South (A / Cross)
+  Push ......... Gamepad Right Shoulder (RB)
+  Cancel push .. Gamepad input against the push direction
+  Keyboard ..... ignored (inputMode GamepadOnly; keyboard push disabled)
+
+--------------------------------------------------------------------------------
+17.3 Device selection
+--------------------------------------------------------------------------------
+  PlayerInputMode enum:
+      KeyboardAndGamepad ... both devices (single-player default)
+      KeyboardOnly ......... keyboard only (Leon)
+      GamepadOnly .......... gamepad only (Krush)
+
+  gamepadIndex:
+      0 = Gamepad.current (the active pad)
+      1 = Gamepad.all[1] (second pad)
+      etc.
+
+  This split prevents one controller from driving both characters.
+
+--------------------------------------------------------------------------------
+17.4 Test input
+--------------------------------------------------------------------------------
+  The play-mode test scripts create a synthetic Gamepad with
+  InputSystem.AddDevice<Gamepad>() and queue GamepadState events, so Krush can be
+  tested without a physical controller.
+
+
+================================================================================
+18. PHYSICS, TAGS AND LAYERS
+================================================================================
+  Physics2D settings (ProjectSettings/Physics2DSettings.asset):
+      gravity ................ (0, -9.81)
+      velocity iterations .... 8
+      position iterations .... 3
+      velocity threshold ..... 1
+      max linear correction .. 0.2
+      max translation speed .. 100
+      default contact offset . 0.01
+      simulation mode ........ FixedUpdate
+      auto sync transforms ... false
+
+  Time settings:
+      Fixed Timestep ......... 0.02 s (50 Hz)
+      Maximum Allowed Timestep 0.3333
+      Time Scale ............. 1
+
+  Tags (ProjectSettings/TagManager.asset):
+      Ground
+      PushObject
+
+  Layers:
+      Only Default (layer 0) is used by gameplay objects.
+      TransparentFX, Ignore Raycast, Water and UI exist but are unused.
+
+  Layer collision matrix:
+      All layers collide with all layers (all bits set). Player-vs-player
+      collision is therefore removed at runtime by PlayerSeparation2D using
+      Physics2D.IgnoreCollision, not by a layer split.
+
+  Rigidbody2D setup shared by players:
+      body type .............. Dynamic
+      mass ................... 1
+      gravity scale .......... 1
+      interpolate ............ Interpolate
+      collision detection .... Continuous
+      constraints ............ Freeze Rotation
+      sleep mode ............. NeverSleep (set in Awake by the scripts)
+
+  Pushable object:
+      Dynamic, mass 50, freeze rotation, NeverSleep.
+
+  Skeleton:
+      Dynamic, mass 1, freeze rotation, NeverSleep, frictionless material.
+
+
+================================================================================
+19. SCRIPT REFERENCE (EVERY SCRIPT AND ITS FIELDS)
+================================================================================
+--------------------------------------------------------------------------------
+19.1 Assets/Scripts/Player/PlayerMovement2D.cs
+--------------------------------------------------------------------------------
+  Purpose: horizontal movement, jumping, grounding, facing and animation sync
+           for both players.
+  Execution order: -100.
+  Requires: Rigidbody2D, SpriteRenderer.
+
+  Enum PlayerInputMode:
+      KeyboardAndGamepad, KeyboardOnly, GamepadOnly
+
+  Inspector fields:
+      Input:
+          inputMode .................... KeyboardAndGamepad (default)
+          gamepadIndex ................. 0
+      Movement:
+          moveSpeed .................... 3
+          acceleration ................. 55
+          deceleration ................. 40
+          turnSpeed .................... 90
+          attackLockDeceleration ....... 250
+          inputDeadzone ................ 0.15
+      Grounding:
+          groundTag .................... "Ground"
+          groundProbeDepth ............. 0.25
+          groundProbeLift .............. 0.06
+          groundProbeWidth ............. 0
+          groundCheckOffset ............ -0.89
+          groundCheckRadius ............ 0.15
+      Animation:
+          animator
+          speedParameter ............... "Speed"
+          runThreshold ................. 0.1
+          animationReferenceSpeed ...... 3.878
+          syncRunToSpeed ............... 1
+          minRunPlaybackSpeed .......... 0.5
+          maxRunPlaybackSpeed .......... 3
+      Jump:
+          jumpForce .................... 12 (code default; scene uses 8)
+          fallGravityScale ............. 1.5
+          jumpParameter ................ "IsJumping"
+          coyoteTime ................... 0.1
+      Facing:
+          spriteRenderer
+          startsFacingRight ............ true
+
+  Public API:
+      IsGrounded, IsLocked, FacingRight, IsAttacking, IsPushing,
+      PushDirection, PushSpeed, IsHurt, FeetPosition, InputMode,
+      FaceDirection(float), ReadHorizontalInput(), ActiveGamepad()
+
+--------------------------------------------------------------------------------
+19.2 Assets/Scripts/Player/PlayerAttack2D.cs
+--------------------------------------------------------------------------------
+  Purpose: Leon's sword combo and push. No equivalent on Krush.
+  Execution order: -200.
+  Requires: Animator.
+
+  Inspector fields:
+      Input:
+          allowMouse ................... true
+          allowKeyboard ................ true
+          keyboardKey .................. F
+          allowGamepad ................. true (scene: false)
+      Push:
+          allowPush .................... true
+          pushKeyboardKey .............. E
+          allowPushGamepad ............. true (scene: false)
+          pushParameter ................ "Push"
+          pushRange .................... 1
+          pushSearchRadius ............. 6
+          pushStrength ................. 2
+          pushEndHoldDuration .......... 0.9 (code default; scene uses 0.2)
+          pushTag ...................... "PushObject"
+          pushObject ................... none
+          cancelPushKey ................ A
+      Combo:
+          releaseLeadTime .............. 0.08
+          comboBufferTime .............. 0.35
+          swingStartLockTime ........... 0.1
+          attackParameter .............. "Attack"
+      Hit Detection:
+          attackHitRange ............... 2.6 (code default; scene uses 2)
+          comboHitReachBonus ........... 0.5
+          attackHitHeight .............. 3.0 (code default; scene uses 2)
+          enemyLayerMask ............... Everything
+      References:
+          animator, movement
+
+  Public API:
+      IsSwinging, IsPushing, ComboStep, SwingSequence, PushDirection,
+      StartPush(), EndPush(), AdvanceCombo(), ResetCombo(),
+      OnAttackHitFrame(), OnPushStart(), OnPushEnd()
+
+--------------------------------------------------------------------------------
+19.3 Assets/Scripts/Player/PlayerPush2D.cs
+--------------------------------------------------------------------------------
+  Purpose: Krush's push only (no sword combo).
+  Execution order: -200.
+  Requires: Animator.
+
+  Enum PushGamepadButton:
+      South, East, West, North, LeftShoulder, RightShoulder,
+      LeftStick, RightStick
+
+  Inspector fields:
+      Input:
+          allowKeyboard ................ false
+          pushKeyboardKey .............. E
+          allowGamepad ................. true
+          pushGamepadButton ............ RightShoulder
+          cancelPushKey ................ A
+      Push:
+          pushParameter ................ "Push"
+          pushRange .................... 1
+          pushSearchRadius ............. 6
+          pushStrength ................. 2
+          pushEndHoldDuration .......... 0.2
+          pushTag ...................... "PushObject"
+          pushObject ................... none
+      References:
+          animator, movement
+
+  Public API:
+      IsPushing, PushDirection, StartPush(), EndPush(),
+      OnPushStart(), OnPushEnd()
+
+--------------------------------------------------------------------------------
+19.4 Assets/Scripts/Player/PlayerHealthHurt.cs
+--------------------------------------------------------------------------------
+  Purpose: hurt reactions, 5-hit death and corpse grounding for both players.
+  Requires: Animator.
+
+  Inspector fields:
+      Input:
+          enableDebugHurtKey ........... false
+          hurtKey ...................... H
+      Hits:
+          hitsBeforeDeath .............. 5
+      Animation:
+          animator
+          hurtTrigger .................. "Hurt"
+          deathTrigger ................. "Death"
+          hurtStateName ................ "Hurt"
+      Death Grounding:
+          pinDeathToGround ............. true
+          groundTag .................... "Ground"
+          spriteRenderer, bodyCollider, body
+      References:
+          movement (PlayerMovement2D)
+          attack (PlayerAttack2D; empty on Krush)
+
+  Public API:
+      HurtCount, IsDead, TakeHit()
+
+--------------------------------------------------------------------------------
+19.5 Assets/Scripts/Player/PlayerSeparation2D.cs
+--------------------------------------------------------------------------------
+  Purpose: disables collision between the two players so they pass through.
+  Requires: Rigidbody2D, Collider2D.
+
+  Inspector fields:
+      other ............................ the other player's component
+
+  Public API:
+      HardCollisionIgnored
+
+--------------------------------------------------------------------------------
+19.6 Assets/Scripts/Player/PushableObject2D.cs
+--------------------------------------------------------------------------------
+  Purpose: a prop that can be pushed.
+  Requires: Rigidbody2D, Collider2D.
+
+  No inspector fields.
+
+  Public API:
+      IsBeingPushed, LastPushDirection, Push(Vector2, float), StopPush()
+
+--------------------------------------------------------------------------------
+19.7 Assets/Scripts/Enemy/SkeletonAI.cs
+--------------------------------------------------------------------------------
+  Purpose: patrol, chase, attack, take hits and die.
+  Requires: Rigidbody2D, Animator, SpriteRenderer.
+
+  Inspector fields:
+      Patrol:
+          idleTime ..................... 2
+          patrolDistance ............... 1
+          walkSpeed .................... 3
+          walkAnimationReferenceSpeed .. 3.8
+          walkAnimationSync ............ 0.8
+      Detection:
+          detectionRange ............... 4
+          loseTargetRange .............. 6
+          chaseSpeed ................... 3
+          maxChaseAnimationSpeed ....... 2
+      Combat:
+          attackRange .................. 1.5
+          attackHitReach ............... 1.9
+          attackHitDelay ............... 0.32
+          attack2HitDelay .............. 0.5
+          attackDuration ............... 0.9
+          attackCooldown ............... 2
+          hitsToDie .................... 5
+      Hit Reaction:
+          knockbackDistance ............ 0.6
+          knockbackTime ................ 0.3
+          hitStunTime .................. 0.35
+      Animation Speeds:
+          attackAnimationSpeed ......... 0.75
+          hitAnimationSpeed ............ 0.8
+          deathAnimationSpeed .......... 0.6
+      Death Grounding:
+          pinDeathToGround ............. true
+          groundTag .................... "Ground"
+          deathArtBottomPadding ........ 0.49
+      Animation States:
+          idleState .................... "Idle"
+          walkState .................... "Walk"
+          attack1State ................. "Attack1"
+          attack2State ................. "Attack2"
+          takeHitState ................. "TakeHit"
+          deathState ................... "Death"
+      References:
+          player, playerHealth, playerMovement, animator, spriteRenderer,
+          body, bodyCollider
+
+  Public API:
+      HitsTaken, IsDead, TakeSwordHit(Vector2 sourcePosition)
+
+  Internal states: Idle, Patrol, Chase, Attack, Hurt, Dead.
+
+
+================================================================================
+20. AGENTSCRIPTS (UNITY EDITOR AUTOMATION AND TESTS)
+================================================================================
+These files live in AgentScripts/ at the project root. They are editor-only
+helpers and are not part of the game build. They are run through the Unity
+Pipeline package with commands such as:
+
+    unity command run_script --file AgentScripts/PlayTestKrush.cs --entry Run
+
+  AttackVerify.cs
+      Play-mode probes for sword hit timing and combo chaining. Every attack is
+      triggered through the real Input System (key F), not by calling the combo
+      method directly, so the whole input -> parameter -> Animator path is
+      tested.
+
+  BuildKrush.cs
+      Idempotent builder for Krush. It:
+        - slices the six Krush sprite sheets into animation clips with the same
+          frame counts and sample rates as Leon (no attack clips),
+        - builds Krush.controller (Idle, Run, Jump, Push, Hurt, Death),
+        - adds the physics, movement, push, health and separation components to
+          the Krush GameObject and wires every reference,
+        - binds Leon to the keyboard and Krush to the gamepad.
+      Entry point: BuildKrush.All.
+
+  Inspect.cs
+      General scene/asset inspection helper.
+
+  InspectKrush.cs
+      Inspects Krush's components, sprite, animator and scene state.
+
+  PlayTest.cs
+      Original Leon play-mode test suite: movement, attack, hurt, death,
+      skeleton behaviour and status reporting.
+
+  PlayTestKrush.cs
+      Drives Krush with a synthetic gamepad in play mode and reports what the
+      movement, jump, animation, push, hurt and death systems actually did.
+
+  PlayTestSeparation.cs
+      Play-mode check for PlayerSeparation2D: verifies that collision is ignored
+      in both directions, that Krush can walk through Leon, that Leon is not
+      nudged, and that two players can stand on the same spot.
+
+  VerifySkeleton.cs
+      Verifies the Skeleton controller, clips and sprite assets.
+
+Typical test workflow:
+
+    unity command editor_play
+    unity command run_script --file AgentScripts/PlayTestSeparation.cs --entry PlayTestSeparation.Run --timeout_ms 120000
+    unity command editor_stop
+
+
+================================================================================
+21. ROOT HELPER SCRIPTS (.PY) AND DOCUMENTS (.MD)
+================================================================================
+--------------------------------------------------------------------------------
+21.1 Python helper scripts (legacy, not part of the game)
+--------------------------------------------------------------------------------
+These one-off scripts were used during development to patch the Leon animator
+controller and player scripts directly on disk. They are kept for reference and
+are not used by Unity at runtime.
+
+  add_any_trans.py ......... Adds Any State transitions to Leon.controller.
+  add_hurt_death_ctrl.py ... Adds Hurt/Death states/transitions to the controller.
+  check_hurt.py ............ Checks the Hurt wiring in Leon.controller.
+  check_hurt_death.py ...... Checks Hurt/Death sprites and controller wiring.
+  check_sm.py .............. Inspects the controller state machine.
+  fix_ctrl2.py ............. Controller repair script.
+  fix_ctrl_proper.py ....... Controller repair script.
+  fix_hurt_script.py ....... Patches PlayerHealthHurt.cs.
+  fix_hurt_script2.py ...... Patches PlayerHealthHurt.cs (second pass).
+  fix_jump_anim.py ......... Patches the jump sprite import settings.
+  fix_scope.py ............. Patches PlayerMovement2D.cs scoping.
+  fix_syntax.py ............ Patches PlayerMovement2D.cs syntax.
+  make_hurt_death.py ....... Creates Hurt/Death clips.
+  make_hurt_death2.py ...... Creates Hurt/Death clips (second version).
+
+--------------------------------------------------------------------------------
+21.2 Markdown documents
+--------------------------------------------------------------------------------
+  README.md
+      Older completion notes for the Leon jump system: push animation loop fix,
+      jump animation, jump system, coyote time and setup checklist.
+
+  CODE_EXPLANATION.md
+      Older explanation of the jump code added to PlayerMovement2D.cs.
+
+  JUMP_IMPLEMENTATION_GUIDE.md
+      Older guide for the jump animation and movement implementation.
+
+  ANIMATOR_SETUP_QUICK.md
+      Older quick reference for setting up the Leon Animator parameters and
+      states by hand.
+
+  FIXES_SUMMARY.md
+      Summary of the enemy combat fixes: combo hit detection, swing sequences,
+      enemy animation speed, etc.
+
+  TEST_REPORT.md
+      Verification report for the enemy combat fixes.
+
+  WORK_DONE.md
+      Current consolidated status document for the whole project.
+
+  PROJECT_GUIDE.txt
+      This complete guide.
+
+
+================================================================================
+22. PACKAGES
+================================================================================
+From Packages/manifest.json (most relevant packages):
+
+  2D:
+      com.unity.2d.animation ............ 16.0.0
+      com.unity.2d.aseprite ............. 6.0.0
+      com.unity.2d.psdimporter .......... 15.0.0
+      com.unity.2d.sprite ............... 1.0.0
+      com.unity.2d.spriteshape .......... 16.0.0
+      com.unity.2d.tilemap .............. 1.0.0
+      com.unity.2d.tilemap.extras ....... 9.0.0
+      com.unity.2d.tooling .............. 4.0.0
+
+  Rendering / UI:
+      com.unity.render-pipelines.universal ... 17.6.0
+      com.unity.ugui .................... 2.6.0
+      com.unity.visualscripting ......... 1.9.12
+
+  Input / editor / tooling:
+      com.unity.inputsystem ............. 1.20.0
+      com.unity.pipeline ................ 0.8.0-exp.1
+      com.unity.test-framework .......... 1.8.0
+      com.unity.timeline ................ 6.6.0
+      com.unity.ide.rider ............... 3.0.38
+      com.unity.ide.visualstudio ........ 2.0.26
+      com.unity.collab-proxy ............ 2.13.6
+      com.unity.ai.assistant ............ 2.20.0-pre.2
+      com.unity.ai.inference ............ 2.6.1
+      com.unity.learn.iet-framework ..... 6.0.7
+
+  The manifest also includes the standard Unity modules (animation, audio,
+  physics, physics2d, physicscore2d, tilemap, ui, uielements, etc.).
+
+  Note: com.unity.pipeline is the package that lets an external agent drive the
+  running Unity Editor (recompile, play/stop, run C# scripts, inspect the scene).
+  It is a development tool, not a gameplay dependency.
+
+
+================================================================================
+23. PROJECTSETTINGS
+================================================================================
+Files in ProjectSettings/:
+
+  AudioManager.asset ................ Audio settings.
+  ClusterInputManager.asset ......... Cluster input settings.
+  DynamicsManager.asset ............. 3D physics settings.
+  EditorBuildSettings.asset ......... Build scene list (SampleScene enabled).
+  EditorSettings.asset .............. Editor behaviour.
+  GraphicsSettings.asset ............ Graphics / render pipeline settings.
+  InputManager.asset ................ Legacy Input Manager axes.
+  MemorySettings.asset .............. Memory settings.
+  MultiplayerManager.asset .......... Multiplayer settings.
+  NavMeshAreas.asset ................ NavMesh areas.
+  NetworkManager.asset .............. Networking settings.
+  PackageManagerSettings.asset ...... Package manager settings.
+  Physics2DSettings.asset ........... 2D physics (gravity, iterations, matrix).
+  PhysicsCoreProjectSettings2D.asset  2D physics core settings.
+  PresetManager.asset ............... Preset manager.
+  ProjectAuditorSettings.asset ...... Project Auditor settings.
+  ProjectSettings.asset ............. Player settings (company, product, etc.).
+  ProjectVersion.txt ................ Unity 6000.6.0f1 (f7f8ed4d1e24).
+  QualitySettings.asset ............. Quality levels; current quality index 5.
+  SceneTemplateSettings.json ........ Scene template settings.
+  ShaderGraphSettings.asset ......... Shader Graph settings.
+  TagManager.asset .................. Tags and layers.
+  TimeManager.asset ................. Fixed timestep 0.02, time scale 1.
+  UnityConnectSettings.asset ........ Unity Connect services.
+  URPProjectSettings.asset .......... URP project settings.
+  VersionControlSettings.asset ...... Version control mode.
+  VFXManager.asset .................. VFX settings.
+  XRSettings.asset .................. XR settings.
+
+Key values:
+  EditorBuildSettings:
+      Assets/Scenes/SampleScene.unity ... enabled
+  TimeManager:
+      Fixed Timestep 0.02
+      Maximum Allowed Timestep 0.33333334
+      Time Scale 1
+  TagManager:
+      tags: Ground, PushObject
+      layers: Default, TransparentFX, Ignore Raycast, Water, UI
+  Physics2DSettings:
+      gravity (0, -9.81)
+      velocity iterations 8
+      position iterations 3
+      contact offset 0.01
+      all layers collide
+
+
+================================================================================
+24. SPRITES AND ART ASSETS
+================================================================================
+All sprites are sliced sprite sheets (sprite mode = Multiple).
+
+--------------------------------------------------------------------------------
+24.1 Assets/Sprites/Leon spritesheets/
+--------------------------------------------------------------------------------
+  Leon-idle.png ............... idle animation frames.
+  Leon-run.png ................ run animation frames.
+  Leon-jump-v1.png ............ jump animation frames.
+  Leon-push-v1.png ............ push animation frames.
+  Leon-swordhit.png ........... Attack1 sword swing frames.
+  Leon-swordcombohit.png ...... Attack2 combo swing frames.
+  Leon-Hurt.png ............... hurt reaction frames.
+  Leon-Death.png .............. death frames.
+
+--------------------------------------------------------------------------------
+24.2 Assets/Sprites/Krush spritesheets/
+--------------------------------------------------------------------------------
+  k-idle-v1.png ............... idle frames (used).
+  k-run-v1.png ................ run frames (used).
+  k-jump-v1.png ............... jump frames (used).
+  mimo-push-v1.png ............ push frames (used).
+  k-hurt.png .................. hurt frames (used).
+  Kr-death-v1.png ............. death frames (used).
+  k-asm_bow_charged_shot-v1.png ....... unused bow animation.
+  k-asm_bow_charged_shot-v1 1.png ..... unused duplicate bow animation.
+  k-asm_bow_quick_shot-v1.png ......... unused bow animation.
+  Kr-shoot-v1.png .................... unused shoot animation.
+
+--------------------------------------------------------------------------------
+24.3 Assets/Sprites/Enemies/Skeleton/
+--------------------------------------------------------------------------------
+  Idle.png .................... idle frames.
+  Walk.png .................... walk frames.
+  Attack1.png ................. first attack frames.
+  Attack2.png ................. second attack frames.
+  Take Hit.png ................ hit reaction frames.
+  Death.png ................... death frames.
+  Shield.png .................. shield sprite (unused by the current AI).
+
+--------------------------------------------------------------------------------
+24.4 Assets/Welcome/
+--------------------------------------------------------------------------------
+  Welcome-page art and configuration for the Unity 2D template:
+  2d-template.png, NewWelcomePage.asset, TutorialProjectSettings.asset,
+  Unity.2D.Welcome.asmdef, Welcome2DScript.asset, Welcome2DScript.cs.
+
+
+================================================================================
+25. STORE ASSETS (THIRD-PARTY PACKS)
+================================================================================
+--------------------------------------------------------------------------------
+25.1 Assets/Assets from stores/2D Pixel Art Platformer Biome - American Forest/
+--------------------------------------------------------------------------------
+  Atlas.spriteatlas ........... sprite atlas for the pack.
+  Demo.unity .................. demo scene from the pack.
+  ReadMe.pdf .................. pack readme.
+  Sprites.png ................. the pack's sprite sheet.
+  Tilemap/
+      Tilemap.prefab .......... a ready-made tilemap prefab.
+      TileBackGround1..13 ..... 13 background tile assets.
+      TileFence1..6 ........... 6 fence tile assets.
+      TileGround1..32 ......... 32 ground tile assets.
+      TilePlant1..12 .......... 12 plant tile assets.
+      TileSpikes.asset ........ spike tile asset.
+
+  This pack is not used by SampleScene; SampleScene uses a simple
+  SpriteRenderer ground object instead of a Tilemap.
+
+--------------------------------------------------------------------------------
+25.2 Assets/Assets from stores/Monsters Creatures Fantasy/
+--------------------------------------------------------------------------------
+  Animations/
+      Flying eye/  Flight_0.controller, Flyingeye_anim.anim
+      Goblin/      Idle_0.controller, Goblin_anim.anim
+      Mushroom/    Idle_0.controller, Mushromm_anim.anim
+      Skeleton/    Idle_0.controller, Skeleton_anim.anim
+  Demo/
+      SceneDemo.unity
+  Sprites/
+      Flying eye/  Attack1, Attack2, Death, Flight, Take Hit
+      Goblin/      Attack1, Attack2, Death, Idle, Run, Take Hit
+      Mushroom/    Attack1, Attack2, Death, Idle, Run, Take Hit
+      Skeleton/    Attack1, Attack2, Death, Idle, Shield, Take Hit, Walk
+
+  The project's own Skeleton assets are copies/slices of this pack placed under
+  Assets/Sprites/Enemies/Skeleton and Assets/Animations/Enemies/Skeleton.
+
+
+================================================================================
+26. SETTINGS FOLDER
+================================================================================
+Assets/Settings/ contains the URP and project configuration assets:
+
+  DefaultVolumeProfile.asset ...................... default post-processing volume.
+  InputSystem_Actions.inputactions ................ default input action asset
+                                                    (not used by gameplay).
+  Lit2DSceneTemplate.scenetemplate ................ URP 2D scene template.
+  Renderer2D.asset ................................ URP 2D renderer asset.
+  UniversalRenderPipelineGlobalSettings.asset ..... URP global settings.
+  UniversalRP.asset ............................... URP pipeline asset.
+  Scenes/URP2DSceneTemplate.unity ................. template scene.
+
+These assets make the project render with URP's 2D renderer and 2D lights.
+
+
+================================================================================
+27. VERIFICATION AND TEST RESULTS
+================================================================================
+All of the following were checked in Play Mode through the Unity Pipeline
+package.
+
+Movement and animation:
+  - Krush runs with the left stick, jumps with A and pushes with RB.
+  - Krush's run animation timing matches Leon's (same 12 fps / 2.0833 s / 25
+    keyed sprite frames).
+  - Leon does not respond to the gamepad (no movement, no attack, no push).
+
+Push:
+  - Krush's push moved the pushable object about 1.26 units.
+  - The push is forward-only and stops when the button is released.
+
+Hurt and death:
+  - Krush's Hurt locks movement and returns to Idle when it ends.
+  - The fifth hit plays Death.
+  - The corpse's visible bottom was pinned to -4.485 against a ground top of
+    about -4.500, so it does not float.
+
+Player-vs-player:
+  - Physics2D.GetIgnoreCollision is true in both directions.
+  - Krush walked through Leon and crossed to the other side (16.966 units)
+    with a 0.507 maximum overlap; Leon did not move.
+  - Both players standing on the same spot stayed stacked with a 0.538
+    overlap, no push-apart.
+  - Leon and Krush have different sprite sorting orders (Leon 4, Krush 3), so
+    their draw order stays fixed while they overlap and no longer flickers.
+
+Console:
+  - No console errors or warnings after the final pass.
+
+
+================================================================================
+28. KNOWN LIMITATIONS AND POSSIBLE NEXT STEPS
+================================================================================
+  - One physical controller drives Krush; Leon is keyboard-only. Two-controller
+    play needs gamepadIndex = 1 on Krush (or a second GamepadOnly player).
+
+  - Krush has no attack by design. The bow/shoot sprites and the uncommitted
+    Krush-Shot animator state are not used by gameplay.
+
+  - PlayerMovement2D still contains Leon-specific comments/tooltips and an
+    unused attackLockDeceleration path. Harmless for Krush but could be renamed.
+
+  - The Leon controller file contains repeated Hurt/Death trigger parameter
+    entries. Unity uses the first set; the duplicates are harmless but could be
+    cleaned up.
+
+  - The project has no UI, no audio clips and no tilemap gameplay yet. The
+    SampleScene uses a single scaled SpriteRenderer ground.
+
+  - The third-party store packs are imported but mostly unused by SampleScene.
+
+
+================================================================================
+29. GIT / WORKING-TREE STATE
+================================================================================
+Last commit:
+
+  7f6d7a7  2026-11-05  "added krush charcter and implemented movements for her"
+
+Uncommitted changes at the time of writing:
+
+  M  Assets/Animations/Krush/Krush.controller
+        Contains an unrelated "Krush-Shot" state that was already in the working
+        tree. It is not used by gameplay and was left untouched.
+
+  M  Assets/Scenes/SampleScene.unity
+        Adds PlayerSeparation2D to both players and serialises the cross
+        references.
+
+  ?? Assets/Scripts/Player/PlayerSeparation2D.cs
+  ?? Assets/Scripts/Player/PlayerSeparation2D.cs.meta
+        New player-vs-player pass-through component (collision switched off).
+
+  ?? AgentScripts/PlayTestSeparation.cs
+        New repeatable play-mode pass-through test.
+
+  ?? WORK_DONE.md
+        Consolidated status document.
+
+  ?? PROJECT_GUIDE.txt
+        This document.
+
+Nothing was committed as part of this work.
+
+================================================================================
+                              END OF FILE
+================================================================================
