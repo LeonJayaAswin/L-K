@@ -371,13 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthHurt
   enableDebugHurtKey: 0
   hurtKey: 22
-  maxHealth: 100
-  damagePerHit: 10
-  healthBarSmoothSpeed: 90
-  healthBarFrame: {fileID: -5286712842184508281, guid: 8d30dade933becb4c80e167e669762d3, type: 3}
-  healthBarFill: {fileID: -2127120023, guid: 8d30dade933becb4c80e167e669762d3, type: 3}
-  healthBarOnRight: 0
-  healthBarScreenOffset: {x: 20, y: -18}
+  hitsBeforeDeath: 5
   animator: {fileID: 339679980}
   hurtTrigger: Hurt
   deathTrigger: Death
@@ -1269,13 +1263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PlayerHealthHurt
   enableDebugHurtKey: 0
   hurtKey: 22
-  maxHealth: 100
-  damagePerHit: 10
-  healthBarSmoothSpeed: 90
-  healthBarFrame: {fileID: 3209531890788101360, guid: 53c500a5e8d109e48bede518ec637129, type: 3}
-  healthBarFill: {fileID: 904709749891000019, guid: 53c500a5e8d109e48bede518ec637129, type: 3}
-  healthBarOnRight: 1
-  healthBarScreenOffset: {x: 20, y: -18}
+  hitsBeforeDeath: 5
   animator: {fileID: 1200955315}
   hurtTrigger: Hurt
   deathTrigger: Death

@@ -2,14 +2,14 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 
 /// <summary>
-/// Hit reactions and health for Leon and Krush.
+/// Hit reactions and health for Leon.
 ///
 /// Enemy attacks call <see cref="TakeHit"/>. Every hit plays the Hurt
-/// trigger, and each hit removes ten health. Reaching zero plays Death and
-/// takes control away for good. Both triggers are wired to Any
+/// trigger, and the hit that reaches <see cref="hitsBeforeDeath"/> plays Death
+/// instead and takes control away for good. Both triggers are wired to Any
 /// State transitions in Leon.controller, so they interrupt whatever he is
 /// doing. H is only an optional debug key; by default enemies are the damage
-/// source and ten hits kill a player.
+/// source and five of their hits kill Leon.
 ///
 /// The death clips are centre-pivoted sprite swaps, so their visible bottom
 /// rises as the frames get shorter. While Death plays, the sprite bottom is
@@ -27,16 +27,9 @@ public class PlayerHealthHurt : MonoBehaviour
     [Tooltip("Debug key used when Enable Debug Hurt Key is on.")]
     [SerializeField] private Key hurtKey = Key.H;
 
-    [Header("Health")]
-    [SerializeField, Min(1)] private float maxHealth = 100f;
-    [SerializeField, Min(1)] private float damagePerHit = 10f;
-    [SerializeField, Min(0.1f)] private float healthBarSmoothSpeed = 90f;
-
-    [Header("HUD")]
-    [SerializeField] private Sprite healthBarFrame;
-    [SerializeField] private Sprite healthBarFill;
-    [SerializeField] private bool healthBarOnRight;
-    [SerializeField] private Vector2 healthBarScreenOffset = new Vector2(20f, -18f);
+    [Header("Hits")]
+    [Tooltip("How many hits Leon can take. The hit that reaches this number plays Death.")]
+    [SerializeField, Min(1)] private int hitsBeforeDeath = 5;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -74,16 +67,11 @@ public class PlayerHealthHurt : MonoBehaviour
     private int deathTriggerHash;
     private float deathGroundY;
     private float hurtPendingTimer;
-    private float currentHealth;
-    private float displayedHealth;
-    private RectTransform healthFill;
 
     private const float HurtLockGraceTime = 0.3f;
 
     /// <summary>How many hits this player has taken so far.</summary>
     public int HurtCount => hurtCount;
-
-    public float CurrentHealth => currentHealth;
 
     /// <summary>True once the Death animation has been triggered.</summary>
     public bool IsDead => isDead;
@@ -97,17 +85,12 @@ public class PlayerHealthHurt : MonoBehaviour
         if (bodyCollider == null) bodyCollider = GetComponent<Collider2D>();
         if (body == null) body = GetComponent<Rigidbody2D>();
 
-        currentHealth = maxHealth;
-        displayedHealth = maxHealth;
-        if (healthBarFrame != null && healthBarFill != null) CreateHealthBar();
-
         hurtTriggerHash = Animator.StringToHash(hurtTrigger);
         deathTriggerHash = Animator.StringToHash(deathTrigger);
     }
 
     private void Update()
     {
-        UpdateHealthFill();
         // A dead Leon ignores further hits.
         if (isDead) return;
 
@@ -171,9 +154,7 @@ public class PlayerHealthHurt : MonoBehaviour
         if (isDead) return;
 
         hurtCount++;
-        currentHealth = Mathf.Max(0f, currentHealth - damagePerHit);
-
-        if (currentHealth <= 0f)
+        if (hurtCount >= hitsBeforeDeath)
         {
             Die();
             return;
@@ -189,63 +170,6 @@ public class PlayerHealthHurt : MonoBehaviour
             animator.ResetTrigger(deathTriggerHash);
             animator.SetTrigger(hurtTriggerHash);
         }
-    }
-
-    private void CreateHealthBar()
-    {
-        Canvas canvas = FindAnyObjectByType<Canvas>();
-        if (canvas == null)
-        {
-            GameObject canvasObject = new GameObject("Player HUD", typeof(RectTransform), typeof(Canvas), typeof(UnityEngine.UI.CanvasScaler), typeof(UnityEngine.UI.GraphicRaycaster));
-            canvas = canvasObject.GetComponent<Canvas>();
-            canvas.renderMode = RenderMode.ScreenSpaceOverlay;
-            UnityEngine.UI.CanvasScaler scaler = canvasObject.GetComponent<UnityEngine.UI.CanvasScaler>();
-            scaler.uiScaleMode = UnityEngine.UI.CanvasScaler.ScaleMode.ScaleWithScreenSize;
-            scaler.referenceResolution = new Vector2(1920f, 1080f);
-            scaler.matchWidthOrHeight = 0.5f;
-        }
-
-        GameObject bar = new GameObject(name + " Health Bar", typeof(RectTransform));
-        bar.transform.SetParent(canvas.transform, false);
-        RectTransform barRect = bar.GetComponent<RectTransform>();
-        barRect.anchorMin = healthBarOnRight ? new Vector2(1f, 1f) : new Vector2(0f, 1f);
-        barRect.anchorMax = barRect.anchorMin;
-        barRect.pivot = healthBarOnRight ? new Vector2(1f, 1f) : new Vector2(0f, 1f);
-        barRect.anchoredPosition = new Vector2(healthBarOnRight ? -healthBarScreenOffset.x : healthBarScreenOffset.x, healthBarScreenOffset.y);
-        barRect.sizeDelta = new Vector2(530f, 90f);
-
-        GameObject fillObject = new GameObject("Health Fill", typeof(RectTransform), typeof(UnityEngine.UI.Image));
-        fillObject.transform.SetParent(bar.transform, false);
-        RectTransform fillRect = fillObject.GetComponent<RectTransform>();
-        fillRect.anchorMin = new Vector2(0.035f, 0.18f);
-        fillRect.anchorMax = new Vector2(0.965f, 0.58f);
-        fillRect.pivot = new Vector2(0f, 0.5f);
-        fillRect.offsetMin = Vector2.zero;
-        fillRect.offsetMax = Vector2.zero;
-        healthFill = fillRect;
-        UnityEngine.UI.Image fillImage = fillObject.GetComponent<UnityEngine.UI.Image>();
-        fillImage.sprite = healthBarFill;
-        fillImage.raycastTarget = false;
-
-        GameObject frameObject = new GameObject("Frame", typeof(RectTransform), typeof(UnityEngine.UI.Image));
-        frameObject.transform.SetParent(bar.transform, false);
-        RectTransform frameRect = frameObject.GetComponent<RectTransform>();
-        frameRect.anchorMin = Vector2.zero;
-        frameRect.anchorMax = Vector2.one;
-        frameRect.offsetMin = Vector2.zero;
-        frameRect.offsetMax = Vector2.zero;
-        UnityEngine.UI.Image frameImage = frameObject.GetComponent<UnityEngine.UI.Image>();
-        frameImage.sprite = healthBarFrame;
-        frameImage.raycastTarget = false;
-        UpdateHealthFill(true);
-    }
-
-    private void UpdateHealthFill(bool immediate = false)
-    {
-        if (healthFill == null) return;
-        displayedHealth = immediate ? currentHealth : Mathf.MoveTowards(displayedHealth, currentHealth, healthBarSmoothSpeed * Time.deltaTime);
-        float ratio = maxHealth <= 0f ? 0f : Mathf.Clamp01(displayedHealth / maxHealth);
-        healthFill.localScale = new Vector3(ratio, 1f, 1f);
     }
 
     private void Die()
