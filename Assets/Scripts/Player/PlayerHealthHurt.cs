@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 /// <summary>
 /// Hit reactions and health for Leon.
@@ -30,6 +31,11 @@ public class PlayerHealthHurt : MonoBehaviour
     [Header("Hits")]
     [Tooltip("How many hits Leon can take. The hit that reaches this number plays Death.")]
     [SerializeField, Min(1)] private int hitsBeforeDeath = 5;
+
+    [Header("Health Bar")]
+    [SerializeField] private Slider healthBar;
+    [SerializeField, Min(0.1f)] private float fillSmoothSpeed = 2f;
+    private float targetHealthFill = 1f;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -85,12 +91,35 @@ public class PlayerHealthHurt : MonoBehaviour
         if (bodyCollider == null) bodyCollider = GetComponent<Collider2D>();
         if (body == null) body = GetComponent<Rigidbody2D>();
 
+        if (healthBar != null)
+        {
+            healthBar.minValue = 0f;
+            healthBar.maxValue = 1f;
+            healthBar.value = 1f;
+
+            // A Simple Image is squeezed as the Slider resizes its fill rect.
+            // Filled mode clips the original bar art from left to right instead.
+            Image fillImage = healthBar.fillRect != null
+                ? healthBar.fillRect.GetComponent<Image>()
+                : null;
+            if (fillImage != null)
+            {
+                fillImage.type = Image.Type.Filled;
+                fillImage.fillMethod = Image.FillMethod.Horizontal;
+                fillImage.fillOrigin = (int)Image.OriginHorizontal.Left;
+                fillImage.preserveAspect = false;
+            }
+        }
+
         hurtTriggerHash = Animator.StringToHash(hurtTrigger);
         deathTriggerHash = Animator.StringToHash(deathTrigger);
     }
 
     private void Update()
     {
+        if (healthBar != null)
+            healthBar.value = Mathf.MoveTowards(healthBar.value, targetHealthFill, fillSmoothSpeed * Time.deltaTime);
+
         // A dead Leon ignores further hits.
         if (isDead) return;
 
@@ -154,6 +183,7 @@ public class PlayerHealthHurt : MonoBehaviour
         if (isDead) return;
 
         hurtCount++;
+        targetHealthFill = Mathf.Clamp01(1f - (float)hurtCount / hitsBeforeDeath);
         if (hurtCount >= hitsBeforeDeath)
         {
             Die();
