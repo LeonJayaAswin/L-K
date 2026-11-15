@@ -500,7 +500,7 @@ MonoBehaviour:
   hurtKey: 22
   hitsBeforeDeath: 5
   healthBar: {fileID: 339471874}
-  fillSmoothSpeed: 2
+  healthFillSmoothSpeed: 1.5
   animator: {fileID: 339679980}
   hurtTrigger: Hurt
   deathTrigger: Death
@@ -1886,7 +1886,7 @@ MonoBehaviour:
   hurtKey: 22
   hitsBeforeDeath: 5
   healthBar: {fileID: 682436168}
-  fillSmoothSpeed: 2
+  healthFillSmoothSpeed: 1.5
   animator: {fileID: 1200955315}
   hurtTrigger: Hurt
   deathTrigger: Death

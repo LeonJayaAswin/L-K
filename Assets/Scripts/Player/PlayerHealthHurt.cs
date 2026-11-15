@@ -34,7 +34,7 @@ public class PlayerHealthHurt : MonoBehaviour
 
     [Header("Health Bar")]
     [SerializeField] private Slider healthBar;
-    [SerializeField, Min(0.1f)] private float fillSmoothSpeed = 2f;
+    [SerializeField, Min(0.1f)] private float healthFillSmoothSpeed = 1.5f;
     private float targetHealthFill = 1f;
 
     [Header("Animation")]
@@ -109,6 +109,7 @@ public class PlayerHealthHurt : MonoBehaviour
                 fillImage.fillOrigin = (int)Image.OriginHorizontal.Left;
                 fillImage.preserveAspect = false;
             }
+
         }
 
         hurtTriggerHash = Animator.StringToHash(hurtTrigger);
@@ -118,7 +119,10 @@ public class PlayerHealthHurt : MonoBehaviour
     private void Update()
     {
         if (healthBar != null)
-            healthBar.value = Mathf.MoveTowards(healthBar.value, targetHealthFill, fillSmoothSpeed * Time.deltaTime);
+            healthBar.value = Mathf.MoveTowards(
+                healthBar.value,
+                targetHealthFill,
+                healthFillSmoothSpeed * Time.deltaTime);
 
         // A dead Leon ignores further hits.
         if (isDead) return;
@@ -274,4 +278,5 @@ public class PlayerHealthHurt : MonoBehaviour
         if (animator == null) return false;
         return animator.GetCurrentAnimatorStateInfo(0).IsName(hurtStateName);
     }
+
 }
