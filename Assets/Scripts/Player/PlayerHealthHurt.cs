@@ -35,7 +35,17 @@ public class PlayerHealthHurt : MonoBehaviour
     [Header("Health Bar")]
     [SerializeField] private Slider healthBar;
     [SerializeField, Min(0.1f)] private float healthFillSmoothSpeed = 1.5f;
+    [SerializeField] private Image healthTrailImage;
+    [SerializeField, Min(0.1f)] private float trailReduceSpeed = 0.65f;
+    [SerializeField, Min(0f)] private float trailDelay = 0.35f;
     private float targetHealthFill = 1f;
+    private float targetTrailFill = 1f;
+    private float trailDelayTimer;
+    private RectTransform healthTrailRect;
+    private Vector3 trailOriginalScale;
+    private Vector2 trailOriginalAnchoredPosition;
+    private Vector2 trailOriginalPivot;
+    private float trailLeftEdge;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -112,6 +122,21 @@ public class PlayerHealthHurt : MonoBehaviour
 
         }
 
+        if (healthTrailImage != null)
+        {
+            healthTrailRect = healthTrailImage.rectTransform;
+            trailOriginalScale = healthTrailRect.localScale;
+            trailOriginalAnchoredPosition = healthTrailRect.anchoredPosition;
+            trailOriginalPivot = healthTrailRect.pivot;
+            trailLeftEdge = trailOriginalAnchoredPosition.x
+                - healthTrailRect.rect.width * trailOriginalScale.x * trailOriginalPivot.x;
+
+            // Keep the Inspector image as authored and anchor its left edge.
+            healthTrailRect.pivot = new Vector2(0f, trailOriginalPivot.y);
+            healthTrailRect.anchoredPosition = new Vector2(trailLeftEdge, trailOriginalAnchoredPosition.y);
+            SetTrailFill(1f);
+        }
+
         hurtTriggerHash = Animator.StringToHash(hurtTrigger);
         deathTriggerHash = Animator.StringToHash(deathTrigger);
     }
@@ -123,6 +148,26 @@ public class PlayerHealthHurt : MonoBehaviour
                 healthBar.value,
                 targetHealthFill,
                 healthFillSmoothSpeed * Time.deltaTime);
+
+        if (healthTrailRect != null)
+        {
+            if (targetHealthFill < targetTrailFill)
+            {
+                trailDelayTimer = Mathf.Max(0f, trailDelayTimer - Time.deltaTime);
+                if (trailDelayTimer <= 0f)
+                    targetTrailFill = Mathf.MoveTowards(
+                        targetTrailFill,
+                        targetHealthFill,
+                        trailReduceSpeed * Time.deltaTime);
+            }
+            else if (targetHealthFill > targetTrailFill)
+            {
+                targetTrailFill = targetHealthFill;
+                trailDelayTimer = 0f;
+            }
+
+            SetTrailFill(targetTrailFill);
+        }
 
         // A dead Leon ignores further hits.
         if (isDead) return;
@@ -188,6 +233,7 @@ public class PlayerHealthHurt : MonoBehaviour
 
         hurtCount++;
         targetHealthFill = Mathf.Clamp01(1f - (float)hurtCount / hitsBeforeDeath);
+        trailDelayTimer = trailDelay;
         if (hurtCount >= hitsBeforeDeath)
         {
             Die();
@@ -277,6 +323,15 @@ public class PlayerHealthHurt : MonoBehaviour
     {
         if (animator == null) return false;
         return animator.GetCurrentAnimatorStateInfo(0).IsName(hurtStateName);
+    }
+
+    private void SetTrailFill(float fill)
+    {
+        if (healthTrailRect == null) return;
+
+        Vector3 scale = trailOriginalScale;
+        scale.x *= Mathf.Clamp01(fill);
+        healthTrailRect.localScale = scale;
     }
 
 }

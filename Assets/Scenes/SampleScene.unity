@@ -501,6 +501,9 @@ MonoBehaviour:
   hitsBeforeDeath: 5
   healthBar: {fileID: 339471874}
   healthFillSmoothSpeed: 1.5
+  healthTrailImage: {fileID: 659336459}
+  trailReduceSpeed: 0.65
+  trailDelay: 0.35
   animator: {fileID: 339679980}
   hurtTrigger: Hurt
   deathTrigger: Death
@@ -1887,6 +1890,9 @@ MonoBehaviour:
   hitsBeforeDeath: 5
   healthBar: {fileID: 682436168}
   healthFillSmoothSpeed: 1.5
+  healthTrailImage: {fileID: 1891017624}
+  trailReduceSpeed: 0.65
+  trailDelay: 0.35
   animator: {fileID: 1200955315}
   hurtTrigger: Hurt
   deathTrigger: Death
@@ -2179,14 +2185,14 @@ RectTransform:
   m_GameObject: {fileID: 1549929884}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.235, y: 0.15273477, z: 0.25078526}
+  m_LocalScale: {x: 0.235, y: 0.095260665, z: 0.25078526}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 377201877}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -82.5, y: 2}
+  m_AnchoredPosition: {x: -82.5, y: 1.6}
   m_SizeDelta: {x: 2093, y: 165.08057}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1549929886
