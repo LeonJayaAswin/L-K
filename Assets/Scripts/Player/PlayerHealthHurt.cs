@@ -3,19 +3,25 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 /// <summary>
-/// Hit reactions and health for Leon.
+/// Hit reactions and health for Leon and Krush.
 ///
 /// Enemy attacks call <see cref="TakeHit"/>. Every hit plays the Hurt
 /// trigger, and the hit that reaches <see cref="hitsBeforeDeath"/> plays Death
 /// instead and takes control away for good. Both triggers are wired to Any
-/// State transitions in Leon.controller, so they interrupt whatever he is
-/// doing. H is only an optional debug key; by default enemies are the damage
-/// source and five of their hits kill Leon.
+/// State transitions in the character's controller, so they interrupt
+/// whatever they are doing. H is only an optional debug key; by default
+/// enemies are the damage source and five of their hits kill the character.
 ///
 /// The death clips are centre-pivoted sprite swaps, so their visible bottom
 /// rises as the frames get shorter. While Death plays, the sprite bottom is
-/// pinned to the ground line captured when Leon died, which keeps the corpse
-/// on the floor instead of floating.
+/// pinned to the ground line captured when the character died, which keeps
+/// the corpse on the floor instead of floating.
+///
+/// The Hurt clips have the same problem, but the body is still simulated while
+/// they play, so the transform cannot be moved without fighting physics. The
+/// hurt frame is therefore drawn through a small child renderer whose offset
+/// keeps the visible bottom on the floor while the collider and rigidbody stay
+/// where they are.
 /// </summary>
 [RequireComponent(typeof(Animator))]
 [AddComponentMenu("L&K/Player/Player Health Hurt")]
@@ -29,7 +35,7 @@ public class PlayerHealthHurt : MonoBehaviour
     [SerializeField] private Key hurtKey = Key.H;
 
     [Header("Hits")]
-    [Tooltip("How many hits Leon can take. The hit that reaches this number plays Death.")]
+    [Tooltip("How many hits the character can take. The hit that reaches this number plays Death.")]
     [SerializeField, Min(1)] private int hitsBeforeDeath = 5;
 
     [Header("Health Bar")]
@@ -43,9 +49,8 @@ public class PlayerHealthHurt : MonoBehaviour
     private float trailDelayTimer;
     private RectTransform healthTrailRect;
     private Vector3 trailOriginalScale;
-    private Vector2 trailOriginalAnchoredPosition;
-    private Vector2 trailOriginalPivot;
-    private float trailLeftEdge;
+    private bool trailUsesFillAmount;
+    private Material trailMaterial;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -56,8 +61,12 @@ public class PlayerHealthHurt : MonoBehaviour
     [Tooltip("Trigger that plays the Death reaction.")]
     [SerializeField] private string deathTrigger = "Death";
 
-    [Tooltip("Animator state that the Hurt trigger moves into. Used to keep Leon staggered for as long as it is on screen.")]
+    [Tooltip("Animator state that the Hurt trigger moves into. Used to keep the character staggered for as long as it is on screen.")]
     [SerializeField] private string hurtStateName = "Hurt";
+
+    [Header("Hurt Grounding")]
+    [Tooltip("Pins the bottom of the hurt sprite to the floor so a centre-pivoted frame cannot lift the character off the ground. The rigidbody is left alone.")]
+    [SerializeField] private bool pinHurtToGround = true;
 
     [Header("Death Grounding")]
     [Tooltip("Pins the bottom of the death sprite to the ground so the corpse cannot float up as its frames get shorter.")]
@@ -74,8 +83,11 @@ public class PlayerHealthHurt : MonoBehaviour
     [Tooltip("Movement script, locked while the Hurt animation plays.")]
     [SerializeField] private PlayerMovement2D movement;
 
-    [Tooltip("Attack script, disabled once Leon dies.")]
+    [Tooltip("Attack script, disabled once the character dies.")]
     [SerializeField] private PlayerAttack2D attack;
+
+    [Tooltip("Push script, cancelled when the character is hit and disabled once the character dies.")]
+    [SerializeField] private PlayerPush2D push;
 
     private int hurtCount;
     private bool isDead;
@@ -83,6 +95,9 @@ public class PlayerHealthHurt : MonoBehaviour
     private int deathTriggerHash;
     private float deathGroundY;
     private float hurtPendingTimer;
+    private SpriteRenderer hurtPinRenderer;
+    private bool isHurtPinned;
+    private float hurtGroundY;
 
     private const float HurtLockGraceTime = 0.3f;
 
@@ -97,6 +112,7 @@ public class PlayerHealthHurt : MonoBehaviour
         if (animator == null) animator = GetComponent<Animator>();
         if (movement == null) movement = GetComponent<PlayerMovement2D>();
         if (attack == null) attack = GetComponent<PlayerAttack2D>();
+        if (push == null) push = GetComponent<PlayerPush2D>();
         if (spriteRenderer == null) spriteRenderer = GetComponent<SpriteRenderer>();
         if (bodyCollider == null) bodyCollider = GetComponent<Collider2D>();
         if (body == null) body = GetComponent<Rigidbody2D>();
@@ -124,17 +140,7 @@ public class PlayerHealthHurt : MonoBehaviour
 
         if (healthTrailImage != null)
         {
-            healthTrailRect = healthTrailImage.rectTransform;
-            trailOriginalScale = healthTrailRect.localScale;
-            trailOriginalAnchoredPosition = healthTrailRect.anchoredPosition;
-            trailOriginalPivot = healthTrailRect.pivot;
-            trailLeftEdge = trailOriginalAnchoredPosition.x
-                - healthTrailRect.rect.width * trailOriginalScale.x * trailOriginalPivot.x;
-
-            // Keep the Inspector image as authored and anchor its left edge.
-            healthTrailRect.pivot = new Vector2(0f, trailOriginalPivot.y);
-            healthTrailRect.anchoredPosition = new Vector2(trailLeftEdge, trailOriginalAnchoredPosition.y);
-            SetTrailFill(1f);
+            SetUpTrail();
         }
 
         hurtTriggerHash = Animator.StringToHash(hurtTrigger);
@@ -169,7 +175,7 @@ public class PlayerHealthHurt : MonoBehaviour
             SetTrailFill(targetTrailFill);
         }
 
-        // A dead Leon ignores further hits.
+        // A dead character ignores further hits.
         if (isDead) return;
 
         if (enableDebugHurtKey && Keyboard.current != null && Keyboard.current[hurtKey].wasPressedThisFrame)
@@ -180,7 +186,7 @@ public class PlayerHealthHurt : MonoBehaviour
             if (isDead) return;
         }
 
-        // Hold Leon in place only while the Hurt state is actually playing.
+        // Hold the character in place only while the Hurt state is actually playing.
         // The short grace timer also covers the frame between setting the
         // trigger and the Animator entering the state; if the Animator never
         // enters it, the timer expires and control is handed back.
@@ -191,7 +197,27 @@ public class PlayerHealthHurt : MonoBehaviour
             bool hurtPlaying = IsHurtPlaying();
             if (hurtPlaying) hurtPendingTimer = 0f;
 
-            movement.IsHurt = hurtPlaying || hurtPendingTimer > 0f;
+            bool hurtLocked = hurtPlaying || hurtPendingTimer > 0f;
+            movement.IsHurt = hurtLocked;
+
+            if (pinHurtToGround)
+            {
+                // Start pinning as soon as the reaction locks the character and
+                // the feet are on the floor. A hit taken in mid-air is pinned
+                // once the body settles instead of freezing the sprite in air.
+                if (hurtLocked && !isHurtPinned && movement.IsGrounded)
+                    StartHurtPin();
+                else if (!hurtLocked && isHurtPinned)
+                    StopHurtPin();
+            }
+            else if (isHurtPinned)
+            {
+                StopHurtPin();
+            }
+        }
+        else if (isHurtPinned)
+        {
+            StopHurtPin();
         }
     }
 
@@ -201,7 +227,13 @@ public class PlayerHealthHurt : MonoBehaviour
     /// </summary>
     private void LateUpdate()
     {
-        if (!isDead || !pinDeathToGround) return;
+        if (!isDead)
+        {
+            if (isHurtPinned) UpdateHurtPin();
+            return;
+        }
+
+        if (!pinDeathToGround) return;
         if (spriteRenderer == null || spriteRenderer.sprite == null) return;
 
         // Centre-pivoted death frames shrink as Leon collapses, which would
@@ -223,9 +255,101 @@ public class PlayerHealthHurt : MonoBehaviour
     }
 
     /// <summary>
+    /// Starts drawing the hurt animation through an offset child renderer.
+    /// The collider and rigidbody stay exactly where physics put them; only
+    /// the sprite is shifted so the visible feet cannot rise with the frame.
+    /// </summary>
+    private void StartHurtPin()
+    {
+        if (spriteRenderer == null || spriteRenderer.sprite == null) return;
+
+        if (hurtPinRenderer == null)
+        {
+            var pinObject = new GameObject("Hurt Sprite");
+            pinObject.layer = gameObject.layer;
+            pinObject.transform.SetParent(transform, false);
+            hurtPinRenderer = pinObject.AddComponent<SpriteRenderer>();
+            hurtPinRenderer.enabled = false;
+        }
+
+        isHurtPinned = true;
+
+        // Remember the floor line before the first hurt frame is swapped in.
+        hurtGroundY = CurrentSpriteBottom();
+
+        CopySpriteToPin();
+        spriteRenderer.enabled = false;
+        hurtPinRenderer.enabled = true;
+        UpdateHurtPin();
+    }
+
+    /// <summary>
+    /// Stops the pinned draw and hands rendering back to the real renderer.
+    /// </summary>
+    private void StopHurtPin()
+    {
+        isHurtPinned = false;
+
+        if (hurtPinRenderer != null) hurtPinRenderer.enabled = false;
+        if (spriteRenderer != null) spriteRenderer.enabled = true;
+    }
+
+    /// <summary>
+    /// Mirrors the Animator's sprite on the pin renderer so the hurt frames can
+    /// be drawn at an offset without moving the whole character.
+    /// </summary>
+    private void UpdateHurtPin()
+    {
+        if (!isHurtPinned || hurtPinRenderer == null || spriteRenderer == null) return;
+
+        CopySpriteToPin();
+
+        Sprite sprite = spriteRenderer.sprite;
+        if (sprite == null) return;
+
+        float scaleY = Mathf.Abs(transform.lossyScale.y);
+        if (scaleY < 0.0001f) return;
+
+        float spriteBottom = transform.position.y + sprite.bounds.min.y * scaleY;
+        float offset = (hurtGroundY - spriteBottom) / scaleY;
+        hurtPinRenderer.transform.localPosition = new Vector3(0f, offset, 0f);
+    }
+
+    private void CopySpriteToPin()
+    {
+        if (hurtPinRenderer == null || spriteRenderer == null) return;
+
+        hurtPinRenderer.sprite = spriteRenderer.sprite;
+        hurtPinRenderer.flipX = spriteRenderer.flipX;
+        hurtPinRenderer.flipY = spriteRenderer.flipY;
+        hurtPinRenderer.color = spriteRenderer.color;
+        hurtPinRenderer.sortingLayerID = spriteRenderer.sortingLayerID;
+        hurtPinRenderer.sortingOrder = spriteRenderer.sortingOrder;
+        hurtPinRenderer.sharedMaterial = spriteRenderer.sharedMaterial;
+        hurtPinRenderer.drawMode = spriteRenderer.drawMode;
+        hurtPinRenderer.size = spriteRenderer.size;
+        hurtPinRenderer.maskInteraction = spriteRenderer.maskInteraction;
+        hurtPinRenderer.spriteSortPoint = spriteRenderer.spriteSortPoint;
+    }
+
+    /// <summary>World Y of the bottom of the sprite currently on screen.</summary>
+    private float CurrentSpriteBottom()
+    {
+        if (spriteRenderer == null || spriteRenderer.sprite == null) return transform.position.y;
+
+        float scaleY = Mathf.Abs(transform.lossyScale.y);
+        return transform.position.y + spriteRenderer.sprite.bounds.min.y * scaleY;
+    }
+
+    private void OnDisable()
+    {
+        StopHurtPin();
+    }
+
+    /// <summary>
     /// Registers one hit, called by an enemy attack. The hit that reaches the
-    /// death threshold kills Leon instead of staggering him, so five skeleton
-    /// hits kill him on the fifth.
+    /// death threshold kills the character instead of staggering them, so five
+    /// skeleton hits kill on the fifth.
     /// </summary>
     public void TakeHit()
     {
@@ -234,6 +358,11 @@ public class PlayerHealthHurt : MonoBehaviour
         hurtCount++;
         targetHealthFill = Mathf.Clamp01(1f - (float)hurtCount / hitsBeforeDeath);
         trailDelayTimer = trailDelay;
+
+        // A hit interrupts a push. Otherwise the hold would keep the Push
+        // animation parameter set and fight the Hurt animation.
+        if (push != null) push.EndPush();
+
         if (hurtCount >= hitsBeforeDeath)
         {
             Die();
@@ -255,6 +384,10 @@ public class PlayerHealthHurt : MonoBehaviour
     private void Die()
     {
         isDead = true;
+
+        // The Death pin takes over from the hurt pin and moves the whole
+        // corpse, so hand rendering back to the real sprite renderer first.
+        StopHurtPin();
 
         // Remember where the floor is before the body is taken out of physics.
         deathGroundY = ResolveGroundY();
@@ -279,6 +412,12 @@ public class PlayerHealthHurt : MonoBehaviour
 
         if (attack != null) attack.enabled = false;
 
+        if (push != null)
+        {
+            push.EndPush();
+            push.enabled = false;
+        }
+
         // The corpse no longer needs physics. Freezing the body lets LateUpdate
         // slide the sprite onto the floor without the collider fighting it.
         if (body != null)
@@ -290,9 +429,10 @@ public class PlayerHealthHurt : MonoBehaviour
     }
 
     /// <summary>
-    /// The Y of the ground Leon falls onto. While he is standing this is simply
-    /// the bottom of his collider; when he dies in mid-air the first walkable
-    /// collider below him is used so the corpse does not hang in the air.
+    /// The Y of the ground the character falls onto. While standing this is
+    /// simply the bottom of the collider; when death happens in mid-air the
+    /// first walkable collider below is used so the corpse does not hang in
+    /// the air.
     /// </summary>
     private float ResolveGroundY()
     {
@@ -325,12 +465,106 @@ public class PlayerHealthHurt : MonoBehaviour
         return animator.GetCurrentAnimatorStateInfo(0).IsName(hurtStateName);
     }
 
+    private void SetUpTrail()
+    {
+        healthTrailRect = healthTrailImage.rectTransform;
+
+        RectTransform fillRect = healthBar != null ? healthBar.fillRect : null;
+        Image fillImage = fillRect != null ? fillRect.GetComponent<Image>() : null;
+
+        // The authored trail is a plain rectangle with its own rect and scale,
+        // so after a hit its bright edge shows around the bar art. Copy the
+        // fill's transform and sprite instead: both graphics then share one
+        // silhouette, and the trail stays the first sibling so the fill always
+        // paints over the part of it that is still full.
+        if (fillRect != null)
+        {
+            if (healthTrailRect.parent != fillRect.parent)
+                healthTrailRect.SetParent(fillRect.parent, false);
+
+            healthTrailRect.anchorMin = fillRect.anchorMin;
+            healthTrailRect.anchorMax = fillRect.anchorMax;
+            healthTrailRect.pivot = fillRect.pivot;
+            healthTrailRect.anchoredPosition = fillRect.anchoredPosition;
+            healthTrailRect.sizeDelta = fillRect.sizeDelta;
+            healthTrailRect.localScale = fillRect.localScale;
+            healthTrailRect.localRotation = fillRect.localRotation;
+
+            if (healthTrailRect.GetSiblingIndex() > fillRect.GetSiblingIndex())
+                healthTrailRect.SetSiblingIndex(fillRect.GetSiblingIndex());
+        }
+
+        trailOriginalScale = healthTrailRect.localScale;
+
+        trailUsesFillAmount = false;
+        if (fillImage != null && fillImage.sprite != null)
+        {
+            healthTrailImage.sprite = fillImage.sprite;
+            healthTrailImage.type = Image.Type.Filled;
+            healthTrailImage.fillMethod = Image.FillMethod.Horizontal;
+            healthTrailImage.fillOrigin = (int)Image.OriginHorizontal.Left;
+            healthTrailImage.fillClockwise = fillImage.fillClockwise;
+            healthTrailImage.preserveAspect = false;
+            healthTrailImage.useSpriteMesh = false;
+            trailUsesFillAmount = true;
+        }
+        else
+        {
+            // No fill art to borrow: keep the old plain rectangle, but shrink
+            // it from its left edge so the trail still drains rightwards.
+            Vector2 pivot = healthTrailRect.pivot;
+            float leftEdge = healthTrailRect.anchoredPosition.x
+                - healthTrailRect.rect.width * healthTrailRect.localScale.x * pivot.x;
+            healthTrailRect.pivot = new Vector2(0f, pivot.y);
+            healthTrailRect.anchoredPosition = new Vector2(leftEdge, healthTrailRect.anchoredPosition.y);
+        }
+
+        healthTrailImage.raycastTarget = false;
+        healthTrailImage.color = Color.white;
+
+        // The trail borrows the fill's art, so a normal tint would make it the
+        // exact same colour as the health and it would vanish behind the fill.
+        // UI/Default multiplies its pixels by the material's _Color; pushing
+        // that far past white turns the whole silhouette into a flat pale
+        // ghost while keeping the sprite's alpha (and therefore its exact
+        // shape and rounded ends).
+        if (trailMaterial == null)
+        {
+            trailMaterial = new Material(healthTrailImage.material)
+            {
+                name = "Health Trail Silhouette"
+            };
+
+            if (trailMaterial.HasProperty("_Color"))
+                trailMaterial.SetColor("_Color", new Color(255f, 255f, 255f, 1f));
+
+            healthTrailImage.material = trailMaterial;
+        }
+
+        SetTrailFill(1f);
+    }
+
+    private void OnDestroy()
+    {
+        if (trailMaterial != null) Destroy(trailMaterial);
+    }
+
     private void SetTrailFill(float fill)
     {
+        if (healthTrailImage == null) return;
+
+        fill = Mathf.Clamp01(fill);
+
+        if (trailUsesFillAmount)
+        {
+            healthTrailImage.fillAmount = fill;
+            return;
+        }
+
         if (healthTrailRect == null) return;
 
         Vector3 scale = trailOriginalScale;
-        scale.x *= Mathf.Clamp01(fill);
+        scale.x *= fill;
         healthTrailRect.localScale = scale;
     }
 

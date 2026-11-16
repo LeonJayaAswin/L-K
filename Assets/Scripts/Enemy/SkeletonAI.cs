@@ -7,10 +7,13 @@ using UnityEngine;
 ///  - Idles for <see cref="idleTime"/> seconds, then patrols
 ///    <see cref="patrolDistance"/> metres left and right with the Walk clip.
 ///  - Patrols back to an Idle pause at each end, then walks the other way.
-///  - When the player comes within <see cref="detectionRange"/> the skeleton
-///    chases with a faster walk, stops at <see cref="attackRange"/> and
-///    alternates Attack1/Attack2. Each attack calls PlayerHealthHurt.TakeHit,
-///    so five skeleton hits kill Leon.
+///  - When either player (Leon or Krush) comes within
+///    <see cref="detectionRange"/> the skeleton chases the nearest one with a
+///    faster walk, stops at <see cref="attackRange"/> and alternates
+///    Attack1/Attack2. Each attack calls PlayerHealthHurt.TakeHit on the
+///    player it is facing, so five skeleton hits kill that player.
+///  - The target is re-picked as the two players move, so Krush is chased and
+///    attacked exactly like Leon, and a dying player is dropped for the other.
 ///  - Every swing of Leon's sword (Attack1 or the Attack2 combo) can hit the
 ///    skeleton once. A hit plays TakeHit, knocks the skeleton back a few steps
 ///    and interrupts whatever it was doing. Five sword hits kill it.
@@ -45,6 +48,9 @@ public class SkeletonAI : MonoBehaviour
 
     [Tooltip("How far the player can run before the skeleton gives up and goes back to patrolling.")]
     [SerializeField, Min(0.5f)] private float loseTargetRange = 8f;
+
+    [Tooltip("How much closer the other player has to be before the skeleton switches target, so it cannot flip-flop when Leon and Krush stand together.")]
+    [SerializeField, Min(0f)] private float targetSwitchDistance = 0.5f;
 
     [Tooltip("Chase speed. The Walk clip is sped up to match so the legs read as a fast walk. Match to player speed.")]
     [SerializeField, Min(0.1f)] private float chaseSpeed = 3f;
@@ -113,9 +119,10 @@ public class SkeletonAI : MonoBehaviour
     [SerializeField] private string deathState = "Death";
 
     [Header("References")]
-    [Tooltip("Leon's transform. Left empty, the PlayerHealthHurt component is found automatically.")]
+    [Tooltip("Current target, normally Leon or Krush. Left empty, the players are found by their PlayerHealthHurt component.")]
     [SerializeField] private Transform player;
 
+    [Tooltip("Current target's health. Drives which player the skeleton chases and hits.")]
     [SerializeField] private PlayerHealthHurt playerHealth;
     [SerializeField] private PlayerMovement2D playerMovement;
     [SerializeField] private Animator animator;
@@ -146,6 +153,12 @@ public class SkeletonAI : MonoBehaviour
     private int hitsTaken;
     private float playerSearchTimer;
 
+    // Every living-and-dead player in the scene. The skeleton keeps the full
+    // list so it can pick the nearest one and fall back to the other when one
+    // of them dies.
+    private PlayerHealthHurt[] players = System.Array.Empty<PlayerHealthHurt>();
+    private readonly System.Collections.Generic.List<PlayerHealthHurt> playerBuffer = new System.Collections.Generic.List<PlayerHealthHurt>();
+
     private bool isDead;
     private float deathGroundY;
     private string currentAnimation;
@@ -168,6 +181,7 @@ public class SkeletonAI : MonoBehaviour
         if (body != null) body.sleepMode = RigidbodySleepMode2D.NeverSleep;
 
         ResolvePlayerReferences();
+        UpdateTarget();
     }
 
     private void Start()
@@ -184,21 +198,25 @@ public class SkeletonAI : MonoBehaviour
     {
         if (isDead) return;
 
-        // A player spawned after the scene loaded is still picked up.
+        // Players spawned after the scene loaded are still picked up. The list
+        // is also refreshed here because a player can be disabled or removed,
+        // and the other one has to take over as the target.
+        playerSearchTimer -= Time.deltaTime;
+        if (playerSearchTimer <= 0f)
+        {
+            playerSearchTimer = 0.5f;
+            ResolvePlayerReferences();
+        }
+
+        UpdateTarget();
+
         if (player == null)
         {
-            playerSearchTimer -= Time.deltaTime;
-            if (playerSearchTimer <= 0f)
-            {
-                playerSearchTimer = 0.5f;
-                ResolvePlayerReferences();
-            }
-
-            if (player == null)
-            {
-                desiredVelocityX = 0f;
-                return;
-            }
+            // Nobody left to fight: stop walking and settle back into Idle
+            // without restarting the idle timer every frame.
+            desiredVelocityX = 0f;
+            if (state != State.Idle && state != State.Hurt) EnterIdle(idleTime);
+            return;
         }
 
         bool playerAlive = playerHealth == null || !playerHealth.IsDead;
@@ -431,15 +449,40 @@ public class SkeletonAI : MonoBehaviour
 
     private void TryHitPlayer()
     {
-        if (playerHealth == null || playerHealth.IsDead || player == null) return;
+        // The swing lands on the nearest living player it is facing, so the
+        // skeleton can fight Krush exactly like Leon. Anyone who stepped out of
+        // reach during the wind-up is spared.
+        PlayerHealthHurt victim = null;
+        float bestDistance = float.MaxValue;
 
-        float dx = Mathf.Abs(player.position.x - transform.position.x);
-        if (dx > attackHitReach) return;
+        bool facingRight = spriteRenderer == null || !spriteRenderer.flipX;
+        float forward = facingRight ? 1f : -1f;
 
-        // Keep the blow believable: the player can jump over the skeleton.
-        if (Mathf.Abs(player.position.y - transform.position.y) > 2f) return;
+        foreach (PlayerHealthHurt candidate in players)
+        {
+            if (candidate == null || candidate.IsDead) continue;
 
-        playerHealth.TakeHit();
+            Vector2 target = candidate.transform.position;
+            float dx = target.x - transform.position.x;
+            float absDx = Mathf.Abs(dx);
+
+            if (absDx > attackHitReach) continue;
+
+            // Keep the blow believable: the player can jump over the skeleton.
+            if (Mathf.Abs(target.y - transform.position.y) > 2f) continue;
+
+            // Only hit what the skeleton is facing. The tiny dead zone keeps a
+            // player who is standing right on top of it hittable.
+            if (absDx > 0.2f && Mathf.Sign(dx) != forward) continue;
+
+            if (absDx < bestDistance)
+            {
+                bestDistance = absDx;
+                victim = candidate;
+            }
+        }
+
+        if (victim != null) victim.TakeHit();
     }
 
     /// <summary>
@@ -568,27 +611,77 @@ public class SkeletonAI : MonoBehaviour
 
     private void ResolvePlayerReferences()
     {
-        if (playerHealth == null)
+        playerBuffer.Clear();
+
+        PlayerHealthHurt[] found = FindObjectsByType<PlayerHealthHurt>(FindObjectsInactive.Exclude);
+        foreach (PlayerHealthHurt candidate in found)
         {
-            playerHealth = FindAnyObjectByType<PlayerHealthHurt>();
+            if (candidate == null) continue;
+            if (!playerBuffer.Contains(candidate)) playerBuffer.Add(candidate);
         }
 
-        if (playerHealth != null)
+        // An explicitly assigned player is kept even if it is temporarily
+        // missing from the search, so the skeleton still remembers it.
+        if (playerHealth != null && !playerBuffer.Contains(playerHealth))
         {
-            if (player == null) player = playerHealth.transform;
-            if (playerMovement == null) playerMovement = playerHealth.GetComponent<PlayerMovement2D>();
+            playerBuffer.Add(playerHealth);
         }
 
-        if (player == null)
+        // Last-resort fallback for a character tagged as the player.
+        if (playerBuffer.Count == 0 && player == null)
         {
-            GameObject found = GameObject.FindGameObjectWithTag("Player");
-            if (found != null) player = found.transform;
+            GameObject foundPlayer = GameObject.FindGameObjectWithTag("Player");
+            if (foundPlayer != null)
+            {
+                PlayerHealthHurt taggedHealth = foundPlayer.GetComponent<PlayerHealthHurt>();
+                if (taggedHealth != null) playerBuffer.Add(taggedHealth);
+            }
         }
 
-        if (player != null)
+        players = playerBuffer.ToArray();
+    }
+
+    /// <summary>
+    /// Picks the nearest living player as the target. The current target is
+    /// kept unless the other player is clearly closer, which stops the
+    /// skeleton from flipping direction when Leon and Krush stand together.
+    /// </summary>
+    private void UpdateTarget()
+    {
+        PlayerHealthHurt best = null;
+        float bestDistance = float.MaxValue;
+
+        foreach (PlayerHealthHurt candidate in players)
         {
-            if (playerHealth == null) playerHealth = player.GetComponent<PlayerHealthHurt>();
-            if (playerMovement == null) playerMovement = player.GetComponent<PlayerMovement2D>();
+            if (candidate == null || candidate.IsDead) continue;
+
+            float distance = Vector2.Distance(transform.position, candidate.transform.position);
+            if (distance < bestDistance)
+            {
+                bestDistance = distance;
+                best = candidate;
+            }
         }
+
+        if (best == null)
+        {
+            // Both players are dead. Clearing the target lets the skeleton
+            // return to Idle and stop chasing a corpse.
+            player = null;
+            return;
+        }
+
+        if (playerHealth != null && playerHealth != best && !playerHealth.IsDead)
+        {
+            float currentDistance = Vector2.Distance(transform.position, playerHealth.transform.position);
+            if (bestDistance + targetSwitchDistance >= currentDistance)
+            {
+                best = playerHealth;
+            }
+        }
+
+        playerHealth = best;
+        player = playerHealth.transform;
+        playerMovement = playerHealth.GetComponent<PlayerMovement2D>();
     }
 }

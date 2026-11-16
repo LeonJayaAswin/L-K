@@ -111,6 +111,14 @@ public class PlayerPush2D : MonoBehaviour
 
     private void Update()
     {
+        // A hurt player can't push. This also stops a held button from
+        // restarting the push on the frame after a hit cancelled it.
+        if (movement != null && movement.IsHurt)
+        {
+            if (isPushing) EndPush();
+            return;
+        }
+
         if (isPushing)
         {
             // Push requires holding the button. Releasing it (or cancelling)
