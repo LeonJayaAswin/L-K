@@ -66,10 +66,18 @@ public static class SetupWhiteTrail
 
             RectTransform fillRect = fill.rectTransform;
             RectTransform trailRect = trail.rectTransform;
+            // Left-align, do not centre. A centred inset puts the trail's
+            // left edge right of the fill's left edge, so at low fill amounts
+            // its proportional right edge pokes past the fill and leaves a
+            // white sliver after 3-4 hits. Sharing the fill's left edge means
+            // the trail is always the shorter graphic, at every fill amount.
+            // Use rect.width, not sizeDelta.x: these are stretched anchors,
+            // so sizeDelta omits the parent-driven part of the width.
+            float fillLeft = fillRect.anchoredPosition.x - fillRect.pivot.x * fillRect.rect.width;
             trailRect.anchorMin = fillRect.anchorMin;
             trailRect.anchorMax = fillRect.anchorMax;
-            trailRect.pivot = fillRect.pivot;
-            trailRect.anchoredPosition = fillRect.anchoredPosition;
+            trailRect.pivot = new Vector2(0f, fillRect.pivot.y);
+            trailRect.anchoredPosition = new Vector2(fillLeft, fillRect.anchoredPosition.y);
             trailRect.sizeDelta = new Vector2(fillRect.sizeDelta.x * (1f - Inset), fillRect.sizeDelta.y * (1f - Inset));
             trailRect.localScale = fillRect.localScale;
             trailRect.localRotation = fillRect.localRotation;

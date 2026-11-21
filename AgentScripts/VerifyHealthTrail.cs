@@ -61,13 +61,16 @@ public static class VerifyHealthTrail
                 trail.sprite != null && trail.sprite.name == "HealthTrailWhite" && IsAllWhite(trail.sprite));
             Check(results, health.name + " fill keeps its own bar art",
                 GetFillImage(health).sprite != trail.sprite);
-            Check(results, health.name + " trail is inset inside fill",
+            float fillLeft = fillRect.anchoredPosition.x - fillRect.pivot.x * fillRect.rect.width;
+            float trailLeft = trailRect.anchoredPosition.x - trailRect.pivot.x * trailRect.rect.width;
+            Check(results, health.name + " trail left-aligned and inset inside fill",
                 trailRect.anchorMin == fillRect.anchorMin &&
                 trailRect.anchorMax == fillRect.anchorMax &&
-                trailRect.pivot == fillRect.pivot &&
-                trailRect.anchoredPosition == fillRect.anchoredPosition &&
-                trailRect.sizeDelta.x < fillRect.sizeDelta.x &&
-                trailRect.sizeDelta.y < fillRect.sizeDelta.y &&
+                Mathf.Approximately(trailRect.pivot.x, 0f) &&
+                Mathf.Approximately(trailRect.pivot.y, fillRect.pivot.y) &&
+                Mathf.Abs(trailLeft - fillLeft) < 0.01f &&
+                trailRect.rect.width < fillRect.rect.width &&
+                trailRect.rect.height < fillRect.rect.height &&
                 trailRect.localScale == fillRect.localScale);
             Check(results, health.name + " trail is behind fill",
                 trailRect.GetSiblingIndex() < fillRect.GetSiblingIndex());
@@ -78,6 +81,136 @@ public static class VerifyHealthTrail
                 + " trailTarget=" + state.Trail.ToString("F3")
                 + " trailFillAmount=" + trail.fillAmount.ToString("F3")
                 + " tint=" + trail.color);
+        }
+        return results.ToString();
+    }
+
+    /// <summary>
+    /// Measures the drawn left/right edges of fill and trail at the fill
+    /// amounts reached by 1-4 hits. Both use a left-origin Filled image, so
+    /// rightEdge = leftEdge + fillAmount * width. Anchors and parent match,
+    /// comparing anchoredPosition - pivot*width puts both in parent space.
+    /// </summary>
+    public static string Geometry()
+    {
+        var results = new StringBuilder();
+
+        foreach (PlayerHealthHurt health in Object.FindObjectsByType<PlayerHealthHurt>())
+        {
+            Image trail = (Image)typeof(PlayerHealthHurt)
+                .GetField("healthTrailImage", Flags).GetValue(health);
+            Image fillImage = GetFillImage(health);
+            if (trail == null || fillImage == null) continue;
+
+            RectTransform f = fillImage.rectTransform;
+            RectTransform t = trail.rectTransform;
+
+            float fLeft = f.anchoredPosition.x - f.pivot.x * f.rect.width;
+            float tLeft = t.anchoredPosition.x - t.pivot.x * t.rect.width;
+
+            results.AppendLine(health.name
+                + " fill(width=" + f.rect.width.ToString("F2")
+                + " left=" + fLeft.ToString("F2")
+                + " pivot=" + f.pivot.x.ToString("F2") + ")"
+                + " trail(width=" + t.rect.width.ToString("F2")
+                + " left=" + tLeft.ToString("F2")
+                + " pivot=" + t.pivot.x.ToString("F2") + ")");
+
+            foreach (float amount in new[] { 1f, 0.8f, 0.6f, 0.4f, 0.2f })
+            {
+                float fRight = fLeft + amount * f.rect.width;
+                float tRight = tLeft + amount * t.rect.width;
+                results.AppendLine("  a=" + amount.ToString("F1")
+                    + " fillRight=" + fRight.ToString("F2")
+                    + " trailRight=" + tRight.ToString("F2")
+                    + " overhang=" + (tRight - fRight).ToString("F2"));
+            }
+        }
+        return results.ToString();
+    }
+
+    /// <summary>
+    /// Settled-state check: when the trail has caught up with the fill, its
+    /// right edge must never extend past the fill's right edge at any health
+    /// level. This is the sliver seen after 3-4 hits.
+    /// </summary>
+    public static string Edges()
+    {
+        var results = new StringBuilder();
+
+        foreach (PlayerHealthHurt health in Object.FindObjectsByType<PlayerHealthHurt>())
+        {
+            Image trail = (Image)typeof(PlayerHealthHurt)
+                .GetField("healthTrailImage", Flags).GetValue(health);
+            Image fillImage = GetFillImage(health);
+            if (trail == null || fillImage == null) continue;
+
+            RectTransform f = fillImage.rectTransform;
+            RectTransform t = trail.rectTransform;
+            float fLeft = f.anchoredPosition.x - f.pivot.x * f.rect.width;
+            float tLeft = t.anchoredPosition.x - t.pivot.x * t.rect.width;
+
+            foreach (float amount in new[] { 1f, 0.8f, 0.6f, 0.4f, 0.2f, 0f })
+            {
+                float fRight = fLeft + amount * f.rect.width;
+                float tRight = tLeft + amount * t.rect.width;
+                Check(results, health.name + " no trail overhang at " + amount.ToString("F1"),
+                    tRight <= fRight + 0.01f);
+            }
+        }
+        return results.ToString();
+    }
+
+    /// <summary>
+    /// Dynamic check for the 4-hit case: drive the real Update until the trail
+    /// has drained, then assert it settles at exactly the health fill level
+    /// and still sits inside the fill.
+    /// </summary>
+    public static string Converge()
+    {
+        var results = new StringBuilder();
+        SkeletonAI skeleton = Object.FindAnyObjectByType<SkeletonAI>();
+        if (skeleton != null) skeleton.enabled = false;
+
+        System.Type type = typeof(PlayerHealthHurt);
+        MethodInfo update = type.GetMethod("Update", Flags);
+        FieldInfo healthField = type.GetField("targetHealthFill", Flags);
+        FieldInfo trailField = type.GetField("targetTrailFill", Flags);
+        FieldInfo timerField = type.GetField("trailDelayTimer", Flags);
+
+        foreach (PlayerHealthHurt health in Object.FindObjectsByType<PlayerHealthHurt>())
+        {
+            Image trail = (Image)type.GetField("healthTrailImage", Flags).GetValue(health);
+            Slider bar = GetHealthBar(health);
+            if (trail == null || bar == null) continue;
+
+            // Four hits out of five: health at 0.2, trail still full.
+            healthField.SetValue(health, 0.2f);
+            trailField.SetValue(health, 1f);
+            timerField.SetValue(health, 0.35f);
+
+            for (int i = 0; i < 600; i++) update.Invoke(health, null);
+
+            float healthFill = bar.value;
+            float trailFill = trail.fillAmount;
+            Check(results, health.name + " trail settles with health fill",
+                Mathf.Abs(trailFill - healthFill) < 0.01f);
+            Check(results, health.name + " trail settles at 4-hit level",
+                Mathf.Abs(trailFill - 0.2f) < 0.01f);
+
+            RectTransform f = bar.fillRect;
+            RectTransform t = trail.rectTransform;
+            float fLeft = f.anchoredPosition.x - f.pivot.x * f.rect.width;
+            float tLeft = t.anchoredPosition.x - t.pivot.x * t.rect.width;
+            float fRight = fLeft + healthFill * f.rect.width;
+            float tRight = tLeft + trailFill * t.rect.width;
+            Check(results, health.name + " settled trail has no overhang",
+                tRight <= fRight + 0.01f);
+
+            results.AppendLine("  " + health.name + " healthFill=" + healthFill.ToString("F3")
+                + " trailFill=" + trailFill.ToString("F3")
+                + " fillRight=" + fRight.ToString("F2")
+                + " trailRight=" + tRight.ToString("F2"));
         }
         return results.ToString();
     }
