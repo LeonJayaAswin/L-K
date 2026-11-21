@@ -110,6 +110,11 @@ public class PlayerAttack2D : MonoBehaviour
     [Tooltip("Movement script, locked while a swing or a push is playing.")]
     [SerializeField] private PlayerMovement2D movement;
 
+    // Passed to the enemy with every landed hit so it knows WHO attacked it.
+    // This is the same component the enemy uses to track co-op aggro, so any
+    // player with a sword script gets the same treatment with no enemy changes.
+    private PlayerHealthHurt attackerHealth;
+
     private int attackParamHash;
     private int pushParamHash;
     private int comboStep;
@@ -156,6 +161,7 @@ public class PlayerAttack2D : MonoBehaviour
     {
         if (animator == null) animator = GetComponent<Animator>();
         if (movement == null) movement = GetComponent<PlayerMovement2D>();
+        if (attackerHealth == null) attackerHealth = GetComponent<PlayerHealthHurt>();
         attackParamHash = Animator.StringToHash(attackParameter);
         pushParamHash = Animator.StringToHash(pushParameter);
     }
@@ -627,7 +633,7 @@ public class PlayerAttack2D : MonoBehaviour
             if (skeleton == null) skeleton = hit.GetComponentInParent<SkeletonAI>();
             if (skeleton != null && !skeleton.IsDead)
             {
-                skeleton.TakeSwordHit(transform.position);
+                skeleton.TakeSwordHit(transform.position, attackerHealth);
             }
         }
     }

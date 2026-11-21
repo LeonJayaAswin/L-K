@@ -41,16 +41,15 @@ public class PlayerHealthHurt : MonoBehaviour
     [Header("Health Bar")]
     [SerializeField] private Slider healthBar;
     [SerializeField, Min(0.1f)] private float healthFillSmoothSpeed = 1.5f;
+    [Tooltip("The trail Image itself is the source of truth: edit its Color (alpha = opacity) and RectTransform (size/position) directly in the Inspector. Nothing here overwrites them at runtime.")]
     [SerializeField] private Image healthTrailImage;
+
     [SerializeField, Min(0.1f)] private float trailReduceSpeed = 0.65f;
     [SerializeField, Min(0f)] private float trailDelay = 0.35f;
     private float targetHealthFill = 1f;
     private float targetTrailFill = 1f;
     private float trailDelayTimer;
     private RectTransform healthTrailRect;
-    private Vector3 trailOriginalScale;
-    private bool trailUsesFillAmount;
-    private Material trailMaterial;
 
     [Header("Animation")]
     [SerializeField] private Animator animator;
@@ -469,103 +468,29 @@ public class PlayerHealthHurt : MonoBehaviour
     {
         healthTrailRect = healthTrailImage.rectTransform;
 
-        RectTransform fillRect = healthBar != null ? healthBar.fillRect : null;
-        Image fillImage = fillRect != null ? fillRect.GetComponent<Image>() : null;
-
-        // The authored trail is a plain rectangle with its own rect and scale,
-        // so after a hit its bright edge shows around the bar art. Copy the
-        // fill's transform and sprite instead: both graphics then share one
-        // silhouette, and the trail stays the first sibling so the fill always
-        // paints over the part of it that is still full.
-        if (fillRect != null)
-        {
-            if (healthTrailRect.parent != fillRect.parent)
-                healthTrailRect.SetParent(fillRect.parent, false);
-
-            healthTrailRect.anchorMin = fillRect.anchorMin;
-            healthTrailRect.anchorMax = fillRect.anchorMax;
-            healthTrailRect.pivot = fillRect.pivot;
-            healthTrailRect.anchoredPosition = fillRect.anchoredPosition;
-            healthTrailRect.sizeDelta = fillRect.sizeDelta;
-            healthTrailRect.localScale = fillRect.localScale;
-            healthTrailRect.localRotation = fillRect.localRotation;
-
-            if (healthTrailRect.GetSiblingIndex() > fillRect.GetSiblingIndex())
-                healthTrailRect.SetSiblingIndex(fillRect.GetSiblingIndex());
-        }
-
-        trailOriginalScale = healthTrailRect.localScale;
-
-        trailUsesFillAmount = false;
-        if (fillImage != null && fillImage.sprite != null)
-        {
-            healthTrailImage.sprite = fillImage.sprite;
-            healthTrailImage.type = Image.Type.Filled;
-            healthTrailImage.fillMethod = Image.FillMethod.Horizontal;
-            healthTrailImage.fillOrigin = (int)Image.OriginHorizontal.Left;
-            healthTrailImage.fillClockwise = fillImage.fillClockwise;
-            healthTrailImage.preserveAspect = false;
-            healthTrailImage.useSpriteMesh = false;
-            trailUsesFillAmount = true;
-        }
-        else
-        {
-            // No fill art to borrow: keep the old plain rectangle, but shrink
-            // it from its left edge so the trail still drains rightwards.
-            Vector2 pivot = healthTrailRect.pivot;
-            float leftEdge = healthTrailRect.anchoredPosition.x
-                - healthTrailRect.rect.width * healthTrailRect.localScale.x * pivot.x;
-            healthTrailRect.pivot = new Vector2(0f, pivot.y);
-            healthTrailRect.anchoredPosition = new Vector2(leftEdge, healthTrailRect.anchoredPosition.y);
-        }
-
+        // Only behaviour is configured here. The graphic itself - sprite,
+        // colour/alpha, size and position - is left exactly as authored on the
+        // trail Image, so Inspector edits show up in game immediately.
+        healthTrailImage.type = Image.Type.Filled;
+        healthTrailImage.fillMethod = Image.FillMethod.Horizontal;
+        healthTrailImage.fillOrigin = (int)Image.OriginHorizontal.Left;
+        healthTrailImage.fillClockwise = true;
+        healthTrailImage.preserveAspect = false;
+        healthTrailImage.useSpriteMesh = false;
         healthTrailImage.raycastTarget = false;
-        healthTrailImage.color = Color.white;
 
-        // The trail borrows the fill's art, so a normal tint would make it the
-        // exact same colour as the health and it would vanish behind the fill.
-        // UI/Default multiplies its pixels by the material's _Color; pushing
-        // that far past white turns the whole silhouette into a flat pale
-        // ghost while keeping the sprite's alpha (and therefore its exact
-        // shape and rounded ends).
-        if (trailMaterial == null)
-        {
-            trailMaterial = new Material(healthTrailImage.material)
-            {
-                name = "Health Trail Silhouette"
-            };
-
-            if (trailMaterial.HasProperty("_Color"))
-                trailMaterial.SetColor("_Color", new Color(255f, 255f, 255f, 1f));
-
-            healthTrailImage.material = trailMaterial;
-        }
+        // The fill paints over the trail while health is still full.
+        RectTransform fillRect = healthBar != null ? healthBar.fillRect : null;
+        if (fillRect != null && healthTrailRect.GetSiblingIndex() > fillRect.GetSiblingIndex())
+            healthTrailRect.SetSiblingIndex(fillRect.GetSiblingIndex());
 
         SetTrailFill(1f);
     }
 
-    private void OnDestroy()
-    {
-        if (trailMaterial != null) Destroy(trailMaterial);
-    }
-
     private void SetTrailFill(float fill)
     {
-        if (healthTrailImage == null) return;
-
-        fill = Mathf.Clamp01(fill);
-
-        if (trailUsesFillAmount)
-        {
-            healthTrailImage.fillAmount = fill;
-            return;
-        }
-
-        if (healthTrailRect == null) return;
-
-        Vector3 scale = trailOriginalScale;
-        scale.x *= fill;
-        healthTrailRect.localScale = scale;
+        if (healthTrailImage != null)
+            healthTrailImage.fillAmount = Mathf.Clamp01(fill);
     }
 
 }

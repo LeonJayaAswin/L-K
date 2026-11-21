@@ -8,12 +8,15 @@ using UnityEngine;
 ///    <see cref="patrolDistance"/> metres left and right with the Walk clip.
 ///  - Patrols back to an Idle pause at each end, then walks the other way.
 ///  - When either player (Leon or Krush) comes within
-///    <see cref="detectionRange"/> the skeleton chases the nearest one with a
-///    faster walk, stops at <see cref="attackRange"/> and alternates
-///    Attack1/Attack2. Each attack calls PlayerHealthHurt.TakeHit on the
-///    player it is facing, so five skeleton hits kill that player.
-///  - The target is re-picked as the two players move, so Krush is chased and
-///    attacked exactly like Leon, and a dying player is dropped for the other.
+///    <see cref="detectionRange"/> the skeleton chases them with a faster walk,
+///    stops at <see cref="attackRange"/> and alternates Attack1/Attack2. Each
+///    attack calls PlayerHealthHurt.TakeHit on the focused player when they are
+///    in reach, so five skeleton hits kill that player.
+///  - Co-op targeting: the first player to enter detection range holds the
+///    skeleton's attention, even if the other player walks closer. A sword hit
+///    from either player immediately steals that attention, so damage always
+///    overrides "who was seen first". A dying or fleeing player is dropped for
+///    the other one, and the aggro notes are cleared once both are out of range.
 ///  - Every swing of Leon's sword (Attack1 or the Attack2 combo) can hit the
 ///    skeleton once. A hit plays TakeHit, knocks the skeleton back a few steps
 ///    and interrupts whatever it was doing. Five sword hits kill it.
@@ -153,9 +156,16 @@ public class SkeletonAI : MonoBehaviour
     private int hitsTaken;
     private float playerSearchTimer;
 
+    // Co-op aggro. Both players are tracked by their PlayerHealthHurt component,
+    // so the skeleton does not need to know their names, tags or input devices.
+    // "first seen" is whoever entered detection range first in this encounter.
+    // "attacker" is whoever last damaged the skeleton; damage outranks vision.
+    private PlayerHealthHurt firstSeenPlayer;
+    private PlayerHealthHurt attackerPlayer;
+    private bool hasChosenTarget;
+
     // Every living-and-dead player in the scene. The skeleton keeps the full
-    // list so it can pick the nearest one and fall back to the other when one
-    // of them dies.
+    // list so it can fall back to the other player when one of them dies.
     private PlayerHealthHurt[] players = System.Array.Empty<PlayerHealthHurt>();
     private readonly System.Collections.Generic.List<PlayerHealthHurt> playerBuffer = new System.Collections.Generic.List<PlayerHealthHurt>();
 
@@ -168,6 +178,9 @@ public class SkeletonAI : MonoBehaviour
 
     /// <summary>True once the skeleton has played its Death animation.</summary>
     public bool IsDead => isDead;
+
+    /// <summary>The player currently holding the skeleton's attention, or null when idle.</summary>
+    public PlayerHealthHurt FocusedPlayer => playerHealth;
 
     private void Awake()
     {
@@ -449,49 +462,83 @@ public class SkeletonAI : MonoBehaviour
 
     private void TryHitPlayer()
     {
-        // The swing lands on the nearest living player it is facing, so the
-        // skeleton can fight Krush exactly like Leon. Anyone who stepped out of
-        // reach during the wind-up is spared.
-        PlayerHealthHurt victim = null;
-        float bestDistance = float.MaxValue;
-
         bool facingRight = spriteRenderer == null || !spriteRenderer.flipX;
         float forward = facingRight ? 1f : -1f;
 
+        PlayerHealthHurt nearest = null;
+        float bestDistance = float.MaxValue;
+
         foreach (PlayerHealthHurt candidate in players)
         {
-            if (candidate == null || candidate.IsDead) continue;
+            if (!CanHitPlayer(candidate, forward, out float absDx)) continue;
 
-            Vector2 target = candidate.transform.position;
-            float dx = target.x - transform.position.x;
-            float absDx = Mathf.Abs(dx);
-
-            if (absDx > attackHitReach) continue;
-
-            // Keep the blow believable: the player can jump over the skeleton.
-            if (Mathf.Abs(target.y - transform.position.y) > 2f) continue;
-
-            // Only hit what the skeleton is facing. The tiny dead zone keeps a
-            // player who is standing right on top of it hittable.
-            if (absDx > 0.2f && Mathf.Sign(dx) != forward) continue;
+            // The focused player takes priority: if both co-op players are in
+            // the swing at once, the skeleton still fights the one it is
+            // chasing instead of randomly hitting whoever stands closer.
+            if (candidate == playerHealth)
+            {
+                candidate.TakeHit();
+                return;
+            }
 
             if (absDx < bestDistance)
             {
                 bestDistance = absDx;
-                victim = candidate;
+                nearest = candidate;
             }
         }
 
-        if (victim != null) victim.TakeHit();
+        // Focus stepped out of reach during the wind-up: hit whoever is there.
+        if (nearest != null) nearest.TakeHit();
     }
 
     /// <summary>
-    /// One sword hit. Plays Take Hit and knocks the skeleton back unless this
-    /// is the killing blow, which plays Death instead.
+    /// True when a living player is inside the swing's reach and in front of
+    /// the skeleton. Anyone who jumped over it or stepped away is spared.
+    /// </summary>
+    private bool CanHitPlayer(PlayerHealthHurt candidate, float forward, out float absDx)
+    {
+        absDx = float.MaxValue;
+        if (candidate == null || candidate.IsDead) return false;
+
+        Vector2 target = candidate.transform.position;
+        float dx = target.x - transform.position.x;
+        absDx = Mathf.Abs(dx);
+
+        if (absDx > attackHitReach) return false;
+        if (Mathf.Abs(target.y - transform.position.y) > 2f) return false;
+
+        // The tiny dead zone keeps a player standing right on top hittable.
+        if (absDx > 0.2f && Mathf.Sign(dx) != forward) return false;
+
+        return true;
+    }
+
+    /// <summary>
+    /// One sword hit with no known attacker. Plays Take Hit and knocks the
+    /// skeleton back unless this is the killing blow.
     /// </summary>
     public void TakeSwordHit(Vector2 sourcePosition)
     {
+        TakeSwordHit(sourcePosition, null);
+    }
+
+    /// <summary>
+    /// One sword hit from a specific co-op player. The attacker becomes the
+    /// focus immediately, so a hit from P2 pulls the skeleton off P1 and vice
+    /// versa, regardless of who was seen first or who is standing closer.
+    /// </summary>
+    public void TakeSwordHit(Vector2 sourcePosition, PlayerHealthHurt attacker)
+    {
         if (isDead) return;
+
+        if (attacker != null && !attacker.IsDead)
+        {
+            attackerPlayer = attacker;
+            playerHealth = attacker;
+            player = attacker.transform;
+            hasChosenTarget = true;
+        }
 
         hitsTaken++;
 
@@ -642,46 +689,98 @@ public class SkeletonAI : MonoBehaviour
     }
 
     /// <summary>
-    /// Picks the nearest living player as the target. The current target is
-    /// kept unless the other player is clearly closer, which stops the
-    /// skeleton from flipping direction when Leon and Krush stand together.
+    /// Co-op target priority: the last player to damage the skeleton wins; if
+    /// nobody attacked, the first player that entered detection range keeps
+    /// the aggro even when the other player moves closer. Nearest-player with
+    /// the old switch hysteresis is only the fallback when neither of those
+    /// applies. Dead or out-of-range players are dropped for the other one.
     /// </summary>
     private void UpdateTarget()
     {
-        PlayerHealthHurt best = null;
-        float bestDistance = float.MaxValue;
+        // A dead player cannot hold aggro; the other player takes over.
+        if (firstSeenPlayer != null && firstSeenPlayer.IsDead) firstSeenPlayer = null;
+        if (attackerPlayer != null && attackerPlayer.IsDead) attackerPlayer = null;
 
-        foreach (PlayerHealthHurt candidate in players)
+        // Remember who noticed the skeleton first in this encounter. If both
+        // step into range on the same frame, the nearer one is marked first.
+        if (firstSeenPlayer == null)
         {
-            if (candidate == null || candidate.IsDead) continue;
-
-            float distance = Vector2.Distance(transform.position, candidate.transform.position);
-            if (distance < bestDistance)
+            float firstDistance = float.MaxValue;
+            foreach (PlayerHealthHurt candidate in players)
             {
-                bestDistance = distance;
-                best = candidate;
+                if (candidate == null || candidate.IsDead) continue;
+
+                float distance = Vector2.Distance(transform.position, candidate.transform.position);
+                if (distance <= detectionRange && distance < firstDistance)
+                {
+                    firstDistance = distance;
+                    firstSeenPlayer = candidate;
+                }
             }
         }
 
-        if (best == null)
+        PlayerHealthHurt desired = null;
+
+        // Damage outranks vision: whoever hit the skeleton is the focus.
+        if (IsTargetAvailable(attackerPlayer)) desired = attackerPlayer;
+
+        // Nobody attacked (or the attacker died/fled): keep the first-seen player.
+        if (desired == null && IsTargetAvailable(firstSeenPlayer)) desired = firstSeenPlayer;
+
+        if (desired == null)
         {
-            // Both players are dead. Clearing the target lets the skeleton
-            // return to Idle and stop chasing a corpse.
+            // Last resort: the closest available player. The switch distance
+            // still stops flip-flopping when both stand together.
+            float bestDistance = float.MaxValue;
+            foreach (PlayerHealthHurt candidate in players)
+            {
+                if (!IsTargetAvailable(candidate)) continue;
+
+                float distance = Vector2.Distance(transform.position, candidate.transform.position);
+                if (distance < bestDistance)
+                {
+                    bestDistance = distance;
+                    desired = candidate;
+                }
+            }
+
+            if (desired != null && hasChosenTarget && playerHealth != null &&
+                playerHealth != desired && IsTargetAvailable(playerHealth))
+            {
+                float currentDistance = Vector2.Distance(transform.position, playerHealth.transform.position);
+                if (bestDistance + targetSwitchDistance >= currentDistance)
+                {
+                    desired = playerHealth;
+                }
+            }
+        }
+
+        if (desired == null)
+        {
+            // Nobody left to fight: forget the aggro so the next player to
+            // walk into range starts a fresh "who was seen first" contest.
             player = null;
+            playerHealth = null;
+            playerMovement = null;
+            firstSeenPlayer = null;
+            attackerPlayer = null;
+            hasChosenTarget = false;
             return;
         }
 
-        if (playerHealth != null && playerHealth != best && !playerHealth.IsDead)
-        {
-            float currentDistance = Vector2.Distance(transform.position, playerHealth.transform.position);
-            if (bestDistance + targetSwitchDistance >= currentDistance)
-            {
-                best = playerHealth;
-            }
-        }
+        playerHealth = desired;
+        player = desired.transform;
+        playerMovement = desired.GetComponent<PlayerMovement2D>();
+        hasChosenTarget = true;
+    }
 
-        playerHealth = best;
-        player = playerHealth.transform;
-        playerMovement = playerHealth.GetComponent<PlayerMovement2D>();
+    /// <summary>
+    /// A player can hold aggro while alive and inside the give-up radius.
+    /// Beyond that the skeleton falls back to the other player.
+    /// </summary>
+    private bool IsTargetAvailable(PlayerHealthHurt candidate)
+    {
+        if (candidate == null || candidate.IsDead) return false;
+        return Vector2.Distance(transform.position, candidate.transform.position) <= loseTargetRange;
     }
 }
