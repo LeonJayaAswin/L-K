@@ -44,6 +44,9 @@ public class PlayerHealthHurt : MonoBehaviour
     [Tooltip("The trail Image itself is the source of truth: edit its Color (alpha = opacity) and RectTransform (size/position) directly in the Inspector. Nothing here overwrites them at runtime.")]
     [SerializeField] private Image healthTrailImage;
 
+    [Tooltip("Fraction subtracted from the trail's fillAmount so its drawn right edge stays inside the health fill. The current inset needs about 0.045. Raise this if white still pokes past the fill; lower it to reveal more afterimage.")]
+    [SerializeField, Range(0f, 0.25f)] private float trailReduce = 0.05f;
+
     [SerializeField, Min(0.1f)] private float trailReduceSpeed = 0.65f;
     [SerializeField, Min(0f)] private float trailDelay = 0.35f;
     private float targetHealthFill = 1f;
@@ -490,7 +493,7 @@ public class PlayerHealthHurt : MonoBehaviour
     private void SetTrailFill(float fill)
     {
         if (healthTrailImage != null)
-            healthTrailImage.fillAmount = Mathf.Clamp01(fill);
+            healthTrailImage.fillAmount = Mathf.Clamp01(fill - trailReduce);
     }
 
 }

@@ -61,20 +61,17 @@ public static class VerifyHealthTrail
                 trail.sprite != null && trail.sprite.name == "HealthTrailWhite" && IsAllWhite(trail.sprite));
             Check(results, health.name + " fill keeps its own bar art",
                 GetFillImage(health).sprite != trail.sprite);
-            float fillLeft = fillRect.anchoredPosition.x - fillRect.pivot.x * fillRect.rect.width;
-            float trailLeft = trailRect.anchoredPosition.x - trailRect.pivot.x * trailRect.rect.width;
-            Check(results, health.name + " trail left-aligned and inset inside fill",
-                trailRect.anchorMin == fillRect.anchorMin &&
-                trailRect.anchorMax == fillRect.anchorMax &&
-                Mathf.Approximately(trailRect.pivot.x, 0f) &&
-                Mathf.Approximately(trailRect.pivot.y, fillRect.pivot.y) &&
-                Mathf.Abs(trailLeft - fillLeft) < 0.01f &&
-                trailRect.rect.width < fillRect.rect.width &&
-                trailRect.rect.height < fillRect.rect.height &&
-                trailRect.localScale == fillRect.localScale);
+            EdgeGeometry e = ReadEdges(GetFillImage(health), trail);
+            Check(results, health.name + " trail inset inside fill",
+                e.TrailLeft >= e.FillLeft - 0.01f &&
+                e.TrailWidth < e.FillWidth &&
+                e.TrailLeft + e.TrailWidth <= e.FillLeft + e.FillWidth + 0.01f);
             Check(results, health.name + " trail is behind fill",
                 trailRect.GetSiblingIndex() < fillRect.GetSiblingIndex());
             Check(results, health.name + " health fill drained", sliderValue < 0.99f);
+            Check(results, health.name + " trail position and size unchanged",
+                Mathf.Approximately(trailRect.sizeDelta.x, 2009.2799f) &&
+                Mathf.Approximately(trailRect.sizeDelta.y, 158.47734f));
 
             results.AppendLine("  " + health.name + " slider=" + sliderValue.ToString("F3")
                 + " healthTarget=" + state.Health.ToString("F3")
@@ -86,10 +83,8 @@ public static class VerifyHealthTrail
     }
 
     /// <summary>
-    /// Measures the drawn left/right edges of fill and trail at the fill
-    /// amounts reached by 1-4 hits. Both use a left-origin Filled image, so
-    /// rightEdge = leftEdge + fillAmount * width. Anchors and parent match,
-    /// comparing anchoredPosition - pivot*width puts both in parent space.
+    /// Measures the drawn right edges at the fill amounts reached by 1-4 hits,
+    /// using world-space corners and the actual reduction applied to the trail.
     /// </summary>
     public static string Geometry()
     {
@@ -102,29 +97,65 @@ public static class VerifyHealthTrail
             Image fillImage = GetFillImage(health);
             if (trail == null || fillImage == null) continue;
 
-            RectTransform f = fillImage.rectTransform;
-            RectTransform t = trail.rectTransform;
-
-            float fLeft = f.anchoredPosition.x - f.pivot.x * f.rect.width;
-            float tLeft = t.anchoredPosition.x - t.pivot.x * t.rect.width;
+            EdgeGeometry e = ReadEdges(fillImage, trail);
+            float reduce = GetTrailReduce(health);
 
             results.AppendLine(health.name
-                + " fill(width=" + f.rect.width.ToString("F2")
-                + " left=" + fLeft.ToString("F2")
-                + " pivot=" + f.pivot.x.ToString("F2") + ")"
-                + " trail(width=" + t.rect.width.ToString("F2")
-                + " left=" + tLeft.ToString("F2")
-                + " pivot=" + t.pivot.x.ToString("F2") + ")");
+                + " fillWorld=[" + e.FillLeft.ToString("F2") + ", " + (e.FillLeft + e.FillWidth).ToString("F2") + "]"
+                + " trailWorld=[" + e.TrailLeft.ToString("F2") + ", " + (e.TrailLeft + e.TrailWidth).ToString("F2") + "]"
+                + " reduce=" + reduce.ToString("F3")
+                + " minReduce=" + (Mathf.Max(0f, (e.TrailLeft - e.FillLeft) / e.TrailWidth)).ToString("F4"));
 
             foreach (float amount in new[] { 1f, 0.8f, 0.6f, 0.4f, 0.2f })
             {
-                float fRight = fLeft + amount * f.rect.width;
-                float tRight = tLeft + amount * t.rect.width;
+                float fRight = e.FillLeft + amount * e.FillWidth;
+                float tRight = e.TrailLeft + Mathf.Clamp01(amount - reduce) * e.TrailWidth;
                 results.AppendLine("  a=" + amount.ToString("F1")
                     + " fillRight=" + fRight.ToString("F2")
                     + " trailRight=" + tRight.ToString("F2")
                     + " overhang=" + (tRight - fRight).ToString("F2"));
             }
+        }
+        return results.ToString();
+    }
+
+    /// <summary>
+    /// Definitive rendered geometry: world-space corners avoid any ambiguity
+    /// from stretched anchors or localScale when comparing fill and trail.
+    /// </summary>
+    public static string World()
+    {
+        var results = new StringBuilder();
+
+        foreach (PlayerHealthHurt health in Object.FindObjectsByType<PlayerHealthHurt>())
+        {
+            Image trail = (Image)typeof(PlayerHealthHurt)
+                .GetField("healthTrailImage", Flags).GetValue(health);
+            Image fillImage = GetFillImage(health);
+            if (trail == null || fillImage == null) continue;
+
+            var fc = new Vector3[4];
+            var tc = new Vector3[4];
+            fillImage.rectTransform.GetWorldCorners(fc);
+            trail.rectTransform.GetWorldCorners(tc);
+
+            // corner 0 = bottom-left, 1 = top-left, 2 = top-right, 3 = bottom-right.
+            float fL = fc[0].x, fR = fc[3].x;
+            float tL = tc[0].x, tR = tc[3].x;
+
+            results.AppendLine(health.name
+                + " fillWorld=[" + fL.ToString("F2") + ", " + fR.ToString("F2") + "]"
+                + " trailWorld=[" + tL.ToString("F2") + ", " + tR.ToString("F2") + "]"
+                + " trailOffset=" + (tL - fL).ToString("F2")
+                + " trailWorldWidth=" + (tR - tL).ToString("F2"));
+            results.AppendLine("  requiredReduction=" + (Mathf.Max(0f, (tL - fL) / (tR - tL))).ToString("F4")
+                + " fillOrigin=" + fillImage.fillOrigin + " trailOrigin=" + trail.fillOrigin
+                + " fillMethod=" + fillImage.fillMethod + " trailMethod=" + trail.fillMethod);
+
+            Transform area = fillImage.rectTransform.parent;
+            results.AppendLine("  parent=" + area.name
+                + " mask=" + (area.GetComponent<Mask>() != null)
+                + " rectMask=" + (area.GetComponent<RectMask2D>() != null));
         }
         return results.ToString();
     }
@@ -145,17 +176,19 @@ public static class VerifyHealthTrail
             Image fillImage = GetFillImage(health);
             if (trail == null || fillImage == null) continue;
 
-            RectTransform f = fillImage.rectTransform;
-            RectTransform t = trail.rectTransform;
-            float fLeft = f.anchoredPosition.x - f.pivot.x * f.rect.width;
-            float tLeft = t.anchoredPosition.x - t.pivot.x * t.rect.width;
+            EdgeGeometry e = ReadEdges(fillImage, trail);
+            float reduce = GetTrailReduce(health);
 
             foreach (float amount in new[] { 1f, 0.8f, 0.6f, 0.4f, 0.2f, 0f })
             {
-                float fRight = fLeft + amount * f.rect.width;
-                float tRight = tLeft + amount * t.rect.width;
+                float trailAmount = Mathf.Clamp01(amount - reduce);
+                float fRight = e.FillLeft + amount * e.FillWidth;
+                float tRight = e.TrailLeft + trailAmount * e.TrailWidth;
+                // At fillAmount 0 the Image draws nothing, so its left edge
+                // is not an overhang.
+                bool noOverhang = trailAmount <= 0f || tRight <= fRight + 0.01f;
                 Check(results, health.name + " no trail overhang at " + amount.ToString("F1"),
-                    tRight <= fRight + 0.01f);
+                    noOverhang);
             }
         }
         return results.ToString();
@@ -193,17 +226,15 @@ public static class VerifyHealthTrail
 
             float healthFill = bar.value;
             float trailFill = trail.fillAmount;
+            float reduce = GetTrailReduce(health);
             Check(results, health.name + " trail settles with health fill",
-                Mathf.Abs(trailFill - healthFill) < 0.01f);
+                Mathf.Abs(trailFill - Mathf.Clamp01(healthFill - reduce)) < 0.01f);
             Check(results, health.name + " trail settles at 4-hit level",
-                Mathf.Abs(trailFill - 0.2f) < 0.01f);
+                Mathf.Abs(trailFill - Mathf.Clamp01(0.2f - reduce)) < 0.01f);
 
-            RectTransform f = bar.fillRect;
-            RectTransform t = trail.rectTransform;
-            float fLeft = f.anchoredPosition.x - f.pivot.x * f.rect.width;
-            float tLeft = t.anchoredPosition.x - t.pivot.x * t.rect.width;
-            float fRight = fLeft + healthFill * f.rect.width;
-            float tRight = tLeft + trailFill * t.rect.width;
+            EdgeGeometry e = ReadEdges(GetFillImage(health), trail);
+            float fRight = e.FillLeft + healthFill * e.FillWidth;
+            float tRight = e.TrailLeft + trailFill * e.TrailWidth;
             Check(results, health.name + " settled trail has no overhang",
                 tRight <= fRight + 0.01f);
 
@@ -242,7 +273,7 @@ public static class VerifyHealthTrail
             Check(results, health.name + " authored size kept at runtime",
                 trail.rectTransform.sizeDelta == testSize);
             Check(results, health.name + " drain still uses fillAmount",
-                Mathf.Approximately(trail.fillAmount, 1f));
+                Mathf.Approximately(trail.fillAmount, 1f - GetTrailReduce(health)));
         }
         return results.ToString();
     }
@@ -281,6 +312,35 @@ public static class VerifyHealthTrail
                 afterDelay < 1f && afterDelay > 0.5f);
         }
         return results.ToString();
+    }
+
+    private static float GetTrailReduce(PlayerHealthHurt health)
+    {
+        return (float)typeof(PlayerHealthHurt)
+            .GetField("trailReduce", Flags).GetValue(health);
+    }
+
+    private struct EdgeGeometry
+    {
+        public float FillLeft;
+        public float FillWidth;
+        public float TrailLeft;
+        public float TrailWidth;
+    }
+
+    private static EdgeGeometry ReadEdges(Image fill, Image trail)
+    {
+        var fc = new Vector3[4];
+        var tc = new Vector3[4];
+        fill.rectTransform.GetWorldCorners(fc);
+        trail.rectTransform.GetWorldCorners(tc);
+        return new EdgeGeometry
+        {
+            FillLeft = fc[0].x,
+            FillWidth = fc[3].x - fc[0].x,
+            TrailLeft = tc[0].x,
+            TrailWidth = tc[3].x - tc[0].x
+        };
     }
 
     private static Slider GetHealthBar(PlayerHealthHurt health)
